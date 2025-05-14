@@ -1,4 +1,4 @@
-use starlink_client::client::DishClient;
+use starlink_grpc_client::client::DishClient;
 
 #[tokio::main]
 async fn main() {

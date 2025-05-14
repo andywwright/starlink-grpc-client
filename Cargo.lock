@@ -832,7 +832,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "starlink_client"
+name = "starlink-grpc-client"
 version = "0.1.0"
 dependencies = [
  "prost",
