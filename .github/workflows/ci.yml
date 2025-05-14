@@ -21,11 +21,8 @@ jobs:
         profile: minimal
         override: true
 
-    - name: Install protoc
-      uses: arduino/setup-protoc@v1
-      with:
-        version: '25.3'
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Install protoc via apt
+      run: sudo apt-get update && sudo apt-get install -y protobuf-compiler
 
     - name: Build project
       run: cargo build --verbose
