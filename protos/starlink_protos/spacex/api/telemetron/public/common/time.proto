@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package SpaceX.API.Telemetron.Public.Common;
+
+message TimestampInfo {
+  Epoch epoch = 1;
+
+  int64 nanoseconds = 2;
+}
+
+enum Epoch {
+  UNIX = 0;
+
+  GPS = 1;
+}

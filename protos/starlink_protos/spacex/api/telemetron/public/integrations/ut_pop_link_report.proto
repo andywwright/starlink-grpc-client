@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package SpaceX.API.Telemetron.Public.Integrations;
+
+import "spacex/api/telemetron/public/common/time.proto";
+
+option go_package = "spacex.com/api/telemetron/public/integrations/utpoplink";
+
+message UtPoPLinkReport {
+  SpaceX.API.Telemetron.Public.Common.TimestampInfo slot_timestamp = 1;
+
+  uint32 pop_id = 2;
+
+  uint32 pop_rack_id = 3;
+
+  repeated UtPoPLinkStats stats = 4;
+
+  string pop_version = 5;
+}
+
+message UtPoPLinkStats {
+  SpaceX.API.Telemetron.Public.Common.TimestampInfo measurement_timestamp = 1;
+
+  string ut_id = 2;
+
+  int64 pop_rx_sdu_cnt = 3;
+
+  int64 sdu_loss_cnt = 4;
+
+  uint64 uplink_bytes_last_15s = 5;
+
+  uint64 downlink_bytes_last_15s = 6;
+
+  uint64 uplink_cplane_acl_other_violations_last_15s = 7;
+}
+
+enum RateLimitReason {
+  UNKNOWN = 0;
+
+  NO_LIMIT = 1;
+
+  POLICY_LIMIT = 2;
+
+  USER_CUSTOM_LIMIT = 3;
+
+  OVERAGE_LIMIT = 5;
+
+  reserved 4;
+
+  reserved "HIGH_HOURLY_AVG_LIMIT";
+}

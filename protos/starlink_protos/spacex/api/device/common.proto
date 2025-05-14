@@ -1,0 +1,280 @@
+syntax = "proto3";
+
+package SpaceX.API.Device;
+
+option go_package = "spacex.com/api/device";
+
+message DeviceInfo {
+  string id = 1;
+
+  string hardware_version = 2;
+
+  int32 board_rev = 14;
+
+  string software_version = 3;
+
+  string manufactured_version = 11;
+
+  int64 generation_number = 12;
+
+  string country_code = 4;
+
+  int32 utc_offset_s = 5;
+
+  bool software_partitions_equal = 6;
+
+  bool is_dev = 7;
+
+  int32 bootcount = 8;
+
+  int32 anti_rollback_version = 9;
+
+  bool is_hitl = 10;
+
+  BootInfo boot = 1001;
+
+  bool dish_cohoused = 13;
+
+  string build_id = 15;
+}
+
+message DeviceState {
+  uint64 uptime_s = 1;
+}
+
+message SignedData {
+  bytes data = 1;
+
+  bytes signature = 2;
+}
+
+message GetNextIdRequest {
+}
+
+message GetNextIdResponse {
+  uint64 id = 1;
+
+  uint64 epoch_id = 2;
+}
+
+message BootInfo {
+  map<int32, int32> count_by_reason = 1;
+
+  map<int32, int32> count_by_reason_delta = 4;
+
+  BootReason last_reason = 2;
+
+  int32 last_count = 3;
+
+  bool crash_boot = 5;
+
+  int32 crash_boot_count = 6;
+
+  string even_side_software_version = 7;
+
+  string odd_side_software_version = 8;
+
+  int32 api_version_odd_side = 9;
+
+  int32 api_version_even_side = 10;
+}
+
+message PingTarget {
+  string service = 1;
+
+  string location = 2;
+
+  string address = 3;
+}
+
+message PingResult {
+  PingTarget target = 3;
+
+  float dropRate = 1;
+
+  float latencyMs = 2;
+}
+
+message BondingChallenge {
+  string dish_id = 1;
+
+  string wifi_id = 2;
+
+  bytes nonce = 3;
+}
+
+message AuthenticateRequest {
+  SignedData challenge = 1;
+}
+
+message ChallengeResponse {
+  bytes signature = 1;
+
+  bytes certificate_chain = 2;
+}
+
+message NetworkInterface {
+  string name = 1;
+
+  bool up = 4;
+
+  string mac_address = 5;
+
+  repeated string ipv4_addresses = 6;
+
+  repeated string ipv6_addresses = 7;
+
+  RxStats rx_stats = 2;
+
+  TxStats tx_stats = 3;
+
+  oneof interface {
+    EthernetNetworkInterface ethernet = 1000;
+
+    WifiNetworkInterface wifi = 1001;
+
+    BridgeNetworkInterface bridge = 1002;
+  }
+
+  message RxStats {
+    uint64 bytes = 1;
+
+    uint64 packets = 2;
+
+    uint64 frame_errors = 3;
+  }
+
+  message TxStats {
+    uint64 bytes = 1;
+
+    uint64 packets = 2;
+  }
+}
+
+message EthernetNetworkInterface {
+  bool link_detected = 1;
+
+  uint32 speed_mbps = 2;
+
+  bool autonegotiation_on = 3;
+
+  Duplex duplex = 4;
+
+  enum Duplex {
+    UNKNOWN = 0;
+
+    HALF = 1;
+
+    FULL = 2;
+  }
+}
+
+message WifiNetworkInterface {
+  reserved 1, 7, 9;
+
+  reserved "thermal_status", "antennae_status";
+
+  InvalidPacketCounts invalid_packet_counts = 2;
+
+  uint32 channel = 3;
+
+  uint32 missed_beacons = 8;
+
+  double link_quality = 4;
+
+  double signal_level = 5;
+
+  double noise_level = 6;
+
+  message InvalidPacketCounts {
+    uint32 rx_invalid_nwid = 1;
+
+    uint32 rx_invalid_crypt = 2;
+
+    uint32 rx_invalid_frag = 3;
+
+    uint32 tx_excessive_retries = 4;
+
+    uint32 invalid_misc = 5;
+  }
+}
+
+message BridgeNetworkInterface {
+  repeated string member_names = 1;
+}
+
+message LLAPosition {
+  double lat = 1;
+
+  double lon = 2;
+
+  double alt = 3;
+}
+
+message ECEFPosition {
+  double x = 1;
+
+  double y = 2;
+
+  double z = 3;
+}
+
+message InitiateRemoteSshRequest {
+}
+
+message InitiateRemoteSshResponse {
+  uint32 port = 1;
+
+  string address = 2;
+
+  bytes stsafe = 3;
+}
+
+message SoftwareUpdateRequest {
+  uint64 stream_id = 1;
+
+  bytes data = 2;
+
+  bool open = 3;
+
+  bool close = 4;
+}
+
+message SoftwareUpdateResponse {
+}
+
+enum BootReason {
+  BOOT_REASON_UNKNOWN = 0;
+
+  FORGOTTEN = 1;
+
+  POWER_CYCLE = 2;
+
+  COMMAND = 3;
+
+  SOFTWARE_UPDATE = 4;
+
+  CONFIG_UPDATE = 5;
+
+  UPTIME_FDIR = 6;
+
+  REPEATER_FDIR = 7;
+
+  AVIATION_ETH_WAN_FDIR = 8;
+
+  KERNEL_PANIC = 9;
+
+  INTENTIONAL_KERNEL_PANIC = 14;
+
+  MCU_BRINGUP_FAILED_FDIR = 11;
+
+  AVIATION_OUTAGE_FDIR = 12;
+
+  SOFTWARE_WATCHDOG = 13;
+
+  HARDWARE_WATCHDOG = 15;
+
+  reserved 10;
+
+  reserved "AVIATION_5M_OUTAGE_FDIR";
+}
