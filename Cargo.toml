@@ -12,3 +12,4 @@ tonic = { version = "0.9", features = ["transport"] }
 prost = "0.11"
 prost-types = "0.11"
 thiserror = "1.0"
+futures = "0.3"

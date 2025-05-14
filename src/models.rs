@@ -1,7 +1,7 @@
-include!(concat!(env!("OUT_DIR"), "/mod.rs"));
+// No include! here—lib.rs already did it.
+// Just wrap the shared types.
 
-/// High-level status information of the dish.
 #[derive(Debug, Clone)]
 pub struct DishStatus {
-    pub raw: space_x::api::device::Response,
+    pub raw: crate::space_x::api::device::Response,
 }
