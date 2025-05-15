@@ -24,17 +24,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         let latency = Instant::now().duration_since(start);
 
         // unwrap and print
-        if let Some(resp) = status.raw.response {
-            if let ResponseOneof::DishGetStatus(dgs) = resp {
-                let down_mbps = dgs.downlink_throughput_bps / 1_000_000.0;
-                let up_mbps   = dgs.uplink_throughput_bps   / 1_000_000.0;
-                println!(
-                    "down: {:.2} Mb/s | up: {:.2} Mb/s | rtt: {} ms",
-                    down_mbps,
-                    up_mbps,
-                    latency.as_millis()
-                );
-            }
+        if let Some(ResponseOneof::DishGetStatus(dgs)) = status.raw.response {
+            let down_mbps = dgs.downlink_throughput_bps / 1_000_000.0;
+            let up_mbps   = dgs.uplink_throughput_bps   / 1_000_000.0;
+            println!(
+                "down: {:.2} Mb/s | up: {:.2} Mb/s | rtt: {} ms", 
+                down_mbps,
+                up_mbps,
+                latency.as_millis()
+            );
         }
     }
 }
