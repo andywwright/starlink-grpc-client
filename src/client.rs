@@ -1,4 +1,4 @@
-use futures::{stream::{unfold}, Stream, StreamExt, TryStreamExt};
+use futures::{stream::{unfold}, Stream, TryStreamExt};
 use tonic::{transport::Channel, Request};
 
 use crate::error::DishError;

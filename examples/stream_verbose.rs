@@ -1,6 +1,5 @@
 use starlink_grpc_client::client::DishClient;
 use starlink_grpc_client::space_x::api::device::response::Response as ResponseOneof;
-use futures::StreamExt;
 use tokio::time::{interval, Instant, Duration};
 
 #[tokio::main]
