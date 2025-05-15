@@ -16,6 +16,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         // wait until the next tick
         ticker.tick().await;
 
+        // Log the outgoing request
+        println!("→ Outbound request: GetStatusRequest");
+
         // mark start
         let start = Instant::now();
         // perform a single RPC
@@ -28,7 +31,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             let down_mbps = dgs.downlink_throughput_bps / 1_000_000.0;
             let up_mbps   = dgs.uplink_throughput_bps   / 1_000_000.0;
             println!(
-                "down: {:.2} Mb/s | up: {:.2} Mb/s | rtt: {} ms", 
+                "down: {:.2} Mb/s | up: {:.2} Mb/s | rtt: {} ms",
                 down_mbps,
                 up_mbps,
                 latency.as_millis()
