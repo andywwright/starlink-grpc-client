@@ -1,4 +1,3 @@
-
 # Starlink gRPC Client
 
 A **safe**, **async**, and **type-safe** Rust client for querying status information from a **Starlink Gen 3 Dishy** via **gRPC**.
@@ -17,19 +16,37 @@ A **safe**, **async**, and **type-safe** Rust client for querying status informa
 
 ## 🚀 Getting Started
 
-### 1. **Add to Your `Cargo.toml`**
-```toml
-[dependencies]
-starlink_client = "0.1.0"
-```
+### 1. **Install Protobuf Compiler**
 
-> Or reference from your local path or GitHub.
+This library requires `protoc` (Protocol Buffers Compiler) to be installed.
+
+- **macOS**:  
+  ```bash
+  brew install protobuf
+  ```
+- **Linux**:  
+  Install via package manager or [official releases](https://github.com/protocolbuffers/protobuf/releases).
+
+- **Windows**:  
+  Download from [https://github.com/protocolbuffers/protobuf/releases](https://github.com/protocolbuffers/protobuf/releases).
+
+Or set the `PROTOC` environment variable if you have a custom installation.
 
 ---
 
-### 2. **Example Usage**
+### 2. **Add to Your `Cargo.toml`**
+
+```toml
+[dependencies]
+starlink-grpc-client = "0.1.0"
+```
+
+---
+
+### 3. **Example Usage**
+
 ```rust
-use starlink_client::client::DishClient;
+use starlink_grpc_client::client::DishClient;
 
 #[tokio::main]
 async fn main() {
@@ -45,13 +62,24 @@ async fn main() {
 }
 ```
 
-> ✅ See full example in [examples/usage.rs](examples/usage.rs)
+> ✅ See working examples in [examples/usage.rs](examples/usage.rs), [examples/stream.rs](examples/stream.rs) and [examples/stream_verbose.rs](examples/stream_verbose.rs)
+
+---
+
+## 📑 Public API Summary
+
+| Method                   | Signature                                                                                                                                                         | Description                                        |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| **connect**              | `pub async fn connect(endpoint: &str) -> Result<Self, DishError>`                                                                                                 | Create a new client by dialing the given URL.      |
+| **get_status**           | `pub async fn get_status(&mut self) -> Result<DishStatus, DishError>`                                                                                             | Perform a single, unary status RPC.                |
+| **stream_status**        | `pub async fn stream_status(&mut self) -> Result<impl Stream<Item = Result<DishStatus, DishError>>, DishError>`                                                   | Poll `getStatus` once per second, silently.        |
+| **stream_status_logged** | `pub async fn stream_status_logged(&mut self) -> Result<impl Stream<Item = Result<(DishStatus, Duration), DishError>>, DishError>`                               | Poll with outbound logs and true RTT measurement.  |
 
 ---
 
 ## 🛠️ Features Roadmap
 
-- [ ] Streaming support
+- [ ] Push-based streaming support (server-driven updates)
 - [ ] Configurable polling API
 - [ ] Prometheus / Grafana integration
 - [ ] CLI binary interface
@@ -64,7 +92,7 @@ async fn main() {
 Clone the repository and build:
 
 ```bash
-git clone https://github.com/your-org/starlink-grpc-client.git
+git clone https://github.com/andywwright/starlink-grpc-client.git
 cd starlink-grpc-client
 cargo build
 ```

@@ -1,5 +1,7 @@
-use futures::{stream::{unfold}, Stream, TryStreamExt};
+// src/client.rs
+use futures::{stream::unfold, Stream, TryStreamExt};
 use tonic::{transport::Channel, Request};
+use std::{sync::{Arc, Mutex}, time::{Duration, Instant}, collections::VecDeque};
 
 use crate::error::DishError;
 use crate::models::DishStatus;
@@ -46,29 +48,12 @@ impl DishClient {
         Ok(DishStatus { raw: response })
     }
 
-    /// Opens a long-lived stream: polls `getStatus` every second,
-    /// yielding each `DishStatus`.
+    /// Polling stream: emits one status per second without logging.
     pub async fn stream_status(
         &mut self,
     ) -> Result<impl Stream<Item = Result<DishStatus, DishError>>, DishError> {
-        self.inner_stream(false).await
-    }
-
-    /// Opens a stream with outbound logging enabled (for debugging).
-    pub async fn stream_status_logged(
-        &mut self,
-    ) -> Result<impl Stream<Item = Result<DishStatus, DishError>>, DishError> {
-        self.inner_stream(true).await
-    }
-
-    /// Internal helper to build and execute the polling stream.
-    async fn inner_stream(
-        &mut self,
-        log_outbound: bool,
-    ) -> Result<impl Stream<Item = Result<DishStatus, DishError>>, DishError> {
-        // Build a polling stream that emits a GetStatusRequest every second.
-        let outbound = unfold((), move |()| async move {
-            tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+        let outbound = unfold((), |()| async move {
+            tokio::time::sleep(Duration::from_secs(1)).await;
             let msg = ToDevice {
                 message: Some(ToDeviceMessage::Request(RawRequest {
                     id: 1,
@@ -77,28 +62,78 @@ impl DishClient {
                     request: Some(RequestOneof::GetStatus(GetStatusRequest {})),
                 })),
             };
-            if log_outbound {
-                println!("→ Outbound request: GetStatusRequest");
-            }
             Some((msg, ()))
         });
 
-        // Initiate the bidirectional Stream RPC
+        let response_stream = self
+            .inner
+            .stream(Request::new(outbound))
+            .await
+            .map_err(DishError::RpcError)?
+            .into_inner();
+
+        let mapped = response_stream
+            .map_ok(|from| match from.message.expect("missing message") {
+                FromDeviceMessage::Response(raw) => DishStatus { raw },
+                _ => unreachable!("Only Response variants expected"),
+            })
+            .map_err(DishError::RpcError);
+
+        Ok(mapped)
+    }
+
+    /// Polling stream with outbound logging and real RTT measurement.
+    /// Yields `(DishStatus, Duration)` where `Duration` is measured RTT.
+    pub async fn stream_status_logged(
+        &mut self,
+    ) -> Result<impl Stream<Item = Result<(DishStatus, Duration), DishError>>, DishError> {
+        // Shared queue for send timestamps
+        let times = Arc::new(Mutex::new(VecDeque::new()));
+        let times_clone = times.clone();
+
+        // Build outbound stream: send one request per second,
+        // record send time, and log the outgoing message.
+        let outbound = unfold((), move |()| {
+            let times_clone = times_clone.clone();
+            async move {
+                tokio::time::sleep(Duration::from_secs(1)).await;
+                let send_time = Instant::now();
+                let msg = ToDevice {
+                    message: Some(ToDeviceMessage::Request(RawRequest {
+                        id: 1,
+                        epoch_id: 0,
+                        target_id: "".into(),
+                        request: Some(RequestOneof::GetStatus(GetStatusRequest {})),
+                    })),
+                };
+                println!("→ Outbound request: GetStatusRequest");
+                times_clone.lock().unwrap().push_back(send_time);
+                Some((msg, ()))
+            }
+        });
+
+        // Initiate the bidi stream
         let response = self
             .inner
             .stream(Request::new(outbound))
             .await
             .map_err(DishError::RpcError)?;
 
-        // Map each FromDevice::Response into your DishStatus wrapper
-        let stream = response
-            .into_inner()
-            .map_ok(|msg| match msg.message.expect("missing message") {
-                FromDeviceMessage::Response(raw) => DishStatus { raw },
-                _ => unreachable!("Only Response variants expected"),
+        // Map incoming messages into (DishStatus, Duration)
+        let mapped = response
+            .into_inner() // tonic::Streaming<FromDevice>
+            .map_ok(move |from| {
+                let recv_time = Instant::now();
+                let send_time = times.lock().unwrap().pop_front().unwrap_or(recv_time);
+                let rtt = recv_time.duration_since(send_time);
+                let raw = match from.message.expect("missing message") {
+                    FromDeviceMessage::Response(raw) => raw,
+                    _ => unreachable!("Only Response expected"),
+                };
+                (DishStatus { raw }, rtt)
             })
             .map_err(DishError::RpcError);
 
-        Ok(stream)
+        Ok(mapped)
     }
 }
