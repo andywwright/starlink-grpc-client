@@ -41,6 +41,8 @@ Or set the `PROTOC` environment variable if you have a custom installation.
 starlink-grpc-client = "0.3.1"
 ```
 
+(or whatever the last version is)
+
 ---
 
 ### 3. **Example Usage**
