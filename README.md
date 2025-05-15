@@ -38,7 +38,7 @@ Or set the `PROTOC` environment variable if you have a custom installation.
 
 ```toml
 [dependencies]
-starlink-grpc-client = "0.3.0"
+starlink-grpc-client = "0.3.1"
 ```
 
 ---
