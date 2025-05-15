@@ -4,31 +4,25 @@ use futures::StreamExt;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // Connect to your Dish gRPC endpoint
+    // 1. Connect
     let mut client = DishClient::connect("http://dishy.starlink.com:9200").await?;
-    let mut stream = client.stream_status().await?;
-    println!("Streaming downlink/uplink throughputs (Mb/s)… Ctrl+C to quit");
 
+    // 2. Use the non-logging stream
+    let mut stream = client.stream_status().await?;
+
+    println!("⇆ Streaming throughputs (Mb/s)… Ctrl+C to quit");
     while let Some(item) = stream.next().await {
         match item {
-            Ok(dish_status) => {
-                // Unwrap the generated Response one-of
-                if let Some(resp_oneof) = dish_status.raw.response {
-                    if let ResponseOneof::DishGetStatus(dgs) = resp_oneof {
-                        // Convert bits per second into megabits per second
-                        let down_mbps = dgs.downlink_throughput_bps / 1_000_000.0;
-                        let up_mbps   = dgs.uplink_throughput_bps   / 1_000_000.0;
-                        println!(
-                            "downlink: {:.2} Mb/s | uplink: {:.2} Mb/s",
-                            down_mbps,
-                            up_mbps,
-                        );
+            Ok(status) => {
+                if let Some(resp) = status.raw.response {
+                    if let ResponseOneof::DishGetStatus(dgs) = resp {
+                        let down = dgs.downlink_throughput_bps / 1_000_000.0;
+                        let up   = dgs.uplink_throughput_bps   / 1_000_000.0;
+                        println!("downlink: {:.2} Mb/s | uplink: {:.2} Mb/s", down, up);
                     }
                 }
             }
-            Err(err) => {
-                eprintln!("Stream error: {}", err);
-            }
+            Err(e) => eprintln!("Stream error: {}", e),
         }
     }
 
