@@ -1,19 +1,14 @@
 use futures::{stream, Stream, TryStreamExt};
 use tonic::{transport::Channel, Request};
 
-use std::time::Duration;
-use tokio::time::sleep;
-
 use crate::error::DishError;
 use crate::models::DishStatus;
 
-// One single include! in lib.rs, so none here
 use crate::space_x::api::device::device_client::DeviceClient as GrpcDeviceClient;
 use crate::space_x::api::device::{
     Request as RawRequest,
     GetStatusRequest,
     ToDevice,
-    FromDevice,
 };
 use crate::space_x::api::device::request::Request as RequestOneof;
 use crate::space_x::api::device::to_device::Message as ToDeviceMessage;
@@ -24,7 +19,7 @@ pub struct DishClient {
 }
 
 impl DishClient {
-    /// Connect to the Dish’s gRPC endpoint.
+    /// Connects to the Dish's gRPC endpoint.
     pub async fn connect(endpoint: &str) -> Result<Self, DishError> {
         let inner = GrpcDeviceClient::connect(endpoint.to_string())
             .await
@@ -32,7 +27,7 @@ impl DishClient {
         Ok(Self { inner })
     }
 
-    /// Unary RPC: fetch a single status snapshot.
+    /// Performs a one-off status query.
     pub async fn get_status(&mut self) -> Result<DishStatus, DishError> {
         let raw_req = RawRequest {
             id: 0,
@@ -51,14 +46,15 @@ impl DishClient {
         Ok(DishStatus { raw: response })
     }
 
-    /// Opens a long-lived stream: polls `getStatus` every second.
-    /// Yields a `DishStatus` each time the Dish replies.
+    /// Opens a long‐lived stream: polls `getStatus` every second,
+    /// logging only the innermost request type name.
     pub async fn stream_status(
         &mut self,
     ) -> Result<impl Stream<Item = Result<DishStatus, DishError>>, DishError> {
         // Build a client stream that emits a GetStatusRequest every second.
-        let outbound = stream::unfold((), |_| async {
-            sleep(Duration::from_secs(1)).await;
+        let outbound = stream::unfold((), |()| async {
+            tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+
             let msg = ToDevice {
                 message: Some(ToDeviceMessage::Request(RawRequest {
                     id: 1,
@@ -67,7 +63,20 @@ impl DishClient {
                     request: Some(RequestOneof::GetStatus(GetStatusRequest {})),
                 })),
             };
-            Some((msg, ())) // (item, next state)
+
+            // Inspect and print only the inner variant name:
+            if let Some(ToDeviceMessage::Request(raw_req)) = &msg.message {
+                match &raw_req.request {
+                    Some(RequestOneof::GetStatus(_)) => {
+                        println!("→ Outbound request: GetStatusRequest");
+                    }
+                    _ => {
+                        println!("→ Outbound request: <other>");
+                    }
+                }
+            }
+
+            Some((msg, ()))
         });
 
         // Initiate the bidirectional Stream RPC
@@ -82,7 +91,7 @@ impl DishClient {
         let mapped = response_stream
             .map_ok(|from| match from.message.expect("missing message") {
                 FromDeviceMessage::Response(raw) => DishStatus { raw },
-                _ => unreachable!("Only `Response` messages are expected here"),
+                _ => unreachable!("Only Response variants expected"),
             })
             .map_err(DishError::RpcError);
 
