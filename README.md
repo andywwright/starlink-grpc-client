@@ -25,6 +25,7 @@ A **safe**, **async**, and **type-safe** Rust client for querying status informa
 ```toml
 [dependencies]
 starlink-grpc-client = "0.4.0"
+tokio = "1.45.0"
 ```
 
 (or whatever the last version is)
