@@ -1,0 +1,7745 @@
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PublicKey {
+    #[prost(string, tag = "1")]
+    pub key: ::prost::alloc::string::String,
+    #[deprecated]
+    #[prost(enumeration = "Capability", repeated, packed = "false", tag = "2")]
+    pub capabilities: ::prost::alloc::vec::Vec<i32>,
+    #[prost(enumeration = "User", tag = "3")]
+    pub user: i32,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum Capability {
+    Read = 0,
+    ReadInternal = 13,
+    ReadPrivate = 7,
+    Local = 14,
+    Write = 1,
+    WritePersistent = 11,
+    Debug = 2,
+    Admin = 3,
+    Setup = 4,
+    SetSku = 5,
+    Refresh = 6,
+    Fuse = 8,
+    Reset = 9,
+    Test = 10,
+    Ssh = 12,
+    Guest = 15,
+}
+impl Capability {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Capability::Read => "READ",
+            Capability::ReadInternal => "READ_INTERNAL",
+            Capability::ReadPrivate => "READ_PRIVATE",
+            Capability::Local => "LOCAL",
+            Capability::Write => "WRITE",
+            Capability::WritePersistent => "WRITE_PERSISTENT",
+            Capability::Debug => "DEBUG",
+            Capability::Admin => "ADMIN",
+            Capability::Setup => "SETUP",
+            Capability::SetSku => "SET_SKU",
+            Capability::Refresh => "REFRESH",
+            Capability::Fuse => "FUSE",
+            Capability::Reset => "RESET",
+            Capability::Test => "TEST",
+            Capability::Ssh => "SSH",
+            Capability::Guest => "GUEST",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "READ" => Some(Self::Read),
+            "READ_INTERNAL" => Some(Self::ReadInternal),
+            "READ_PRIVATE" => Some(Self::ReadPrivate),
+            "LOCAL" => Some(Self::Local),
+            "WRITE" => Some(Self::Write),
+            "WRITE_PERSISTENT" => Some(Self::WritePersistent),
+            "DEBUG" => Some(Self::Debug),
+            "ADMIN" => Some(Self::Admin),
+            "SETUP" => Some(Self::Setup),
+            "SET_SKU" => Some(Self::SetSku),
+            "REFRESH" => Some(Self::Refresh),
+            "FUSE" => Some(Self::Fuse),
+            "RESET" => Some(Self::Reset),
+            "TEST" => Some(Self::Test),
+            "SSH" => Some(Self::Ssh),
+            "GUEST" => Some(Self::Guest),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum User {
+    NoUser = 0,
+    God = 1,
+    Lan = 2,
+    Cloud = 3,
+    Factory = 4,
+    Router = 5,
+    GuestLan = 6,
+    SensitiveCommanding = 7,
+    LanTls = 8,
+}
+impl User {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            User::NoUser => "NO_USER",
+            User::God => "GOD",
+            User::Lan => "LAN",
+            User::Cloud => "CLOUD",
+            User::Factory => "FACTORY",
+            User::Router => "ROUTER",
+            User::GuestLan => "GUEST_LAN",
+            User::SensitiveCommanding => "SENSITIVE_COMMANDING",
+            User::LanTls => "LAN_TLS",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "NO_USER" => Some(Self::NoUser),
+            "GOD" => Some(Self::God),
+            "LAN" => Some(Self::Lan),
+            "CLOUD" => Some(Self::Cloud),
+            "FACTORY" => Some(Self::Factory),
+            "ROUTER" => Some(Self::Router),
+            "GUEST_LAN" => Some(Self::GuestLan),
+            "SENSITIVE_COMMANDING" => Some(Self::SensitiveCommanding),
+            "LAN_TLS" => Some(Self::LanTls),
+            _ => None,
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeviceInfo {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub hardware_version: ::prost::alloc::string::String,
+    #[prost(int32, tag = "14")]
+    pub board_rev: i32,
+    #[prost(string, tag = "3")]
+    pub software_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "11")]
+    pub manufactured_version: ::prost::alloc::string::String,
+    #[prost(int64, tag = "12")]
+    pub generation_number: i64,
+    #[prost(string, tag = "4")]
+    pub country_code: ::prost::alloc::string::String,
+    #[prost(int32, tag = "5")]
+    pub utc_offset_s: i32,
+    #[prost(bool, tag = "6")]
+    pub software_partitions_equal: bool,
+    #[prost(bool, tag = "7")]
+    pub is_dev: bool,
+    #[prost(int32, tag = "8")]
+    pub bootcount: i32,
+    #[prost(int32, tag = "9")]
+    pub anti_rollback_version: i32,
+    #[prost(bool, tag = "10")]
+    pub is_hitl: bool,
+    #[prost(message, optional, tag = "1001")]
+    pub boot: ::core::option::Option<BootInfo>,
+    #[prost(bool, tag = "13")]
+    pub dish_cohoused: bool,
+    #[prost(string, tag = "15")]
+    pub build_id: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeviceState {
+    #[prost(uint64, tag = "1")]
+    pub uptime_s: u64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SignedData {
+    #[prost(bytes = "vec", tag = "1")]
+    pub data: ::prost::alloc::vec::Vec<u8>,
+    #[prost(bytes = "vec", tag = "2")]
+    pub signature: ::prost::alloc::vec::Vec<u8>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNextIdRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNextIdResponse {
+    #[prost(uint64, tag = "1")]
+    pub id: u64,
+    #[prost(uint64, tag = "2")]
+    pub epoch_id: u64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BootInfo {
+    #[prost(map = "int32, int32", tag = "1")]
+    pub count_by_reason: ::std::collections::HashMap<i32, i32>,
+    #[prost(map = "int32, int32", tag = "4")]
+    pub count_by_reason_delta: ::std::collections::HashMap<i32, i32>,
+    #[prost(enumeration = "BootReason", tag = "2")]
+    pub last_reason: i32,
+    #[prost(int32, tag = "3")]
+    pub last_count: i32,
+    #[prost(bool, tag = "5")]
+    pub crash_boot: bool,
+    #[prost(int32, tag = "6")]
+    pub crash_boot_count: i32,
+    #[prost(string, tag = "7")]
+    pub even_side_software_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "8")]
+    pub odd_side_software_version: ::prost::alloc::string::String,
+    #[prost(int32, tag = "9")]
+    pub api_version_odd_side: i32,
+    #[prost(int32, tag = "10")]
+    pub api_version_even_side: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PingTarget {
+    #[prost(string, tag = "1")]
+    pub service: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub location: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub address: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PingResult {
+    #[prost(message, optional, tag = "3")]
+    pub target: ::core::option::Option<PingTarget>,
+    #[prost(float, tag = "1")]
+    pub drop_rate: f32,
+    #[prost(float, tag = "2")]
+    pub latency_ms: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BondingChallenge {
+    #[prost(string, tag = "1")]
+    pub dish_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub wifi_id: ::prost::alloc::string::String,
+    #[prost(bytes = "vec", tag = "3")]
+    pub nonce: ::prost::alloc::vec::Vec<u8>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AuthenticateRequest {
+    #[prost(message, optional, tag = "1")]
+    pub challenge: ::core::option::Option<SignedData>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChallengeResponse {
+    #[prost(bytes = "vec", tag = "1")]
+    pub signature: ::prost::alloc::vec::Vec<u8>,
+    #[prost(bytes = "vec", tag = "2")]
+    pub certificate_chain: ::prost::alloc::vec::Vec<u8>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NetworkInterface {
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    #[prost(bool, tag = "4")]
+    pub up: bool,
+    #[prost(string, tag = "5")]
+    pub mac_address: ::prost::alloc::string::String,
+    #[prost(string, repeated, tag = "6")]
+    pub ipv4_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(string, repeated, tag = "7")]
+    pub ipv6_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "2")]
+    pub rx_stats: ::core::option::Option<network_interface::RxStats>,
+    #[prost(message, optional, tag = "3")]
+    pub tx_stats: ::core::option::Option<network_interface::TxStats>,
+    #[prost(oneof = "network_interface::Interface", tags = "1000, 1001, 1002")]
+    pub interface: ::core::option::Option<network_interface::Interface>,
+}
+/// Nested message and enum types in `NetworkInterface`.
+pub mod network_interface {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct RxStats {
+        #[prost(uint64, tag = "1")]
+        pub bytes: u64,
+        #[prost(uint64, tag = "2")]
+        pub packets: u64,
+        #[prost(uint64, tag = "3")]
+        pub frame_errors: u64,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct TxStats {
+        #[prost(uint64, tag = "1")]
+        pub bytes: u64,
+        #[prost(uint64, tag = "2")]
+        pub packets: u64,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Interface {
+        #[prost(message, tag = "1000")]
+        Ethernet(super::EthernetNetworkInterface),
+        #[prost(message, tag = "1001")]
+        Wifi(super::WifiNetworkInterface),
+        #[prost(message, tag = "1002")]
+        Bridge(super::BridgeNetworkInterface),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EthernetNetworkInterface {
+    #[prost(bool, tag = "1")]
+    pub link_detected: bool,
+    #[prost(uint32, tag = "2")]
+    pub speed_mbps: u32,
+    #[prost(bool, tag = "3")]
+    pub autonegotiation_on: bool,
+    #[prost(enumeration = "ethernet_network_interface::Duplex", tag = "4")]
+    pub duplex: i32,
+}
+/// Nested message and enum types in `EthernetNetworkInterface`.
+pub mod ethernet_network_interface {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Duplex {
+        Unknown = 0,
+        Half = 1,
+        Full = 2,
+    }
+    impl Duplex {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Duplex::Unknown => "UNKNOWN",
+                Duplex::Half => "HALF",
+                Duplex::Full => "FULL",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNKNOWN" => Some(Self::Unknown),
+                "HALF" => Some(Self::Half),
+                "FULL" => Some(Self::Full),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiNetworkInterface {
+    #[prost(message, optional, tag = "2")]
+    pub invalid_packet_counts: ::core::option::Option<
+        wifi_network_interface::InvalidPacketCounts,
+    >,
+    #[prost(uint32, tag = "3")]
+    pub channel: u32,
+    #[prost(uint32, tag = "8")]
+    pub missed_beacons: u32,
+    #[prost(double, tag = "4")]
+    pub link_quality: f64,
+    #[prost(double, tag = "5")]
+    pub signal_level: f64,
+    #[prost(double, tag = "6")]
+    pub noise_level: f64,
+}
+/// Nested message and enum types in `WifiNetworkInterface`.
+pub mod wifi_network_interface {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct InvalidPacketCounts {
+        #[prost(uint32, tag = "1")]
+        pub rx_invalid_nwid: u32,
+        #[prost(uint32, tag = "2")]
+        pub rx_invalid_crypt: u32,
+        #[prost(uint32, tag = "3")]
+        pub rx_invalid_frag: u32,
+        #[prost(uint32, tag = "4")]
+        pub tx_excessive_retries: u32,
+        #[prost(uint32, tag = "5")]
+        pub invalid_misc: u32,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BridgeNetworkInterface {
+    #[prost(string, repeated, tag = "1")]
+    pub member_names: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LlaPosition {
+    #[prost(double, tag = "1")]
+    pub lat: f64,
+    #[prost(double, tag = "2")]
+    pub lon: f64,
+    #[prost(double, tag = "3")]
+    pub alt: f64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EcefPosition {
+    #[prost(double, tag = "1")]
+    pub x: f64,
+    #[prost(double, tag = "2")]
+    pub y: f64,
+    #[prost(double, tag = "3")]
+    pub z: f64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InitiateRemoteSshRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InitiateRemoteSshResponse {
+    #[prost(uint32, tag = "1")]
+    pub port: u32,
+    #[prost(string, tag = "2")]
+    pub address: ::prost::alloc::string::String,
+    #[prost(bytes = "vec", tag = "3")]
+    pub stsafe: ::prost::alloc::vec::Vec<u8>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SoftwareUpdateRequest {
+    #[prost(uint64, tag = "1")]
+    pub stream_id: u64,
+    #[prost(bytes = "vec", tag = "2")]
+    pub data: ::prost::alloc::vec::Vec<u8>,
+    #[prost(bool, tag = "3")]
+    pub open: bool,
+    #[prost(bool, tag = "4")]
+    pub close: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SoftwareUpdateResponse {}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum BootReason {
+    Unknown = 0,
+    Forgotten = 1,
+    PowerCycle = 2,
+    Command = 3,
+    SoftwareUpdate = 4,
+    ConfigUpdate = 5,
+    UptimeFdir = 6,
+    RepeaterFdir = 7,
+    AviationEthWanFdir = 8,
+    KernelPanic = 9,
+    IntentionalKernelPanic = 14,
+    McuBringupFailedFdir = 11,
+    AviationOutageFdir = 12,
+    SoftwareWatchdog = 13,
+    HardwareWatchdog = 15,
+}
+impl BootReason {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            BootReason::Unknown => "BOOT_REASON_UNKNOWN",
+            BootReason::Forgotten => "FORGOTTEN",
+            BootReason::PowerCycle => "POWER_CYCLE",
+            BootReason::Command => "COMMAND",
+            BootReason::SoftwareUpdate => "SOFTWARE_UPDATE",
+            BootReason::ConfigUpdate => "CONFIG_UPDATE",
+            BootReason::UptimeFdir => "UPTIME_FDIR",
+            BootReason::RepeaterFdir => "REPEATER_FDIR",
+            BootReason::AviationEthWanFdir => "AVIATION_ETH_WAN_FDIR",
+            BootReason::KernelPanic => "KERNEL_PANIC",
+            BootReason::IntentionalKernelPanic => "INTENTIONAL_KERNEL_PANIC",
+            BootReason::McuBringupFailedFdir => "MCU_BRINGUP_FAILED_FDIR",
+            BootReason::AviationOutageFdir => "AVIATION_OUTAGE_FDIR",
+            BootReason::SoftwareWatchdog => "SOFTWARE_WATCHDOG",
+            BootReason::HardwareWatchdog => "HARDWARE_WATCHDOG",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "BOOT_REASON_UNKNOWN" => Some(Self::Unknown),
+            "FORGOTTEN" => Some(Self::Forgotten),
+            "POWER_CYCLE" => Some(Self::PowerCycle),
+            "COMMAND" => Some(Self::Command),
+            "SOFTWARE_UPDATE" => Some(Self::SoftwareUpdate),
+            "CONFIG_UPDATE" => Some(Self::ConfigUpdate),
+            "UPTIME_FDIR" => Some(Self::UptimeFdir),
+            "REPEATER_FDIR" => Some(Self::RepeaterFdir),
+            "AVIATION_ETH_WAN_FDIR" => Some(Self::AviationEthWanFdir),
+            "KERNEL_PANIC" => Some(Self::KernelPanic),
+            "INTENTIONAL_KERNEL_PANIC" => Some(Self::IntentionalKernelPanic),
+            "MCU_BRINGUP_FAILED_FDIR" => Some(Self::McuBringupFailedFdir),
+            "AVIATION_OUTAGE_FDIR" => Some(Self::AviationOutageFdir),
+            "SOFTWARE_WATCHDOG" => Some(Self::SoftwareWatchdog),
+            "HARDWARE_WATCHDOG" => Some(Self::HardwareWatchdog),
+            _ => None,
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishConfig {
+    #[prost(enumeration = "dish_config::SnowMeltMode", tag = "1")]
+    pub snow_melt_mode: i32,
+    #[prost(bool, tag = "1001")]
+    pub apply_snow_melt_mode: bool,
+    #[prost(enumeration = "dish_config::LocationRequestMode", tag = "2")]
+    pub location_request_mode: i32,
+    #[prost(bool, tag = "2001")]
+    pub apply_location_request_mode: bool,
+    #[prost(enumeration = "dish_config::LevelDishMode", tag = "3")]
+    pub level_dish_mode: i32,
+    #[prost(bool, tag = "3001")]
+    pub apply_level_dish_mode: bool,
+    #[prost(uint32, tag = "4")]
+    pub power_save_start_minutes: u32,
+    #[prost(bool, tag = "4001")]
+    pub apply_power_save_start_minutes: bool,
+    #[prost(uint32, tag = "5")]
+    pub power_save_duration_minutes: u32,
+    #[prost(bool, tag = "5001")]
+    pub apply_power_save_duration_minutes: bool,
+    #[prost(bool, tag = "6")]
+    pub power_save_mode: bool,
+    #[prost(bool, tag = "6001")]
+    pub apply_power_save_mode: bool,
+    #[prost(uint32, tag = "9")]
+    pub swupdate_reboot_hour: u32,
+    #[prost(bool, tag = "9001")]
+    pub apply_swupdate_reboot_hour: bool,
+    #[prost(bool, tag = "7")]
+    pub swupdate_three_day_deferral_enabled: bool,
+    #[prost(bool, tag = "7001")]
+    pub apply_swupdate_three_day_deferral_enabled: bool,
+    #[prost(uint32, tag = "8")]
+    pub asset_class: u32,
+    #[prost(bool, tag = "8001")]
+    pub apply_asset_class: bool,
+}
+/// Nested message and enum types in `DishConfig`.
+pub mod dish_config {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum SnowMeltMode {
+        Auto = 0,
+        AlwaysOn = 1,
+        AlwaysOff = 2,
+    }
+    impl SnowMeltMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                SnowMeltMode::Auto => "AUTO",
+                SnowMeltMode::AlwaysOn => "ALWAYS_ON",
+                SnowMeltMode::AlwaysOff => "ALWAYS_OFF",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "AUTO" => Some(Self::Auto),
+                "ALWAYS_ON" => Some(Self::AlwaysOn),
+                "ALWAYS_OFF" => Some(Self::AlwaysOff),
+                _ => None,
+            }
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum LocationRequestMode {
+        None = 0,
+        Local = 1,
+    }
+    impl LocationRequestMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LocationRequestMode::None => "NONE",
+                LocationRequestMode::Local => "LOCAL",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "NONE" => Some(Self::None),
+                "LOCAL" => Some(Self::Local),
+                _ => None,
+            }
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum LevelDishMode {
+        TiltLikeNormal = 0,
+        ForceLevel = 1,
+    }
+    impl LevelDishMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                LevelDishMode::TiltLikeNormal => "TILT_LIKE_NORMAL",
+                LevelDishMode::ForceLevel => "FORCE_LEVEL",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "TILT_LIKE_NORMAL" => Some(Self::TiltLikeNormal),
+                "FORCE_LEVEL" => Some(Self::ForceLevel),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RssiEntry {
+    #[prost(double, tag = "1")]
+    pub theta_degree: f64,
+    #[prost(double, tag = "2")]
+    pub phi_degree: f64,
+    #[prost(double, tag = "3")]
+    pub rssi_dbf: f64,
+    #[prost(uint64, tag = "4")]
+    pub scan_timestamp_ms: u64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishActivateRssiScan {
+    #[prost(uint32, tag = "1")]
+    pub channel: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetRssiScanResult {
+    #[prost(bool, tag = "1")]
+    pub success: bool,
+    #[prost(uint32, tag = "2")]
+    pub channel: u32,
+    #[prost(uint64, tag = "3")]
+    pub request_timestamp: u64,
+    #[prost(uint32, tag = "4")]
+    pub number_samples: u32,
+    #[prost(message, repeated, tag = "5")]
+    pub rssi_scan_points: ::prost::alloc::vec::Vec<RssiEntry>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishStowRequest {
+    #[prost(bool, tag = "1")]
+    pub unstow: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishStowResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetContextRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetContextResponse {
+    #[prost(message, optional, tag = "1")]
+    pub device_info: ::core::option::Option<DeviceInfo>,
+    #[prost(message, optional, tag = "7")]
+    pub device_state: ::core::option::Option<DeviceState>,
+    #[prost(float, tag = "2")]
+    pub obstruction_fraction: f32,
+    #[prost(float, tag = "20")]
+    pub obstruction_time: f32,
+    #[prost(float, tag = "3")]
+    pub obstruction_valid_s: f32,
+    #[prost(bool, tag = "12")]
+    pub obstruction_current: bool,
+    #[prost(uint32, tag = "4")]
+    pub cell_id: u32,
+    #[prost(uint32, tag = "5")]
+    pub pop_rack_id: u32,
+    #[prost(uint32, tag = "8")]
+    pub initial_satellite_id: u32,
+    #[prost(uint32, tag = "9")]
+    pub initial_gateway_id: u32,
+    #[prost(bool, tag = "10")]
+    pub on_backup_beam: bool,
+    #[prost(float, tag = "6")]
+    pub seconds_to_slot_end: f32,
+    #[prost(bool, tag = "11")]
+    pub debug_telemetry_enabled: bool,
+    #[prost(float, tag = "13")]
+    pub pop_ping_drop_rate_15s_mean: f32,
+    #[prost(float, tag = "14")]
+    pub pop_ping_latency_ms_15s_mean: f32,
+    #[prost(float, tag = "15")]
+    pub seconds_since_last_1s_outage: f32,
+    #[prost(float, tag = "16")]
+    pub seconds_since_last_2s_outage: f32,
+    #[prost(float, tag = "17")]
+    pub seconds_since_last_5s_outage: f32,
+    #[prost(float, tag = "18")]
+    pub seconds_since_last_15s_outage: f32,
+    #[prost(float, tag = "19")]
+    pub seconds_since_last_60s_outage: f32,
+    #[prost(bool, tag = "23")]
+    pub outage_1s_within_1h: bool,
+    #[prost(bool, tag = "24")]
+    pub outage_2s_within_1h: bool,
+    #[prost(bool, tag = "25")]
+    pub outage_5s_within_1h: bool,
+    #[prost(enumeration = "super::satellites::network::UtDisablementCode", tag = "21")]
+    pub disablement_code: i32,
+    #[prost(float, tag = "22")]
+    pub ku_mac_active_ratio: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishOutage {
+    #[prost(enumeration = "dish_outage::Cause", tag = "1")]
+    pub cause: i32,
+    #[prost(int64, tag = "2")]
+    pub start_timestamp_ns: i64,
+    #[prost(uint64, tag = "3")]
+    pub duration_ns: u64,
+    #[prost(bool, tag = "4")]
+    pub did_switch: bool,
+}
+/// Nested message and enum types in `DishOutage`.
+pub mod dish_outage {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Cause {
+        Unknown = 0,
+        Booting = 1,
+        Stowed = 2,
+        ThermalShutdown = 3,
+        NoSchedule = 4,
+        NoSats = 5,
+        Obstructed = 6,
+        NoDownlink = 7,
+        NoPings = 8,
+        ActuatorActivity = 9,
+        CableTest = 10,
+        Sleeping = 11,
+        MovingWhileNotAllowed = 12,
+    }
+    impl Cause {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Cause::Unknown => "UNKNOWN",
+                Cause::Booting => "BOOTING",
+                Cause::Stowed => "STOWED",
+                Cause::ThermalShutdown => "THERMAL_SHUTDOWN",
+                Cause::NoSchedule => "NO_SCHEDULE",
+                Cause::NoSats => "NO_SATS",
+                Cause::Obstructed => "OBSTRUCTED",
+                Cause::NoDownlink => "NO_DOWNLINK",
+                Cause::NoPings => "NO_PINGS",
+                Cause::ActuatorActivity => "ACTUATOR_ACTIVITY",
+                Cause::CableTest => "CABLE_TEST",
+                Cause::Sleeping => "SLEEPING",
+                Cause::MovingWhileNotAllowed => "MOVING_WHILE_NOT_ALLOWED",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNKNOWN" => Some(Self::Unknown),
+                "BOOTING" => Some(Self::Booting),
+                "STOWED" => Some(Self::Stowed),
+                "THERMAL_SHUTDOWN" => Some(Self::ThermalShutdown),
+                "NO_SCHEDULE" => Some(Self::NoSchedule),
+                "NO_SATS" => Some(Self::NoSats),
+                "OBSTRUCTED" => Some(Self::Obstructed),
+                "NO_DOWNLINK" => Some(Self::NoDownlink),
+                "NO_PINGS" => Some(Self::NoPings),
+                "ACTUATOR_ACTIVITY" => Some(Self::ActuatorActivity),
+                "CABLE_TEST" => Some(Self::CableTest),
+                "SLEEPING" => Some(Self::Sleeping),
+                "MOVING_WHILE_NOT_ALLOWED" => Some(Self::MovingWhileNotAllowed),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetHistoryResponse {
+    #[prost(uint64, tag = "1")]
+    pub current: u64,
+    #[prost(float, repeated, tag = "1001")]
+    pub pop_ping_drop_rate: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "1002")]
+    pub pop_ping_latency_ms: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "1003")]
+    pub downlink_throughput_bps: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "1004")]
+    pub uplink_throughput_bps: ::prost::alloc::vec::Vec<f32>,
+    #[prost(message, repeated, tag = "1009")]
+    pub outages: ::prost::alloc::vec::Vec<DishOutage>,
+    #[prost(float, repeated, tag = "1010")]
+    pub power_in: ::prost::alloc::vec::Vec<f32>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetStatusResponse {
+    #[prost(message, optional, tag = "1")]
+    pub device_info: ::core::option::Option<DeviceInfo>,
+    #[prost(message, optional, tag = "2")]
+    pub device_state: ::core::option::Option<DeviceState>,
+    #[prost(message, optional, tag = "1005")]
+    pub alerts: ::core::option::Option<DishAlerts>,
+    #[prost(message, optional, tag = "1014")]
+    pub outage: ::core::option::Option<DishOutage>,
+    #[prost(message, optional, tag = "1015")]
+    pub gps_stats: ::core::option::Option<DishGpsStats>,
+    #[prost(float, tag = "1002")]
+    pub seconds_to_first_nonempty_slot: f32,
+    #[prost(float, tag = "1003")]
+    pub pop_ping_drop_rate: f32,
+    #[prost(float, tag = "1007")]
+    pub downlink_throughput_bps: f32,
+    #[prost(float, tag = "1008")]
+    pub uplink_throughput_bps: f32,
+    #[prost(float, tag = "1009")]
+    pub pop_ping_latency_ms: f32,
+    #[prost(message, optional, tag = "1004")]
+    pub obstruction_stats: ::core::option::Option<DishObstructionStats>,
+    #[prost(bool, tag = "1010")]
+    pub stow_requested: bool,
+    #[prost(float, tag = "1011")]
+    pub boresight_azimuth_deg: f32,
+    #[prost(float, tag = "1012")]
+    pub boresight_elevation_deg: f32,
+    #[prost(int32, tag = "1016")]
+    pub eth_speed_mbps: i32,
+    #[prost(enumeration = "UserMobilityClass", tag = "1017")]
+    pub mobility_class: i32,
+    #[prost(bool, tag = "1018")]
+    pub is_snr_above_noise_floor: bool,
+    #[prost(message, optional, tag = "1019")]
+    pub ready_states: ::core::option::Option<DishReadyStates>,
+    #[prost(enumeration = "UserClassOfService", tag = "1020")]
+    pub class_of_service: i32,
+    #[prost(enumeration = "SoftwareUpdateState", tag = "1021")]
+    pub software_update_state: i32,
+    #[prost(bool, tag = "1030")]
+    pub swupdate_reboot_ready: bool,
+    #[prost(enumeration = "RebootReason", tag = "1032")]
+    pub reboot_reason: i32,
+    #[prost(message, optional, tag = "1026")]
+    pub software_update_stats: ::core::option::Option<SoftwareUpdateStats>,
+    #[prost(message, optional, tag = "1027")]
+    pub alignment_stats: ::core::option::Option<AlignmentStats>,
+    #[prost(bool, tag = "1022")]
+    pub is_snr_persistently_low: bool,
+    #[prost(enumeration = "HasActuators", tag = "1023")]
+    pub has_actuators: i32,
+    #[prost(enumeration = "super::satellites::network::UtDisablementCode", tag = "1024")]
+    pub disablement_code: i32,
+    #[prost(
+        enumeration = "super::telemetron::public::integrations::RateLimitReason",
+        tag = "1044"
+    )]
+    pub dl_bandwidth_restricted_reason: i32,
+    #[prost(
+        enumeration = "super::telemetron::public::integrations::RateLimitReason",
+        tag = "1045"
+    )]
+    pub ul_bandwidth_restricted_reason: i32,
+    #[prost(bool, tag = "1025")]
+    pub has_signed_cals: bool,
+    #[prost(message, optional, tag = "2000")]
+    pub config: ::core::option::Option<DishConfig>,
+    #[prost(message, optional, tag = "1028")]
+    pub initialization_duration_seconds: ::core::option::Option<
+        InitializationDurationSeconds,
+    >,
+    #[prost(bool, tag = "1029")]
+    pub is_cell_disabled: bool,
+    #[prost(int32, tag = "1031")]
+    pub seconds_until_swupdate_reboot_possible: i32,
+    #[prost(bool, tag = "1033")]
+    pub high_power_test_mode: bool,
+    #[prost(string, repeated, tag = "1040")]
+    pub connected_routers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "1041")]
+    pub plc_stats: ::core::option::Option<PlcStats>,
+    #[prost(bool, tag = "1042")]
+    pub is_moving_fast_persisted: bool,
+    #[prost(message, optional, tag = "1043")]
+    pub upsu_stats: ::core::option::Option<DishUpsuStats>,
+    #[prost(message, optional, tag = "1048")]
+    pub aps_stats: ::core::option::Option<DishApsStats>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetObstructionMapRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetObstructionMapResponse {
+    #[prost(uint32, tag = "1")]
+    pub num_rows: u32,
+    #[prost(uint32, tag = "2")]
+    pub num_cols: u32,
+    #[prost(float, repeated, tag = "3")]
+    pub snr: ::prost::alloc::vec::Vec<f32>,
+    #[deprecated]
+    #[prost(float, tag = "4")]
+    pub min_elevation_deg: f32,
+    #[prost(float, tag = "5")]
+    pub max_theta_deg: f32,
+    #[prost(enumeration = "ObstructionMapReferenceFrame", tag = "6")]
+    pub map_reference_frame: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishAlerts {
+    #[prost(bool, tag = "1")]
+    pub motors_stuck: bool,
+    #[prost(bool, tag = "3")]
+    pub thermal_throttle: bool,
+    #[prost(bool, tag = "2")]
+    pub thermal_shutdown: bool,
+    #[prost(bool, tag = "5")]
+    pub mast_not_near_vertical: bool,
+    #[prost(bool, tag = "4")]
+    pub unexpected_location: bool,
+    #[prost(bool, tag = "6")]
+    pub slow_ethernet_speeds: bool,
+    #[prost(bool, tag = "18")]
+    pub slow_ethernet_speeds_100: bool,
+    #[prost(bool, tag = "7")]
+    pub roaming: bool,
+    #[prost(bool, tag = "8")]
+    pub install_pending: bool,
+    #[prost(bool, tag = "9")]
+    pub is_heating: bool,
+    #[prost(bool, tag = "10")]
+    pub power_supply_thermal_throttle: bool,
+    #[prost(bool, tag = "11")]
+    pub is_power_save_idle: bool,
+    #[prost(bool, tag = "12")]
+    pub moving_while_not_mobile: bool,
+    #[prost(bool, tag = "15")]
+    pub moving_too_fast_for_policy: bool,
+    #[prost(bool, tag = "14")]
+    pub dbf_telem_stale: bool,
+    #[prost(bool, tag = "16")]
+    pub low_motor_current: bool,
+    #[prost(bool, tag = "17")]
+    pub lower_signal_than_predicted: bool,
+    #[prost(bool, tag = "19")]
+    pub obstruction_map_reset: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishReadyStates {
+    #[prost(bool, tag = "1")]
+    pub cady: bool,
+    #[prost(bool, tag = "2")]
+    pub scp: bool,
+    #[prost(bool, tag = "3")]
+    pub l1l2: bool,
+    #[prost(bool, tag = "4")]
+    pub xphy: bool,
+    #[prost(bool, tag = "5")]
+    pub aap: bool,
+    #[prost(bool, tag = "6")]
+    pub rf: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGpsStats {
+    #[prost(bool, tag = "1")]
+    pub gps_valid: bool,
+    #[prost(uint32, tag = "2")]
+    pub gps_sats: u32,
+    #[prost(bool, tag = "3")]
+    pub no_sats_after_ttff: bool,
+    #[prost(bool, tag = "4")]
+    pub inhibit_gps: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SoftwareUpdateStats {
+    #[prost(enumeration = "SoftwareUpdateState", tag = "1")]
+    pub software_update_state: i32,
+    #[prost(float, tag = "2")]
+    pub software_update_progress: f32,
+    #[prost(bool, tag = "3")]
+    pub update_requires_reboot: bool,
+    #[prost(int64, tag = "4")]
+    pub reboot_scheduled_utc_time: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AlignmentStats {
+    #[prost(enumeration = "HasActuators", tag = "1")]
+    pub has_actuators: i32,
+    #[prost(enumeration = "ActuatorState", tag = "2")]
+    pub actuator_state: i32,
+    #[prost(float, tag = "3")]
+    pub tilt_angle_deg: f32,
+    #[prost(float, tag = "4")]
+    pub boresight_azimuth_deg: f32,
+    #[prost(float, tag = "5")]
+    pub boresight_elevation_deg: f32,
+    #[prost(float, tag = "8")]
+    pub desired_boresight_azimuth_deg: f32,
+    #[prost(float, tag = "9")]
+    pub desired_boresight_elevation_deg: f32,
+    #[prost(enumeration = "AttitudeEstimationState", tag = "6")]
+    pub attitude_estimation_state: i32,
+    #[prost(float, tag = "7")]
+    pub attitude_uncertainty_deg: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishObstructionStats {
+    #[prost(bool, tag = "5")]
+    pub currently_obstructed: bool,
+    #[prost(float, tag = "1")]
+    pub fraction_obstructed: f32,
+    #[prost(float, tag = "9")]
+    pub time_obstructed: f32,
+    #[prost(float, tag = "4")]
+    pub valid_s: f32,
+    #[prost(uint32, tag = "10")]
+    pub patches_valid: u32,
+    #[prost(float, tag = "6")]
+    pub avg_prolonged_obstruction_duration_s: f32,
+    #[prost(float, tag = "7")]
+    pub avg_prolonged_obstruction_interval_s: f32,
+    #[prost(bool, tag = "8")]
+    pub avg_prolonged_obstruction_valid: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishUpsuStats {
+    #[prost(uint64, tag = "2")]
+    pub app_version: u64,
+    #[prost(uint64, tag = "3")]
+    pub boot_version: u64,
+    #[prost(uint64, tag = "4")]
+    pub rom_version: u64,
+    #[prost(int64, tag = "5")]
+    pub uptime: i64,
+    #[prost(float, tag = "6")]
+    pub dish_power: f32,
+    #[prost(float, tag = "7")]
+    pub router_power: f32,
+    #[prost(bool, tag = "8")]
+    pub force_dev_signed_allowed: bool,
+    #[prost(bool, tag = "9")]
+    pub debug_port_locked: bool,
+    #[prost(bool, tag = "10")]
+    pub stsafe_certs_locked: bool,
+    #[prost(bool, tag = "11")]
+    pub stsafe_keys_locked: bool,
+    #[prost(uint32, tag = "12")]
+    pub g0_locked: u32,
+    #[prost(uint32, tag = "13")]
+    pub g0_firmware_version: u32,
+    #[prost(int32, tag = "14")]
+    pub board_rev: i32,
+    #[prost(uint32, tag = "15")]
+    pub g0_board_id: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishApsStats {
+    #[prost(uint64, tag = "2")]
+    pub app_version: u64,
+    #[prost(uint64, tag = "3")]
+    pub boot_version: u64,
+    #[prost(uint64, tag = "4")]
+    pub rom_version: u64,
+    #[prost(int64, tag = "5")]
+    pub uptime: i64,
+    #[prost(float, tag = "6")]
+    pub dish_power: f32,
+    #[prost(bool, tag = "7")]
+    pub force_dev_signed_allowed: bool,
+    #[prost(bool, tag = "8")]
+    pub debug_port_locked: bool,
+    #[prost(int32, tag = "9")]
+    pub board_rev: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InitializationDurationSeconds {
+    #[prost(int32, tag = "1")]
+    pub attitude_initialization: i32,
+    #[prost(int32, tag = "2")]
+    pub burst_detected: i32,
+    #[prost(int32, tag = "3")]
+    pub ekf_converged: i32,
+    #[prost(int32, tag = "4")]
+    pub first_cplane: i32,
+    #[prost(int32, tag = "5")]
+    pub first_pop_ping: i32,
+    #[prost(int32, tag = "6")]
+    pub gps_valid: i32,
+    #[prost(int32, tag = "7")]
+    pub initial_network_entry: i32,
+    #[prost(int32, tag = "8")]
+    pub network_schedule: i32,
+    #[prost(int32, tag = "9")]
+    pub rf_ready: i32,
+    #[prost(int32, tag = "10")]
+    pub stable_connection: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishAuthenticateResponse {
+    #[prost(message, optional, tag = "2")]
+    pub dish: ::core::option::Option<ChallengeResponse>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SelfTestRequest {
+    #[prost(bool, tag = "1")]
+    pub detailed: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SelfTestResponse {
+    #[prost(bool, tag = "1")]
+    pub passed: bool,
+    #[prost(string, tag = "2")]
+    pub report: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetTestModeRequest {
+    #[prost(enumeration = "set_test_mode_request::RfMode", tag = "1")]
+    pub rf_mode: i32,
+    #[prost(bool, tag = "1001")]
+    pub disable_loss_of_comm_fdir: bool,
+    #[prost(bool, tag = "1002")]
+    pub enable_rules_override: bool,
+}
+/// Nested message and enum types in `SetTestModeRequest`.
+pub mod set_test_mode_request {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum RfMode {
+        Rx = 0,
+        Idle = 1,
+        Tx = 2,
+        Cal = 3,
+        User = 4,
+        Normal = 420,
+    }
+    impl RfMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                RfMode::Rx => "RX",
+                RfMode::Idle => "IDLE",
+                RfMode::Tx => "TX",
+                RfMode::Cal => "CAL",
+                RfMode::User => "USER",
+                RfMode::Normal => "NORMAL",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "RX" => Some(Self::Rx),
+                "IDLE" => Some(Self::Idle),
+                "TX" => Some(Self::Tx),
+                "CAL" => Some(Self::Cal),
+                "USER" => Some(Self::User),
+                "NORMAL" => Some(Self::Normal),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetTestModeResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishSetConfigRequest {
+    #[prost(message, optional, tag = "1")]
+    pub dish_config: ::core::option::Option<DishConfig>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishSetConfigResponse {
+    #[prost(message, optional, tag = "1")]
+    pub updated_dish_config: ::core::option::Option<DishConfig>,
+    #[prost(string, tag = "2")]
+    pub error: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetConfigRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetConfigResponse {
+    #[prost(message, optional, tag = "1")]
+    pub dish_config: ::core::option::Option<DishConfig>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishInhibitGpsRequest {
+    #[prost(bool, tag = "1")]
+    pub inhibit_gps: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishInhibitGpsResponse {
+    #[prost(bool, tag = "1")]
+    pub inhibit_gps: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetDataRequest {
+    #[prost(uint32, tag = "1")]
+    pub id: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishClearObstructionMapRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishClearObstructionMapResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishActivateRssiScanRequest {
+    #[prost(message, optional, tag = "1")]
+    pub scan_query: ::core::option::Option<DishActivateRssiScan>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishActivateRssiScanResponse {
+    #[prost(bool, tag = "1")]
+    pub success: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetRssiScanResultRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetRssiScanResultResponse {
+    #[prost(message, optional, tag = "1")]
+    pub result: ::core::option::Option<DishGetRssiScanResult>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishFactoryResetRequest {
+    #[prost(bool, tag = "1")]
+    pub app_reset: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishFactoryResetResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResetButtonRequest {
+    #[prost(bool, tag = "1")]
+    pub pressed: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ResetButtonResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PlcStats {
+    #[prost(bool, tag = "1")]
+    pub receiving_plc: bool,
+    #[prost(uint32, tag = "2")]
+    pub average_time_to_empty: u32,
+    #[prost(uint32, tag = "3")]
+    pub average_time_to_full: u32,
+    #[prost(uint32, tag = "4")]
+    pub battery_health: u32,
+    #[prost(uint32, tag = "5")]
+    pub hardware_revision_id: u32,
+    #[prost(bool, tag = "6")]
+    pub permanent_failure: bool,
+    #[prost(message, optional, tag = "7")]
+    pub port_1_stats: ::core::option::Option<PlcPortStats>,
+    #[prost(message, optional, tag = "8")]
+    pub port_2_stats: ::core::option::Option<PlcPortStats>,
+    #[prost(message, optional, tag = "9")]
+    pub port_3_stats: ::core::option::Option<PlcPortStats>,
+    #[prost(enumeration = "plc_stats::ProtocolRevision", tag = "10")]
+    pub plc_revision: i32,
+    #[prost(bool, tag = "11")]
+    pub safety_mode_active: bool,
+    #[prost(uint32, tag = "12")]
+    pub state_of_charge: u32,
+    #[prost(uint32, tag = "13")]
+    pub thermal_throttle_level: u32,
+}
+/// Nested message and enum types in `PLCStats`.
+pub mod plc_stats {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum ProtocolRevision {
+        RevD = 0,
+    }
+    impl ProtocolRevision {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                ProtocolRevision::RevD => "REV_D",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "REV_D" => Some(Self::RevD),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PlcPortStats {
+    #[prost(uint32, tag = "1")]
+    pub power: u32,
+    #[prost(enumeration = "plc_port_stats::PortStatus", tag = "2")]
+    pub status: i32,
+}
+/// Nested message and enum types in `PLCPortStats`.
+pub mod plc_port_stats {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum PortStatus {
+        Inactive = 0,
+        Charging = 1,
+        Discharging = 2,
+        MoistureDetected = 3,
+    }
+    impl PortStatus {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                PortStatus::Inactive => "INACTIVE",
+                PortStatus::Charging => "CHARGING",
+                PortStatus::Discharging => "DISCHARGING",
+                PortStatus::MoistureDetected => "MOISTURE_DETECTED",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "INACTIVE" => Some(Self::Inactive),
+                "CHARGING" => Some(Self::Charging),
+                "DISCHARGING" => Some(Self::Discharging),
+                "MOISTURE_DETECTED" => Some(Self::MoistureDetected),
+                _ => None,
+            }
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum UserMobilityClass {
+    Stationary = 0,
+    Nomadic = 1,
+    Mobile = 2,
+}
+impl UserMobilityClass {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            UserMobilityClass::Stationary => "STATIONARY",
+            UserMobilityClass::Nomadic => "NOMADIC",
+            UserMobilityClass::Mobile => "MOBILE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "STATIONARY" => Some(Self::Stationary),
+            "NOMADIC" => Some(Self::Nomadic),
+            "MOBILE" => Some(Self::Mobile),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ObstructionMapReferenceFrame {
+    FrameUnknown = 0,
+    FrameEarth = 1,
+    FrameUt = 2,
+}
+impl ObstructionMapReferenceFrame {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ObstructionMapReferenceFrame::FrameUnknown => "FRAME_UNKNOWN",
+            ObstructionMapReferenceFrame::FrameEarth => "FRAME_EARTH",
+            ObstructionMapReferenceFrame::FrameUt => "FRAME_UT",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "FRAME_UNKNOWN" => Some(Self::FrameUnknown),
+            "FRAME_EARTH" => Some(Self::FrameEarth),
+            "FRAME_UT" => Some(Self::FrameUt),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum SoftwareUpdateState {
+    Unknown = 0,
+    Idle = 1,
+    Fetching = 2,
+    PreCheck = 3,
+    Writing = 4,
+    PostCheck = 5,
+    RebootRequired = 6,
+    Disabled = 7,
+    Faulted = 8,
+}
+impl SoftwareUpdateState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SoftwareUpdateState::Unknown => "SOFTWARE_UPDATE_STATE_UNKNOWN",
+            SoftwareUpdateState::Idle => "IDLE",
+            SoftwareUpdateState::Fetching => "FETCHING",
+            SoftwareUpdateState::PreCheck => "PRE_CHECK",
+            SoftwareUpdateState::Writing => "WRITING",
+            SoftwareUpdateState::PostCheck => "POST_CHECK",
+            SoftwareUpdateState::RebootRequired => "REBOOT_REQUIRED",
+            SoftwareUpdateState::Disabled => "DISABLED",
+            SoftwareUpdateState::Faulted => "FAULTED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "SOFTWARE_UPDATE_STATE_UNKNOWN" => Some(Self::Unknown),
+            "IDLE" => Some(Self::Idle),
+            "FETCHING" => Some(Self::Fetching),
+            "PRE_CHECK" => Some(Self::PreCheck),
+            "WRITING" => Some(Self::Writing),
+            "POST_CHECK" => Some(Self::PostCheck),
+            "REBOOT_REQUIRED" => Some(Self::RebootRequired),
+            "DISABLED" => Some(Self::Disabled),
+            "FAULTED" => Some(Self::Faulted),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum UserClassOfService {
+    UnknownUserClassOfService = 0,
+    Consumer = 1,
+    Business = 2,
+    BusinessPlus = 3,
+    CommercialAviation = 4,
+}
+impl UserClassOfService {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            UserClassOfService::UnknownUserClassOfService => {
+                "UNKNOWN_USER_CLASS_OF_SERVICE"
+            }
+            UserClassOfService::Consumer => "CONSUMER",
+            UserClassOfService::Business => "BUSINESS",
+            UserClassOfService::BusinessPlus => "BUSINESS_PLUS",
+            UserClassOfService::CommercialAviation => "COMMERCIAL_AVIATION",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "UNKNOWN_USER_CLASS_OF_SERVICE" => Some(Self::UnknownUserClassOfService),
+            "CONSUMER" => Some(Self::Consumer),
+            "BUSINESS" => Some(Self::Business),
+            "BUSINESS_PLUS" => Some(Self::BusinessPlus),
+            "COMMERCIAL_AVIATION" => Some(Self::CommercialAviation),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum HasActuators {
+    Unknown = 0,
+    Yes = 1,
+    No = 2,
+}
+impl HasActuators {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            HasActuators::Unknown => "HAS_ACTUATORS_UNKNOWN",
+            HasActuators::Yes => "HAS_ACTUATORS_YES",
+            HasActuators::No => "HAS_ACTUATORS_NO",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "HAS_ACTUATORS_UNKNOWN" => Some(Self::Unknown),
+            "HAS_ACTUATORS_YES" => Some(Self::Yes),
+            "HAS_ACTUATORS_NO" => Some(Self::No),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ActuatorState {
+    Idle = 0,
+    FullTilt = 1,
+    Rotate = 2,
+    Tilt = 3,
+    UnwrapPositive = 4,
+    UnwrapNegative = 5,
+    TiltToStowed = 6,
+    Faulted = 7,
+    WaitTilStatic = 8,
+    DriveToMobilePosition = 9,
+    MobileWait = 10,
+}
+impl ActuatorState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ActuatorState::Idle => "ACTUATOR_STATE_IDLE",
+            ActuatorState::FullTilt => "ACTUATOR_STATE_FULL_TILT",
+            ActuatorState::Rotate => "ACTUATOR_STATE_ROTATE",
+            ActuatorState::Tilt => "ACTUATOR_STATE_TILT",
+            ActuatorState::UnwrapPositive => "ACTUATOR_STATE_UNWRAP_POSITIVE",
+            ActuatorState::UnwrapNegative => "ACTUATOR_STATE_UNWRAP_NEGATIVE",
+            ActuatorState::TiltToStowed => "ACTUATOR_STATE_TILT_TO_STOWED",
+            ActuatorState::Faulted => "ACTUATOR_STATE_FAULTED",
+            ActuatorState::WaitTilStatic => "ACTUATOR_STATE_WAIT_TIL_STATIC",
+            ActuatorState::DriveToMobilePosition => {
+                "ACTUATOR_STATE_DRIVE_TO_MOBILE_POSITION"
+            }
+            ActuatorState::MobileWait => "ACTUATOR_STATE_MOBILE_WAIT",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ACTUATOR_STATE_IDLE" => Some(Self::Idle),
+            "ACTUATOR_STATE_FULL_TILT" => Some(Self::FullTilt),
+            "ACTUATOR_STATE_ROTATE" => Some(Self::Rotate),
+            "ACTUATOR_STATE_TILT" => Some(Self::Tilt),
+            "ACTUATOR_STATE_UNWRAP_POSITIVE" => Some(Self::UnwrapPositive),
+            "ACTUATOR_STATE_UNWRAP_NEGATIVE" => Some(Self::UnwrapNegative),
+            "ACTUATOR_STATE_TILT_TO_STOWED" => Some(Self::TiltToStowed),
+            "ACTUATOR_STATE_FAULTED" => Some(Self::Faulted),
+            "ACTUATOR_STATE_WAIT_TIL_STATIC" => Some(Self::WaitTilStatic),
+            "ACTUATOR_STATE_DRIVE_TO_MOBILE_POSITION" => {
+                Some(Self::DriveToMobilePosition)
+            }
+            "ACTUATOR_STATE_MOBILE_WAIT" => Some(Self::MobileWait),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum AttitudeEstimationState {
+    FilterReset = 0,
+    FilterUnconverged = 1,
+    FilterConverged = 2,
+    FilterFaulted = 3,
+    FilterInvalid = 4,
+}
+impl AttitudeEstimationState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AttitudeEstimationState::FilterReset => "FILTER_RESET",
+            AttitudeEstimationState::FilterUnconverged => "FILTER_UNCONVERGED",
+            AttitudeEstimationState::FilterConverged => "FILTER_CONVERGED",
+            AttitudeEstimationState::FilterFaulted => "FILTER_FAULTED",
+            AttitudeEstimationState::FilterInvalid => "FILTER_INVALID",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "FILTER_RESET" => Some(Self::FilterReset),
+            "FILTER_UNCONVERGED" => Some(Self::FilterUnconverged),
+            "FILTER_CONVERGED" => Some(Self::FilterConverged),
+            "FILTER_FAULTED" => Some(Self::FilterFaulted),
+            "FILTER_INVALID" => Some(Self::FilterInvalid),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum RebootReason {
+    None = 0,
+    Manual = 1,
+    LossOfComm = 2,
+    SwupdateNow = 3,
+    SwupdateScheduled = 4,
+    App = 5,
+    Emc = 6,
+    FactoryReset = 7,
+    TestCase = 8,
+    ThermalPowerCut = 9,
+    CriticalProcessDied = 10,
+    NoRfReady = 11,
+    PostponedLossOfComm = 12,
+    SwupdateStationary = 13,
+    AapCrash = 14,
+    Xp70Sacs = 15,
+    IneFailed = 16,
+}
+impl RebootReason {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            RebootReason::None => "REBOOT_REASON_NONE",
+            RebootReason::Manual => "REBOOT_REASON_MANUAL",
+            RebootReason::LossOfComm => "REBOOT_REASON_LOSS_OF_COMM",
+            RebootReason::SwupdateNow => "REBOOT_REASON_SWUPDATE_NOW",
+            RebootReason::SwupdateScheduled => "REBOOT_REASON_SWUPDATE_SCHEDULED",
+            RebootReason::App => "REBOOT_REASON_APP",
+            RebootReason::Emc => "REBOOT_REASON_EMC",
+            RebootReason::FactoryReset => "REBOOT_REASON_FACTORY_RESET",
+            RebootReason::TestCase => "REBOOT_REASON_TEST_CASE",
+            RebootReason::ThermalPowerCut => "REBOOT_REASON_THERMAL_POWER_CUT",
+            RebootReason::CriticalProcessDied => "REBOOT_REASON_CRITICAL_PROCESS_DIED",
+            RebootReason::NoRfReady => "REBOOT_REASON_NO_RF_READY",
+            RebootReason::PostponedLossOfComm => "REBOOT_REASON_POSTPONED_LOSS_OF_COMM",
+            RebootReason::SwupdateStationary => "REBOOT_REASON_SWUPDATE_STATIONARY",
+            RebootReason::AapCrash => "REBOOT_REASON_AAP_CRASH",
+            RebootReason::Xp70Sacs => "REBOOT_REASON_XP70_SACS",
+            RebootReason::IneFailed => "REBOOT_REASON_INE_FAILED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "REBOOT_REASON_NONE" => Some(Self::None),
+            "REBOOT_REASON_MANUAL" => Some(Self::Manual),
+            "REBOOT_REASON_LOSS_OF_COMM" => Some(Self::LossOfComm),
+            "REBOOT_REASON_SWUPDATE_NOW" => Some(Self::SwupdateNow),
+            "REBOOT_REASON_SWUPDATE_SCHEDULED" => Some(Self::SwupdateScheduled),
+            "REBOOT_REASON_APP" => Some(Self::App),
+            "REBOOT_REASON_EMC" => Some(Self::Emc),
+            "REBOOT_REASON_FACTORY_RESET" => Some(Self::FactoryReset),
+            "REBOOT_REASON_TEST_CASE" => Some(Self::TestCase),
+            "REBOOT_REASON_THERMAL_POWER_CUT" => Some(Self::ThermalPowerCut),
+            "REBOOT_REASON_CRITICAL_PROCESS_DIED" => Some(Self::CriticalProcessDied),
+            "REBOOT_REASON_NO_RF_READY" => Some(Self::NoRfReady),
+            "REBOOT_REASON_POSTPONED_LOSS_OF_COMM" => Some(Self::PostponedLossOfComm),
+            "REBOOT_REASON_SWUPDATE_STATIONARY" => Some(Self::SwupdateStationary),
+            "REBOOT_REASON_AAP_CRASH" => Some(Self::AapCrash),
+            "REBOOT_REASON_XP70_SACS" => Some(Self::Xp70Sacs),
+            "REBOOT_REASON_INE_FAILED" => Some(Self::IneFailed),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum DishState {
+    Unknown = 0,
+    Connected = 1,
+    Searching = 2,
+    Booting = 3,
+}
+impl DishState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            DishState::Unknown => "UNKNOWN",
+            DishState::Connected => "CONNECTED",
+            DishState::Searching => "SEARCHING",
+            DishState::Booting => "BOOTING",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "UNKNOWN" => Some(Self::Unknown),
+            "CONNECTED" => Some(Self::Connected),
+            "SEARCHING" => Some(Self::Searching),
+            "BOOTING" => Some(Self::Booting),
+            _ => None,
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransceiverIfLoopbackTestRequest {
+    #[prost(bool, tag = "1")]
+    pub enable_if_loopback: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransceiverIfLoopbackTestResponse {
+    #[prost(float, tag = "1")]
+    pub ber_loopback_test: f32,
+    #[prost(float, tag = "2")]
+    pub snr_loopback_test: f32,
+    #[prost(float, tag = "3")]
+    pub rssi_loopback_test: f32,
+    #[prost(bool, tag = "4")]
+    pub pll_lock: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransceiverGetStatusRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransceiverGetStatusResponse {
+    #[prost(enumeration = "TransceiverModulatorState", tag = "1")]
+    pub mod_state: i32,
+    #[prost(enumeration = "TransceiverModulatorState", tag = "2")]
+    pub demod_state: i32,
+    #[prost(enumeration = "TransceiverTxRxState", tag = "3")]
+    pub tx_state: i32,
+    #[prost(enumeration = "TransceiverTxRxState", tag = "4")]
+    pub rx_state: i32,
+    #[prost(enumeration = "DishState", tag = "1006")]
+    pub state: i32,
+    #[prost(message, optional, tag = "1007")]
+    pub faults: ::core::option::Option<TransceiverFaults>,
+    #[prost(enumeration = "TransceiverTransmitBlankingState", tag = "1008")]
+    pub transmit_blanking_state: i32,
+    #[prost(float, tag = "1009")]
+    pub modem_asic_temp: f32,
+    #[prost(float, tag = "1010")]
+    pub tx_if_temp: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransceiverFaults {
+    #[prost(bool, tag = "1")]
+    pub over_temp_modem_asic_fault: bool,
+    #[prost(bool, tag = "2")]
+    pub over_temp_pcba_fault: bool,
+    #[prost(bool, tag = "3")]
+    pub dc_voltage_fault: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransceiverGetTelemetryRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransceiverGetTelemetryResponse {
+    #[prost(uint32, tag = "1001")]
+    pub antenna_pointing_mode: u32,
+    #[prost(float, tag = "1002")]
+    pub antenna_pitch: f32,
+    #[prost(float, tag = "1003")]
+    pub antenna_roll: f32,
+    #[prost(float, tag = "1004")]
+    pub antenna_rx_theta: f32,
+    #[prost(float, tag = "1005")]
+    pub antenna_true_heading: f32,
+    #[prost(uint32, tag = "1006")]
+    pub rx_channel: u32,
+    #[prost(uint32, tag = "1007")]
+    pub current_cell_id: u32,
+    #[prost(float, tag = "1008")]
+    pub seconds_until_slot_end: f32,
+    #[prost(float, tag = "1009")]
+    pub wb_rssi_peak_mag_db: f32,
+    #[prost(float, tag = "1010")]
+    pub pop_ping_drop_rate: f32,
+    #[prost(float, tag = "1011")]
+    pub snr_db: f32,
+    #[prost(float, tag = "1012")]
+    pub l1_snr_avg_db: f32,
+    #[prost(float, tag = "1013")]
+    pub l1_snr_min_db: f32,
+    #[prost(float, tag = "1014")]
+    pub l1_snr_max_db: f32,
+    #[prost(uint32, tag = "1015")]
+    pub lmac_satellite_id: u32,
+    #[prost(uint32, tag = "1016")]
+    pub target_satellite_id: u32,
+    #[prost(uint32, tag = "1017")]
+    pub grant_mcs: u32,
+    #[prost(float, tag = "1018")]
+    pub grant_symbols_avg: f32,
+    #[prost(uint32, tag = "1019")]
+    pub ded_grant: u32,
+    #[prost(uint32, tag = "1020")]
+    pub mobility_proactive_slot_change: u32,
+    #[prost(uint32, tag = "1021")]
+    pub mobility_reactive_slot_change: u32,
+    #[prost(uint32, tag = "1022")]
+    pub rfp_total_syn_failed: u32,
+    #[prost(uint32, tag = "1023")]
+    pub num_out_of_seq: u32,
+    #[prost(uint32, tag = "1024")]
+    pub num_ulmap_drop: u32,
+    #[prost(float, tag = "1025")]
+    pub current_seconds_of_schedule: f32,
+    #[prost(uint32, tag = "1026")]
+    pub send_label_switch_to_ground_failed_calls: u32,
+    #[prost(double, tag = "1027")]
+    pub ema_velocity_x: f64,
+    #[prost(double, tag = "1028")]
+    pub ema_velocity_y: f64,
+    #[prost(double, tag = "1029")]
+    pub ema_velocity_z: f64,
+    #[prost(float, tag = "1030")]
+    pub ce_rssi_db: f32,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum TransceiverModulatorState {
+    ModstateUnknown = 0,
+    ModstateEnabled = 1,
+    ModstateDisabled = 2,
+}
+impl TransceiverModulatorState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TransceiverModulatorState::ModstateUnknown => "MODSTATE_UNKNOWN",
+            TransceiverModulatorState::ModstateEnabled => "MODSTATE_ENABLED",
+            TransceiverModulatorState::ModstateDisabled => "MODSTATE_DISABLED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "MODSTATE_UNKNOWN" => Some(Self::ModstateUnknown),
+            "MODSTATE_ENABLED" => Some(Self::ModstateEnabled),
+            "MODSTATE_DISABLED" => Some(Self::ModstateDisabled),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum TransceiverTxRxState {
+    TxrxUnknown = 0,
+    TxrxEnabled = 1,
+    TxrxDisabled = 2,
+}
+impl TransceiverTxRxState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TransceiverTxRxState::TxrxUnknown => "TXRX_UNKNOWN",
+            TransceiverTxRxState::TxrxEnabled => "TXRX_ENABLED",
+            TransceiverTxRxState::TxrxDisabled => "TXRX_DISABLED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "TXRX_UNKNOWN" => Some(Self::TxrxUnknown),
+            "TXRX_ENABLED" => Some(Self::TxrxEnabled),
+            "TXRX_DISABLED" => Some(Self::TxrxDisabled),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum TransceiverTransmitBlankingState {
+    TbUnknown = 0,
+    TbEnabled = 1,
+    TbDisabled = 2,
+}
+impl TransceiverTransmitBlankingState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TransceiverTransmitBlankingState::TbUnknown => "TB_UNKNOWN",
+            TransceiverTransmitBlankingState::TbEnabled => "TB_ENABLED",
+            TransceiverTransmitBlankingState::TbDisabled => "TB_DISABLED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "TB_UNKNOWN" => Some(Self::TbUnknown),
+            "TB_ENABLED" => Some(Self::TbEnabled),
+            "TB_DISABLED" => Some(Self::TbDisabled),
+            _ => None,
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct InflatedBasicServiceSet {
+    #[prost(string, tag = "1")]
+    pub bssid: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub ssid: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub mac_lan: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub iface_name: ::prost::alloc::string::String,
+    #[prost(enumeration = "IfaceType", tag = "5")]
+    pub iface_type: i32,
+    #[prost(uint32, tag = "6")]
+    pub channel: u32,
+    #[prost(uint32, tag = "7")]
+    pub preference: u32,
+    #[prost(string, tag = "8")]
+    pub domain: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DhcpLease {
+    #[prost(string, tag = "1")]
+    pub ip_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub mac_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub hostname: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub expires_time: ::prost::alloc::string::String,
+    #[prost(bool, tag = "5")]
+    pub active: bool,
+    #[prost(uint32, tag = "6")]
+    pub client_id: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DhcpServer {
+    #[prost(string, tag = "1")]
+    pub domain: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub subnet: ::prost::alloc::string::String,
+    #[prost(message, repeated, tag = "3")]
+    pub leases: ::prost::alloc::vec::Vec<DhcpLease>,
+    #[prost(bool, tag = "4")]
+    pub ip_exhausted: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RadiusStatsMap {
+    #[prost(map = "string, message", tag = "1")]
+    pub radius_stats: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        radius_stats_map::RadiusStats,
+    >,
+}
+/// Nested message and enum types in `RadiusStatsMap`.
+pub mod radius_stats_map {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct RadiusStats {
+        #[prost(string, tag = "1")]
+        pub iface_name: ::prost::alloc::string::String,
+        #[prost(uint32, tag = "2")]
+        pub timeout_count: u32,
+        #[prost(uint32, tag = "3")]
+        pub access_request_count: u32,
+        #[prost(uint32, tag = "4")]
+        pub access_accept_count: u32,
+        #[prost(uint32, tag = "5")]
+        pub access_reject_count: u32,
+        #[prost(uint32, tag = "6")]
+        pub access_challenge_count: u32,
+        #[prost(uint32, tag = "7")]
+        pub accounting_request_count: u32,
+        #[prost(uint32, tag = "8")]
+        pub accounting_response_count: u32,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PoeStats {
+    #[prost(enumeration = "PoeState", tag = "1")]
+    pub poe_state: i32,
+    #[prost(float, tag = "2")]
+    pub poe_power: f32,
+    #[prost(uint32, tag = "3")]
+    pub poe_faults_fast_overcurrent: u32,
+    #[prost(uint32, tag = "4")]
+    pub poe_faults_slow_overcurrent: u32,
+    #[prost(uint32, tag = "5")]
+    pub poe_faults_overvoltage: u32,
+    #[prost(uint32, tag = "6")]
+    pub poe_faults_undervoltage: u32,
+    #[prost(float, tag = "7")]
+    pub vsns_vin: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSoftwareUpdateStats {
+    #[prost(enumeration = "WifiSoftwareUpdateState", tag = "1")]
+    pub state: i32,
+    #[prost(float, tag = "2")]
+    pub software_download_progress: f32,
+    #[prost(float, tag = "3")]
+    pub seconds_since_get_target_versions: f32,
+    #[prost(string, tag = "4")]
+    pub running_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "5")]
+    pub version_in_progress: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetupRequirement {
+    #[prost(enumeration = "WifiSetupRequirementState", tag = "1")]
+    pub state: i32,
+    #[prost(uint64, tag = "2")]
+    pub pause_countdown_seconds: u64,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum IfaceType {
+    Unknown = 0,
+    Eth = 1,
+    Rf2ghz = 2,
+    Rf5ghz = 5,
+    Rf5ghzHigh = 6,
+}
+impl IfaceType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            IfaceType::Unknown => "IFACE_TYPE_UNKNOWN",
+            IfaceType::Eth => "IFACE_TYPE_ETH",
+            IfaceType::Rf2ghz => "IFACE_TYPE_RF_2GHZ",
+            IfaceType::Rf5ghz => "IFACE_TYPE_RF_5GHZ",
+            IfaceType::Rf5ghzHigh => "IFACE_TYPE_RF_5GHZ_HIGH",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "IFACE_TYPE_UNKNOWN" => Some(Self::Unknown),
+            "IFACE_TYPE_ETH" => Some(Self::Eth),
+            "IFACE_TYPE_RF_2GHZ" => Some(Self::Rf2ghz),
+            "IFACE_TYPE_RF_5GHZ" => Some(Self::Rf5ghz),
+            "IFACE_TYPE_RF_5GHZ_HIGH" => Some(Self::Rf5ghzHigh),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum TxPowerLevel {
+    TxPowerLevel100 = 0,
+    TxPowerLevel80 = 1,
+    TxPowerLevel50 = 2,
+    TxPowerLevel25 = 3,
+    TxPowerLevel12 = 4,
+    TxPowerLevel6 = 5,
+}
+impl TxPowerLevel {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            TxPowerLevel::TxPowerLevel100 => "TX_POWER_LEVEL_100",
+            TxPowerLevel::TxPowerLevel80 => "TX_POWER_LEVEL_80",
+            TxPowerLevel::TxPowerLevel50 => "TX_POWER_LEVEL_50",
+            TxPowerLevel::TxPowerLevel25 => "TX_POWER_LEVEL_25",
+            TxPowerLevel::TxPowerLevel12 => "TX_POWER_LEVEL_12",
+            TxPowerLevel::TxPowerLevel6 => "TX_POWER_LEVEL_6",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "TX_POWER_LEVEL_100" => Some(Self::TxPowerLevel100),
+            "TX_POWER_LEVEL_80" => Some(Self::TxPowerLevel80),
+            "TX_POWER_LEVEL_50" => Some(Self::TxPowerLevel50),
+            "TX_POWER_LEVEL_25" => Some(Self::TxPowerLevel25),
+            "TX_POWER_LEVEL_12" => Some(Self::TxPowerLevel12),
+            "TX_POWER_LEVEL_6" => Some(Self::TxPowerLevel6),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PoeState {
+    Disabled = 0,
+    Negotiating = 1,
+    OnRampup = 2,
+    On = 3,
+    WaterDetectRampup = 4,
+    WaterDetect = 5,
+}
+impl PoeState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PoeState::Disabled => "POE_STATE_DISABLED",
+            PoeState::Negotiating => "POE_STATE_NEGOTIATING",
+            PoeState::OnRampup => "POE_STATE_ON_RAMPUP",
+            PoeState::On => "POE_STATE_ON",
+            PoeState::WaterDetectRampup => "POE_STATE_WATER_DETECT_RAMPUP",
+            PoeState::WaterDetect => "POE_STATE_WATER_DETECT",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "POE_STATE_DISABLED" => Some(Self::Disabled),
+            "POE_STATE_NEGOTIATING" => Some(Self::Negotiating),
+            "POE_STATE_ON_RAMPUP" => Some(Self::OnRampup),
+            "POE_STATE_ON" => Some(Self::On),
+            "POE_STATE_WATER_DETECT_RAMPUP" => Some(Self::WaterDetectRampup),
+            "POE_STATE_WATER_DETECT" => Some(Self::WaterDetect),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PoeFault {
+    FastOvercurrent = 0,
+    SlowOvercurrent = 1,
+    Undercurrent = 2,
+    Overvoltage = 3,
+    Undervoltage = 4,
+}
+impl PoeFault {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PoeFault::FastOvercurrent => "POE_FAULT_FAST_OVERCURRENT",
+            PoeFault::SlowOvercurrent => "POE_FAULT_SLOW_OVERCURRENT",
+            PoeFault::Undercurrent => "POE_FAULT_UNDERCURRENT",
+            PoeFault::Overvoltage => "POE_FAULT_OVERVOLTAGE",
+            PoeFault::Undervoltage => "POE_FAULT_UNDERVOLTAGE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "POE_FAULT_FAST_OVERCURRENT" => Some(Self::FastOvercurrent),
+            "POE_FAULT_SLOW_OVERCURRENT" => Some(Self::SlowOvercurrent),
+            "POE_FAULT_UNDERCURRENT" => Some(Self::Undercurrent),
+            "POE_FAULT_OVERVOLTAGE" => Some(Self::Overvoltage),
+            "POE_FAULT_UNDERVOLTAGE" => Some(Self::Undervoltage),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum WifiMode {
+    Default = 0,
+    AOnly = 1,
+    BOnly = 2,
+    GOnly = 3,
+    NOnly = 4,
+    BGMixed = 5,
+    ANMixed = 6,
+    GNMixed = 7,
+    BGNMixed = 8,
+    AAnAcMixed = 9,
+    AnAcMixed = 10,
+    BGNAxMixed = 11,
+    AAnAcAxMixed = 12,
+    ANAcMixed = 13,
+    ANAcAxMixed = 14,
+}
+impl WifiMode {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            WifiMode::Default => "WIFI_MODE_DEFAULT",
+            WifiMode::AOnly => "A_ONLY",
+            WifiMode::BOnly => "B_ONLY",
+            WifiMode::GOnly => "G_ONLY",
+            WifiMode::NOnly => "N_ONLY",
+            WifiMode::BGMixed => "B_G_MIXED",
+            WifiMode::ANMixed => "A_N_MIXED",
+            WifiMode::GNMixed => "G_N_MIXED",
+            WifiMode::BGNMixed => "B_G_N_MIXED",
+            WifiMode::AAnAcMixed => "A_AN_AC_MIXED",
+            WifiMode::AnAcMixed => "AN_AC_MIXED",
+            WifiMode::BGNAxMixed => "B_G_N_AX_MIXED",
+            WifiMode::AAnAcAxMixed => "A_AN_AC_AX_MIXED",
+            WifiMode::ANAcMixed => "A_N_AC_MIXED",
+            WifiMode::ANAcAxMixed => "A_N_AC_AX_MIXED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "WIFI_MODE_DEFAULT" => Some(Self::Default),
+            "A_ONLY" => Some(Self::AOnly),
+            "B_ONLY" => Some(Self::BOnly),
+            "G_ONLY" => Some(Self::GOnly),
+            "N_ONLY" => Some(Self::NOnly),
+            "B_G_MIXED" => Some(Self::BGMixed),
+            "A_N_MIXED" => Some(Self::ANMixed),
+            "G_N_MIXED" => Some(Self::GNMixed),
+            "B_G_N_MIXED" => Some(Self::BGNMixed),
+            "A_AN_AC_MIXED" => Some(Self::AAnAcMixed),
+            "AN_AC_MIXED" => Some(Self::AnAcMixed),
+            "B_G_N_AX_MIXED" => Some(Self::BGNAxMixed),
+            "A_AN_AC_AX_MIXED" => Some(Self::AAnAcAxMixed),
+            "A_N_AC_MIXED" => Some(Self::ANAcMixed),
+            "A_N_AC_AX_MIXED" => Some(Self::ANAcAxMixed),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum WifiSecurity {
+    Unknown = 0,
+    Open = 1,
+    Wpa2 = 2,
+    Wpa3 = 3,
+    Wpa2wpa3 = 4,
+}
+impl WifiSecurity {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            WifiSecurity::Unknown => "WIFI_SECURITY_UNKNOWN",
+            WifiSecurity::Open => "OPEN",
+            WifiSecurity::Wpa2 => "WPA2",
+            WifiSecurity::Wpa3 => "WPA3",
+            WifiSecurity::Wpa2wpa3 => "WPA2WPA3",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "WIFI_SECURITY_UNKNOWN" => Some(Self::Unknown),
+            "OPEN" => Some(Self::Open),
+            "WPA2" => Some(Self::Wpa2),
+            "WPA3" => Some(Self::Wpa3),
+            "WPA2WPA3" => Some(Self::Wpa2wpa3),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum Protocol {
+    Tcp = 0,
+    Udp = 1,
+    Tls = 2,
+    Dtls = 3,
+}
+impl Protocol {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Protocol::Tcp => "TCP",
+            Protocol::Udp => "UDP",
+            Protocol::Tls => "TLS",
+            Protocol::Dtls => "DTLS",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "TCP" => Some(Self::Tcp),
+            "UDP" => Some(Self::Udp),
+            "TLS" => Some(Self::Tls),
+            "DTLS" => Some(Self::Dtls),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum WifiSoftwareUpdateState {
+    NotRun = 0,
+    GettingTargetVersion = 1,
+    DownloadingUpdateImage = 2,
+    Flashing = 3,
+    NoUpdateRequired = 4,
+    RebootPending = 5,
+    GettingTargetVersionFailed = 6,
+    GettingTargetVersionExhausted = 7,
+    NoValidArtifact = 8,
+    IllegalArtifact = 9,
+    DownloadingUpdateImageFailed = 10,
+    DownloadingUpdateImageExhausted = 11,
+    FlashingFailed = 12,
+}
+impl WifiSoftwareUpdateState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            WifiSoftwareUpdateState::NotRun => "NOT_RUN",
+            WifiSoftwareUpdateState::GettingTargetVersion => "GETTING_TARGET_VERSION",
+            WifiSoftwareUpdateState::DownloadingUpdateImage => "DOWNLOADING_UPDATE_IMAGE",
+            WifiSoftwareUpdateState::Flashing => "FLASHING",
+            WifiSoftwareUpdateState::NoUpdateRequired => "NO_UPDATE_REQUIRED",
+            WifiSoftwareUpdateState::RebootPending => "REBOOT_PENDING",
+            WifiSoftwareUpdateState::GettingTargetVersionFailed => {
+                "GETTING_TARGET_VERSION_FAILED"
+            }
+            WifiSoftwareUpdateState::GettingTargetVersionExhausted => {
+                "GETTING_TARGET_VERSION_EXHAUSTED"
+            }
+            WifiSoftwareUpdateState::NoValidArtifact => "NO_VALID_ARTIFACT",
+            WifiSoftwareUpdateState::IllegalArtifact => "ILLEGAL_ARTIFACT",
+            WifiSoftwareUpdateState::DownloadingUpdateImageFailed => {
+                "DOWNLOADING_UPDATE_IMAGE_FAILED"
+            }
+            WifiSoftwareUpdateState::DownloadingUpdateImageExhausted => {
+                "DOWNLOADING_UPDATE_IMAGE_EXHAUSTED"
+            }
+            WifiSoftwareUpdateState::FlashingFailed => "FLASHING_FAILED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "NOT_RUN" => Some(Self::NotRun),
+            "GETTING_TARGET_VERSION" => Some(Self::GettingTargetVersion),
+            "DOWNLOADING_UPDATE_IMAGE" => Some(Self::DownloadingUpdateImage),
+            "FLASHING" => Some(Self::Flashing),
+            "NO_UPDATE_REQUIRED" => Some(Self::NoUpdateRequired),
+            "REBOOT_PENDING" => Some(Self::RebootPending),
+            "GETTING_TARGET_VERSION_FAILED" => Some(Self::GettingTargetVersionFailed),
+            "GETTING_TARGET_VERSION_EXHAUSTED" => {
+                Some(Self::GettingTargetVersionExhausted)
+            }
+            "NO_VALID_ARTIFACT" => Some(Self::NoValidArtifact),
+            "ILLEGAL_ARTIFACT" => Some(Self::IllegalArtifact),
+            "DOWNLOADING_UPDATE_IMAGE_FAILED" => Some(Self::DownloadingUpdateImageFailed),
+            "DOWNLOADING_UPDATE_IMAGE_EXHAUSTED" => {
+                Some(Self::DownloadingUpdateImageExhausted)
+            }
+            "FLASHING_FAILED" => Some(Self::FlashingFailed),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum WifiSetupRequirementState {
+    NotRequired = 0,
+    RequiredCountdown = 1,
+    RequiredPaused = 2,
+    RequiredComplete = 3,
+}
+impl WifiSetupRequirementState {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            WifiSetupRequirementState::NotRequired => "NOT_REQUIRED",
+            WifiSetupRequirementState::RequiredCountdown => "REQUIRED_COUNTDOWN",
+            WifiSetupRequirementState::RequiredPaused => "REQUIRED_PAUSED",
+            WifiSetupRequirementState::RequiredComplete => "REQUIRED_COMPLETE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "NOT_REQUIRED" => Some(Self::NotRequired),
+            "REQUIRED_COUNTDOWN" => Some(Self::RequiredCountdown),
+            "REQUIRED_PAUSED" => Some(Self::RequiredPaused),
+            "REQUIRED_COMPLETE" => Some(Self::RequiredComplete),
+            _ => None,
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MeshConfig {
+    #[prost(string, tag = "1")]
+    pub display_name: ::prost::alloc::string::String,
+    #[prost(bool, tag = "2")]
+    pub apply_display_name: bool,
+    #[prost(enumeration = "MeshAuth", tag = "3")]
+    pub auth: i32,
+    #[prost(bool, tag = "4")]
+    pub apply_auth: bool,
+    #[prost(int64, tag = "5")]
+    pub last_connected: i64,
+    #[prost(uint64, tag = "7")]
+    pub incarnation: u64,
+    #[prost(string, tag = "9")]
+    pub hardware_version: ::prost::alloc::string::String,
+    #[prost(bool, tag = "10")]
+    pub supports_5ghz_high: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TlsConfig {
+    #[prost(string, tag = "1")]
+    pub key: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub cert: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct HttpServer {
+    #[prost(string, tag = "1")]
+    pub domain_name: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub tls: ::core::option::Option<TlsConfig>,
+    #[prost(string, tag = "3")]
+    pub file_content_id: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub file_content_hash: ::prost::alloc::string::String,
+    #[prost(string, repeated, tag = "5")]
+    pub access_control_allow_origins: ::prost::alloc::vec::Vec<
+        ::prost::alloc::string::String,
+    >,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CaptivePortal {
+    #[prost(string, tag = "1")]
+    pub url: ::prost::alloc::string::String,
+    #[prost(bool, tag = "2")]
+    pub display_in_captive_browser: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiConfig {
+    #[prost(string, tag = "3")]
+    pub country_code: ::prost::alloc::string::String,
+    #[prost(bool, tag = "1085")]
+    pub apply_country_code: bool,
+    #[prost(bool, tag = "53")]
+    pub pin_country_code: bool,
+    #[prost(bool, tag = "1086")]
+    pub apply_pin_country_code: bool,
+    #[prost(bool, tag = "54")]
+    pub custom_power_table: bool,
+    #[prost(bool, tag = "1087")]
+    pub apply_custom_power_table: bool,
+    #[prost(bool, tag = "7")]
+    pub setup_complete: bool,
+    #[prost(bool, tag = "1010")]
+    pub apply_setup_complete: bool,
+    #[prost(uint32, tag = "9")]
+    pub version: u32,
+    #[prost(string, tag = "12")]
+    pub mac_wan: ::prost::alloc::string::String,
+    #[prost(string, tag = "13")]
+    pub mac_lan: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "19")]
+    pub channel_2ghz: u32,
+    #[prost(bool, tag = "1013")]
+    pub apply_channel_2ghz: bool,
+    #[prost(uint32, tag = "20")]
+    pub channel_5ghz: u32,
+    #[prost(bool, tag = "1014")]
+    pub apply_channel_5ghz: bool,
+    #[prost(uint32, tag = "57")]
+    pub channel_5ghz_high: u32,
+    #[prost(bool, tag = "1016")]
+    pub apply_channel_5ghz_high: bool,
+    #[prost(map = "string, message", tag = "33")]
+    pub mesh_configs: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        MeshConfig,
+    >,
+    #[prost(map = "string, message", tag = "3033")]
+    pub mesh_configs_updates: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        MeshConfig,
+    >,
+    #[prost(bool, tag = "1033")]
+    pub apply_mesh_configs: bool,
+    #[prost(message, repeated, tag = "22")]
+    pub dynamic_keys: ::prost::alloc::vec::Vec<PublicKey>,
+    #[prost(bool, tag = "39")]
+    pub apply_dynamic_keys: bool,
+    #[prost(bool, tag = "23")]
+    pub is_repeater: bool,
+    #[prost(bool, tag = "1031")]
+    pub apply_is_repeater: bool,
+    #[prost(bool, tag = "51")]
+    pub ap_mode: bool,
+    #[prost(bool, tag = "1066")]
+    pub apply_ap_mode: bool,
+    #[prost(bool, tag = "49")]
+    pub is_aviation: bool,
+    #[prost(bool, tag = "1064")]
+    pub apply_is_aviation: bool,
+    #[prost(int32, tag = "26")]
+    pub boot_count: i32,
+    #[prost(message, optional, tag = "3001")]
+    pub boot: ::core::option::Option<BootInfo>,
+    #[prost(string, repeated, tag = "30")]
+    pub nameservers: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(bool, tag = "1054")]
+    pub apply_nameservers: bool,
+    #[prost(bool, tag = "50")]
+    pub secure_dns: bool,
+    #[prost(bool, tag = "1065")]
+    pub apply_secure_dns: bool,
+    #[prost(bool, tag = "31")]
+    pub bypass_mode: bool,
+    #[prost(bool, tag = "1055")]
+    pub apply_bypass_mode: bool,
+    #[prost(bool, tag = "42")]
+    pub dfs_enabled: bool,
+    #[prost(bool, tag = "1058")]
+    pub apply_dfs_enabled: bool,
+    #[prost(bool, tag = "52")]
+    pub disable_mesh_onboarding: bool,
+    #[prost(bool, tag = "1067")]
+    pub apply_disable_mesh_onboarding: bool,
+    #[prost(bool, tag = "1097")]
+    pub disable_wireless_mesh_onboarding: bool,
+    #[prost(bool, tag = "1098")]
+    pub apply_disable_wireless_mesh_onboarding: bool,
+    #[prost(bool, tag = "1107")]
+    pub apply_http_server: bool,
+    #[prost(message, optional, tag = "1108")]
+    pub http_server: ::core::option::Option<HttpServer>,
+    #[prost(message, repeated, tag = "1100")]
+    pub networks: ::prost::alloc::vec::Vec<wifi_config::Network>,
+    #[prost(bool, tag = "1101")]
+    pub apply_networks: bool,
+    #[prost(uint64, tag = "43")]
+    pub incarnation: u64,
+    #[prost(enumeration = "wifi_config::WirelessMode", tag = "44")]
+    pub wireless_mode_2ghz: i32,
+    #[prost(bool, tag = "1059")]
+    pub apply_wireless_mode_2ghz: bool,
+    #[prost(enumeration = "wifi_config::WirelessMode", tag = "45")]
+    pub wireless_mode_5ghz: i32,
+    #[prost(bool, tag = "1060")]
+    pub apply_wireless_mode_5ghz: bool,
+    #[prost(enumeration = "wifi_config::WirelessMode", tag = "58")]
+    pub wireless_mode_5ghz_high: i32,
+    #[prost(bool, tag = "1070")]
+    pub apply_wireless_mode_5ghz_high: bool,
+    #[prost(enumeration = "wifi_config::HtBandwidth", tag = "46")]
+    pub ht_bandwidth_2ghz: i32,
+    #[prost(bool, tag = "1061")]
+    pub apply_ht_bandwidth_2ghz: bool,
+    #[prost(enumeration = "wifi_config::HtBandwidth", tag = "47")]
+    pub ht_bandwidth_5ghz: i32,
+    #[prost(bool, tag = "1062")]
+    pub apply_ht_bandwidth_5ghz: bool,
+    #[prost(enumeration = "wifi_config::HtBandwidth", tag = "59")]
+    pub ht_bandwidth_5ghz_high: i32,
+    #[prost(bool, tag = "1071")]
+    pub apply_ht_bandwidth_5ghz_high: bool,
+    #[prost(enumeration = "wifi_config::VhtBandwidth", tag = "48")]
+    pub vht_bandwidth: i32,
+    #[prost(bool, tag = "1063")]
+    pub apply_vht_bandwidth: bool,
+    #[prost(enumeration = "wifi_config::VhtBandwidth", tag = "60")]
+    pub vht_bandwidth_5ghz_high: i32,
+    #[prost(bool, tag = "1072")]
+    pub apply_vht_bandwidth_5ghz_high: bool,
+    #[prost(bool, tag = "55")]
+    pub use_public_services: bool,
+    #[prost(bool, tag = "1068")]
+    pub apply_use_public_services: bool,
+    #[prost(bool, tag = "56")]
+    pub disable_automated_speedtests: bool,
+    #[prost(bool, tag = "1069")]
+    pub apply_disable_automated_speedtests: bool,
+    #[prost(bool, tag = "61")]
+    pub enable_umbilical_vlan: bool,
+    #[prost(bool, tag = "1073")]
+    pub apply_enable_umbilical_vlan: bool,
+    #[deprecated]
+    #[prost(message, repeated, tag = "62")]
+    pub client_names: ::prost::alloc::vec::Vec<ClientName>,
+    #[deprecated]
+    #[prost(bool, tag = "1074")]
+    pub apply_client_names: bool,
+    #[prost(bool, tag = "63")]
+    pub outdoor_mode: bool,
+    #[prost(bool, tag = "1075")]
+    pub apply_outdoor_mode: bool,
+    #[prost(bool, tag = "64")]
+    pub disable_2ghz: bool,
+    #[prost(bool, tag = "1076")]
+    pub apply_disable_2ghz: bool,
+    #[prost(bool, tag = "65")]
+    pub disable_5ghz: bool,
+    #[prost(bool, tag = "1077")]
+    pub apply_disable_5ghz: bool,
+    #[prost(bool, tag = "66")]
+    pub disable_5ghz_high: bool,
+    #[prost(bool, tag = "1078")]
+    pub apply_disable_5ghz_high: bool,
+    #[prost(bool, tag = "67")]
+    pub disable_x_mesh_backhaul: bool,
+    #[prost(bool, tag = "1079")]
+    pub apply_disable_x_mesh_backhaul: bool,
+    #[deprecated]
+    #[prost(string, tag = "68")]
+    pub golden_bssid: ::prost::alloc::string::String,
+    #[deprecated]
+    #[prost(bool, tag = "1080")]
+    pub apply_golden_bssid: bool,
+    #[deprecated]
+    #[prost(enumeration = "IfaceType", tag = "69")]
+    pub golden_iface_type: i32,
+    #[deprecated]
+    #[prost(bool, tag = "1081")]
+    pub apply_golden_iface_type: bool,
+    #[prost(enumeration = "TxPowerLevel", tag = "70")]
+    pub tx_power_level_2ghz: i32,
+    #[prost(bool, tag = "1082")]
+    pub apply_tx_power_level_2ghz: bool,
+    #[prost(enumeration = "TxPowerLevel", tag = "71")]
+    pub tx_power_level_5ghz: i32,
+    #[prost(bool, tag = "1083")]
+    pub apply_tx_power_level_5ghz: bool,
+    #[prost(enumeration = "TxPowerLevel", tag = "72")]
+    pub tx_power_level_5ghz_high: i32,
+    #[prost(bool, tag = "1084")]
+    pub apply_tx_power_level_5ghz_high: bool,
+    #[prost(bool, tag = "73")]
+    pub disable_pending_update_reboot: bool,
+    #[prost(bool, tag = "1088")]
+    pub apply_disable_pending_update_reboot: bool,
+    #[prost(message, repeated, tag = "74")]
+    pub client_configs: ::prost::alloc::vec::Vec<ClientConfig>,
+    #[prost(bool, tag = "1089")]
+    pub apply_client_configs: bool,
+    #[prost(bool, tag = "75")]
+    pub disable_set_wifi_config_from_controller: bool,
+    #[prost(bool, tag = "1090")]
+    pub apply_disable_set_wifi_config_from_controller: bool,
+    #[prost(bytes = "vec", tag = "76")]
+    pub client_key: ::prost::alloc::vec::Vec<u8>,
+    #[prost(bool, tag = "1091")]
+    pub apply_client_key: bool,
+    #[prost(bool, tag = "1092")]
+    pub apply_wan_traffic_control: bool,
+    #[prost(int32, tag = "77")]
+    pub wan_host_dscp_mark: i32,
+    #[prost(bool, tag = "1093")]
+    pub apply_wan_host_dscp_mark: bool,
+    #[prost(bool, tag = "79")]
+    pub debug_pop_pings: bool,
+    #[prost(bool, tag = "1095")]
+    pub apply_debug_pop_pings: bool,
+    #[prost(bool, tag = "94")]
+    pub debug_pings: bool,
+    #[prost(bool, tag = "1106")]
+    pub apply_debug_pings: bool,
+    #[prost(bool, tag = "80")]
+    pub client_tester: bool,
+    #[prost(bool, tag = "1096")]
+    pub apply_client_tester: bool,
+    #[prost(uint32, tag = "81")]
+    pub asset_class: u32,
+    #[prost(bool, tag = "1099")]
+    pub apply_asset_class: bool,
+    #[prost(bool, tag = "95")]
+    pub disable_band_steering: bool,
+    #[prost(bool, tag = "1109")]
+    pub apply_disable_band_steering: bool,
+    #[prost(string, repeated, tag = "1110")]
+    pub only_overflight_countries: ::prost::alloc::vec::Vec<
+        ::prost::alloc::string::String,
+    >,
+    #[prost(bool, tag = "1111")]
+    pub apply_only_overflight_countries: bool,
+    #[prost(bool, tag = "1114")]
+    pub only_overflight_countries_using_default: bool,
+    #[prost(message, repeated, tag = "1112")]
+    pub unbridged_eth_ports: ::prost::alloc::vec::Vec<wifi_config::UnbridgedEthPort>,
+    #[prost(bool, tag = "1113")]
+    pub apply_unbridged_eth_ports: bool,
+    #[prost(uint32, tag = "78")]
+    pub tag: u32,
+    #[prost(oneof = "wifi_config::WanTrafficControl", tags = "4001, 4002, 4003")]
+    pub wan_traffic_control: ::core::option::Option<wifi_config::WanTrafficControl>,
+}
+/// Nested message and enum types in `WifiConfig`.
+pub mod wifi_config {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct BasicServiceSet {
+        #[prost(string, tag = "1003")]
+        pub bssid: ::prost::alloc::string::String,
+        #[prost(string, tag = "1005")]
+        pub ssid: ::prost::alloc::string::String,
+        #[prost(enumeration = "Band", tag = "1011")]
+        pub band: i32,
+        #[prost(string, tag = "1017")]
+        pub iface_name: ::prost::alloc::string::String,
+        #[prost(bool, tag = "1013")]
+        pub disable: bool,
+        #[prost(bool, tag = "1015")]
+        pub hidden: bool,
+        #[prost(
+            oneof = "basic_service_set::Auth",
+            tags = "2001, 2002, 2003, 2004, 2005, 2006"
+        )]
+        pub auth: ::core::option::Option<basic_service_set::Auth>,
+    }
+    /// Nested message and enum types in `BasicServiceSet`.
+    pub mod basic_service_set {
+        #[allow(clippy::derive_partial_eq_without_eq)]
+        #[derive(Clone, PartialEq, ::prost::Oneof)]
+        pub enum Auth {
+            #[prost(message, tag = "2001")]
+            AuthOpen(super::super::AuthOpen),
+            #[prost(message, tag = "2002")]
+            AuthWpa2(super::super::AuthWpa2),
+            #[prost(message, tag = "2003")]
+            AuthWpa3(super::super::AuthWpa3),
+            #[prost(message, tag = "2004")]
+            AuthWpa2Wpa3(super::super::AuthWpa2Wpa3),
+            #[prost(message, tag = "2005")]
+            AuthRadius(super::super::AuthRadius),
+            #[prost(message, tag = "2006")]
+            AuthOpenEncrypted(super::super::AuthOpenEncrypted),
+        }
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct DnsStaticEntry {
+        #[prost(string, repeated, tag = "1000")]
+        pub domains: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+        #[prost(string, repeated, tag = "1001")]
+        pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct DnsForwardRule {
+        #[prost(string, repeated, tag = "1000")]
+        pub domains: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+        #[prost(string, repeated, tag = "1001")]
+        pub server_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct StaticRoute {
+        #[prost(string, tag = "1")]
+        pub subnet: ::prost::alloc::string::String,
+        #[prost(string, tag = "2")]
+        pub gateway: ::prost::alloc::string::String,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Network {
+        #[prost(string, tag = "1003")]
+        pub ipv4: ::prost::alloc::string::String,
+        #[prost(uint32, tag = "1012")]
+        pub dhcpv4_start: u32,
+        #[prost(uint32, tag = "1025")]
+        pub dhcpv4_end: u32,
+        #[prost(bool, tag = "1015")]
+        pub dhcp_disabled: bool,
+        #[prost(uint32, tag = "1016")]
+        pub dhcpv4_lease_duration_s: u32,
+        #[prost(string, tag = "1011")]
+        pub domain: ::prost::alloc::string::String,
+        #[prost(message, repeated, tag = "1007")]
+        pub basic_service_sets: ::prost::alloc::vec::Vec<BasicServiceSet>,
+        #[prost(bool, tag = "1008")]
+        pub client_isolation: bool,
+        #[prost(bool, tag = "1009")]
+        pub guest: bool,
+        #[prost(string, tag = "1010")]
+        pub landing: ::prost::alloc::string::String,
+        #[prost(bool, tag = "1017")]
+        pub landing_page_v2: bool,
+        #[prost(bool, tag = "1020")]
+        pub sandbox_enabled: bool,
+        #[prost(string, repeated, tag = "1022")]
+        pub sandbox_domain_allow_list: ::prost::alloc::vec::Vec<
+            ::prost::alloc::string::String,
+        >,
+        #[prost(uint32, tag = "1023")]
+        pub sandbox_id: u32,
+        #[prost(bool, tag = "1013")]
+        pub internal: bool,
+        #[prost(uint32, tag = "1014")]
+        pub vlan: u32,
+        #[prost(message, optional, tag = "1024")]
+        pub captive_portal: ::core::option::Option<super::CaptivePortal>,
+        #[prost(uint32, tag = "1026")]
+        pub network_groups: u32,
+        #[prost(message, repeated, tag = "1027")]
+        pub dns_static_entries: ::prost::alloc::vec::Vec<DnsStaticEntry>,
+        #[prost(message, repeated, tag = "1028")]
+        pub dns_forward_rules: ::prost::alloc::vec::Vec<DnsForwardRule>,
+        #[prost(bool, tag = "1029")]
+        pub disable_when_offline: bool,
+        #[prost(message, repeated, tag = "1030")]
+        pub static_routes: ::prost::alloc::vec::Vec<StaticRoute>,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct UnbridgedEthPort {
+        #[prost(uint32, tag = "1")]
+        pub lan_port_index: u32,
+        #[prost(string, tag = "2")]
+        pub ip: ::prost::alloc::string::String,
+        #[prost(string, tag = "3")]
+        pub gateway: ::prost::alloc::string::String,
+        #[prost(message, repeated, tag = "4")]
+        pub static_routes: ::prost::alloc::vec::Vec<unbridged_eth_port::StaticRoute>,
+    }
+    /// Nested message and enum types in `UnbridgedEthPort`.
+    pub mod unbridged_eth_port {
+        #[allow(clippy::derive_partial_eq_without_eq)]
+        #[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct StaticRoute {
+            #[prost(string, tag = "1")]
+            pub subnet: ::prost::alloc::string::String,
+            #[prost(uint32, tag = "2")]
+            pub network_groups: u32,
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Security {
+        Unknown = 0,
+        Wpa2 = 1,
+        Wpa3 = 2,
+        Wpa2wpa3 = 3,
+    }
+    impl Security {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Security::Unknown => "UNKNOWN",
+                Security::Wpa2 => "WPA2",
+                Security::Wpa3 => "WPA3",
+                Security::Wpa2wpa3 => "WPA2WPA3",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNKNOWN" => Some(Self::Unknown),
+                "WPA2" => Some(Self::Wpa2),
+                "WPA3" => Some(Self::Wpa3),
+                "WPA2WPA3" => Some(Self::Wpa2wpa3),
+                _ => None,
+            }
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Band {
+        RfUnknown = 0,
+        Rf2ghz = 2,
+        Rf5ghz = 5,
+        Rf5ghzHigh = 6,
+    }
+    impl Band {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Band::RfUnknown => "RF_UNKNOWN",
+                Band::Rf2ghz => "RF_2GHZ",
+                Band::Rf5ghz => "RF_5GHZ",
+                Band::Rf5ghzHigh => "RF_5GHZ_HIGH",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "RF_UNKNOWN" => Some(Self::RfUnknown),
+                "RF_2GHZ" => Some(Self::Rf2ghz),
+                "RF_5GHZ" => Some(Self::Rf5ghz),
+                "RF_5GHZ_HIGH" => Some(Self::Rf5ghzHigh),
+                _ => None,
+            }
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum WirelessMode {
+        Default = 0,
+        AOnly = 1,
+        BOnly = 2,
+        GOnly = 3,
+        NOnly = 4,
+        BGMixed = 5,
+        ANMixed = 6,
+        GNMixed = 7,
+        BGNMixed = 8,
+        AAnAcMixed = 9,
+        AnAcMixed = 10,
+        BGNAxMixed = 11,
+        AAnAcAxMixed = 12,
+    }
+    impl WirelessMode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                WirelessMode::Default => "WIRELESS_MODE_DEFAULT",
+                WirelessMode::AOnly => "A_ONLY",
+                WirelessMode::BOnly => "B_ONLY",
+                WirelessMode::GOnly => "G_ONLY",
+                WirelessMode::NOnly => "N_ONLY",
+                WirelessMode::BGMixed => "B_G_MIXED",
+                WirelessMode::ANMixed => "A_N_MIXED",
+                WirelessMode::GNMixed => "G_N_MIXED",
+                WirelessMode::BGNMixed => "B_G_N_MIXED",
+                WirelessMode::AAnAcMixed => "A_AN_AC_MIXED",
+                WirelessMode::AnAcMixed => "AN_AC_MIXED",
+                WirelessMode::BGNAxMixed => "B_G_N_AX_MIXED",
+                WirelessMode::AAnAcAxMixed => "A_AN_AC_AX_MIXED",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "WIRELESS_MODE_DEFAULT" => Some(Self::Default),
+                "A_ONLY" => Some(Self::AOnly),
+                "B_ONLY" => Some(Self::BOnly),
+                "G_ONLY" => Some(Self::GOnly),
+                "N_ONLY" => Some(Self::NOnly),
+                "B_G_MIXED" => Some(Self::BGMixed),
+                "A_N_MIXED" => Some(Self::ANMixed),
+                "G_N_MIXED" => Some(Self::GNMixed),
+                "B_G_N_MIXED" => Some(Self::BGNMixed),
+                "A_AN_AC_MIXED" => Some(Self::AAnAcMixed),
+                "AN_AC_MIXED" => Some(Self::AnAcMixed),
+                "B_G_N_AX_MIXED" => Some(Self::BGNAxMixed),
+                "A_AN_AC_AX_MIXED" => Some(Self::AAnAcAxMixed),
+                _ => None,
+            }
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum HtBandwidth {
+        Default = 0,
+        HtBandwidth20Mhz = 1,
+        HtBandwidth20Or40Mhz = 2,
+    }
+    impl HtBandwidth {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                HtBandwidth::Default => "HT_BANDWIDTH_DEFAULT",
+                HtBandwidth::HtBandwidth20Mhz => "HT_BANDWIDTH_20_MHZ",
+                HtBandwidth::HtBandwidth20Or40Mhz => "HT_BANDWIDTH_20_OR_40_MHZ",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "HT_BANDWIDTH_DEFAULT" => Some(Self::Default),
+                "HT_BANDWIDTH_20_MHZ" => Some(Self::HtBandwidth20Mhz),
+                "HT_BANDWIDTH_20_OR_40_MHZ" => Some(Self::HtBandwidth20Or40Mhz),
+                _ => None,
+            }
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum VhtBandwidth {
+        Default = 0,
+        Disabled = 1,
+        VhtBandwidth80Mhz = 2,
+        VhtBandwidth160Mhz = 3,
+        VhtBandwidth80Plus80Mhz = 4,
+    }
+    impl VhtBandwidth {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                VhtBandwidth::Default => "VHT_BANDWIDTH_DEFAULT",
+                VhtBandwidth::Disabled => "VHT_BANDWIDTH_DISABLED",
+                VhtBandwidth::VhtBandwidth80Mhz => "VHT_BANDWIDTH_80_MHZ",
+                VhtBandwidth::VhtBandwidth160Mhz => "VHT_BANDWIDTH_160_MHZ",
+                VhtBandwidth::VhtBandwidth80Plus80Mhz => "VHT_BANDWIDTH_80_PLUS_80_MHZ",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "VHT_BANDWIDTH_DEFAULT" => Some(Self::Default),
+                "VHT_BANDWIDTH_DISABLED" => Some(Self::Disabled),
+                "VHT_BANDWIDTH_80_MHZ" => Some(Self::VhtBandwidth80Mhz),
+                "VHT_BANDWIDTH_160_MHZ" => Some(Self::VhtBandwidth160Mhz),
+                "VHT_BANDWIDTH_80_PLUS_80_MHZ" => Some(Self::VhtBandwidth80Plus80Mhz),
+                _ => None,
+            }
+        }
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum WanTrafficControl {
+        #[prost(message, tag = "4001")]
+        WanNoTrafficControl(super::NoTrafficControl),
+        #[prost(message, tag = "4002")]
+        WanAckSuppression(super::AckSuppression),
+        #[prost(message, tag = "4003")]
+        WanCakeRateLimit(super::CakeRateLimit),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WeeklyBlockSchedule {
+    #[prost(message, repeated, tag = "1")]
+    pub block_ranges: ::prost::alloc::vec::Vec<weekly_block_schedule::BlockRange>,
+    #[prost(string, tag = "2")]
+    pub group_id: ::prost::alloc::string::String,
+}
+/// Nested message and enum types in `WeeklyBlockSchedule`.
+pub mod weekly_block_schedule {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct BlockRange {
+        #[prost(uint32, tag = "1")]
+        pub start_minutes: u32,
+        #[prost(uint32, tag = "2")]
+        pub end_minutes: u32,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ClientConfig {
+    #[prost(uint32, tag = "1")]
+    pub client_id: u32,
+    #[prost(string, tag = "2")]
+    pub mac_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub given_name: ::prost::alloc::string::String,
+    #[prost(message, repeated, tag = "5")]
+    pub weekly_block_schedules: ::prost::alloc::vec::Vec<WeeklyBlockSchedule>,
+    #[prost(string, tag = "6")]
+    pub group_id: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ClientName {
+    #[prost(string, tag = "1")]
+    pub mac_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub given_name: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AuthOpen {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AuthWpa2 {
+    #[prost(string, tag = "1")]
+    pub password: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AuthWpa3 {
+    #[prost(string, tag = "1")]
+    pub password: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AuthWpa2Wpa3 {
+    #[prost(string, tag = "1")]
+    pub password: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AuthOpenEncrypted {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AuthRadius {
+    #[prost(string, tag = "1")]
+    pub server: ::prost::alloc::string::String,
+    #[deprecated]
+    #[prost(string, tag = "3")]
+    pub server_ca: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub server_ca_base_64: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub password: ::prost::alloc::string::String,
+    #[prost(enumeration = "Protocol", tag = "5")]
+    pub transport: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NoTrafficControl {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AckSuppression {
+    #[prost(uint32, tag = "1")]
+    pub ack_mark: u32,
+    #[prost(float, tag = "2")]
+    pub htb_ack_queue_rate: f32,
+    #[prost(float, tag = "3")]
+    pub htb_ack_queue_ceil: f32,
+    #[prost(float, tag = "4")]
+    pub cake_queue_bandwidth: f32,
+    #[prost(bool, tag = "5")]
+    pub cake_ack_filter_aggressive: bool,
+    #[prost(float, tag = "6")]
+    pub cake_manual_rtt: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CakeRateLimit {
+    #[prost(uint32, tag = "1")]
+    pub host_mark: u32,
+    #[prost(float, tag = "2")]
+    pub bandwidth: f32,
+    #[prost(enumeration = "CakePriorityQueueParameter", tag = "3")]
+    pub priority_queue_parameter: i32,
+    #[prost(enumeration = "CakeAckFilter", tag = "4")]
+    pub ack_filter: i32,
+    #[prost(float, tag = "6")]
+    pub manual_rtt: f32,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum MeshAuth {
+    Unknown = 0,
+    New = 1,
+    Trusted = 2,
+    Untrusted = 3,
+}
+impl MeshAuth {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            MeshAuth::Unknown => "MESH_AUTH_UNKNOWN",
+            MeshAuth::New => "MESH_AUTH_NEW",
+            MeshAuth::Trusted => "MESH_AUTH_TRUSTED",
+            MeshAuth::Untrusted => "MESH_AUTH_UNTRUSTED",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "MESH_AUTH_UNKNOWN" => Some(Self::Unknown),
+            "MESH_AUTH_NEW" => Some(Self::New),
+            "MESH_AUTH_TRUSTED" => Some(Self::Trusted),
+            "MESH_AUTH_UNTRUSTED" => Some(Self::Untrusted),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum CakeAckFilter {
+    NoAckFilter = 0,
+    AckFilter = 1,
+    AckFilterAggressive = 2,
+}
+impl CakeAckFilter {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            CakeAckFilter::NoAckFilter => "NO_ACK_FILTER",
+            CakeAckFilter::AckFilter => "ACK_FILTER",
+            CakeAckFilter::AckFilterAggressive => "ACK_FILTER_AGGRESSIVE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "NO_ACK_FILTER" => Some(Self::NoAckFilter),
+            "ACK_FILTER" => Some(Self::AckFilter),
+            "ACK_FILTER_AGGRESSIVE" => Some(Self::AckFilterAggressive),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum CakePriorityQueueParameter {
+    Diffserv3 = 0,
+    Diffserv4 = 1,
+    Precedence = 2,
+    BestEffort = 3,
+}
+impl CakePriorityQueueParameter {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            CakePriorityQueueParameter::Diffserv3 => "DIFFSERV3",
+            CakePriorityQueueParameter::Diffserv4 => "DIFFSERV4",
+            CakePriorityQueueParameter::Precedence => "PRECEDENCE",
+            CakePriorityQueueParameter::BestEffort => "BEST_EFFORT",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "DIFFSERV3" => Some(Self::Diffserv3),
+            "DIFFSERV4" => Some(Self::Diffserv4),
+            "PRECEDENCE" => Some(Self::Precedence),
+            "BEST_EFFORT" => Some(Self::BestEffort),
+            _ => None,
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiClients {
+    #[prost(message, repeated, tag = "1")]
+    pub clients: ::prost::alloc::vec::Vec<WifiClient>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ToController {
+    #[prost(int32, tag = "4")]
+    pub api_version: i32,
+    #[prost(int32, tag = "7")]
+    pub api_version_other_side: i32,
+    #[prost(bool, tag = "6")]
+    pub ready_for_multiple_networks: bool,
+    #[prost(oneof = "to_controller::Message", tags = "1, 2, 3, 5")]
+    pub message: ::core::option::Option<to_controller::Message>,
+}
+/// Nested message and enum types in `ToController`.
+pub mod to_controller {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Message {
+        #[prost(message, tag = "1")]
+        Clients(super::WifiClients),
+        #[prost(message, tag = "2")]
+        MeshJoin(super::WifiMeshJoin),
+        #[prost(message, tag = "3")]
+        Status(super::WifiMeshStatus),
+        #[prost(message, tag = "5")]
+        Speedtest(super::MeshSpeedtest),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiMeshJoin {
+    #[prost(uint64, tag = "1")]
+    pub incarnation: u64,
+    #[prost(string, tag = "2")]
+    pub hardware_version: ::prost::alloc::string::String,
+    #[prost(bool, tag = "3")]
+    pub supports_5ghz_high: bool,
+    #[prost(message, repeated, tag = "4")]
+    pub site_survey_scan: ::prost::alloc::vec::Vec<WifiSiteSurveyResult>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiMeshStatus {
+    #[prost(string, tag = "5")]
+    pub software_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "6")]
+    pub mac_lan: ::prost::alloc::string::String,
+    #[prost(string, repeated, tag = "7")]
+    pub source_mac_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(message, repeated, tag = "2")]
+    pub clients: ::prost::alloc::vec::Vec<WifiClient>,
+    #[prost(message, repeated, tag = "3")]
+    pub bss_list: ::prost::alloc::vec::Vec<InflatedBasicServiceSet>,
+    #[prost(string, tag = "4")]
+    pub hardware_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "8")]
+    pub backhaul_bssid: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "9")]
+    pub backhaul_est_preference: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MeshSpeedtestRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct MeshSpeedtest {
+    #[prost(int64, tag = "1")]
+    pub upload_start_time: i64,
+    #[prost(int64, tag = "2")]
+    pub download_start_time: i64,
+    #[prost(float, tag = "3")]
+    pub upload_mbps: f32,
+    #[prost(float, tag = "4")]
+    pub download_mbps: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSiteSurveyResult {
+    #[prost(float, tag = "1")]
+    pub rssi: f32,
+    #[prost(uint32, tag = "2")]
+    pub channel: u32,
+    #[prost(string, tag = "3")]
+    pub ssid: ::prost::alloc::string::String,
+    #[prost(enumeration = "WifiSecurity", tag = "4")]
+    pub security: i32,
+    #[prost(enumeration = "WifiMode", tag = "5")]
+    pub wireless_mode: i32,
+    #[prost(enumeration = "IfaceType", tag = "6")]
+    pub iface: i32,
+    #[prost(string, tag = "7")]
+    pub mac_address: ::prost::alloc::string::String,
+    #[prost(float, tag = "8")]
+    pub est_rx_rate: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGlobalMeshStatus {
+    #[prost(string, tag = "1")]
+    pub hardware_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub software_version: ::prost::alloc::string::String,
+    #[prost(message, repeated, tag = "3")]
+    pub bss_list: ::prost::alloc::vec::Vec<InflatedBasicServiceSet>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BackhaulRequest {
+    #[prost(bool, tag = "1")]
+    pub retry_backhaul: bool,
+    #[prost(message, optional, tag = "2")]
+    pub golden_bss: ::core::option::Option<WifiConfig>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FromController {
+    #[prost(int32, tag = "3")]
+    pub api_version: i32,
+    #[prost(oneof = "from_controller::Message", tags = "1, 2, 4, 5, 6, 7")]
+    pub message: ::core::option::Option<from_controller::Message>,
+}
+/// Nested message and enum types in `FromController`.
+pub mod from_controller {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Message {
+        #[prost(message, tag = "1")]
+        WifiConfig(super::WifiConfig),
+        #[prost(message, tag = "2")]
+        SteerClientRequest(super::SteerClientRequest),
+        #[prost(message, tag = "4")]
+        Status(super::WifiGlobalMeshStatus),
+        #[prost(message, tag = "5")]
+        BackhaulRequest(super::BackhaulRequest),
+        #[prost(message, tag = "6")]
+        StartSpeedtest(super::MeshSpeedtestRequest),
+        #[prost(message, tag = "7")]
+        WifiBtmRequest(super::WifiBtmRequest),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SteerClientRequest {
+    #[deprecated]
+    #[prost(string, tag = "1")]
+    pub client_mac_addr: ::prost::alloc::string::String,
+    #[deprecated]
+    #[prost(message, repeated, tag = "2")]
+    pub targets: ::prost::alloc::vec::Vec<steer_client_request::SteerTarget>,
+}
+/// Nested message and enum types in `SteerClientRequest`.
+pub mod steer_client_request {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct SteerTarget {
+        #[deprecated]
+        #[prost(string, tag = "1")]
+        pub bssid: ::prost::alloc::string::String,
+        #[deprecated]
+        #[prost(int32, tag = "2")]
+        pub channel: i32,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiBtmRequest {
+    #[prost(uint32, tag = "5")]
+    pub bss_termination_duration_m: u32,
+    #[prost(string, tag = "1")]
+    pub peer_bssid: ::prost::alloc::string::String,
+    #[prost(message, repeated, tag = "4")]
+    pub neighbor_report: ::prost::alloc::vec::Vec<wifi_btm_request::NeighborReport>,
+}
+/// Nested message and enum types in `WifiBtmRequest`.
+pub mod wifi_btm_request {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct NeighborReport {
+        #[prost(string, tag = "1")]
+        pub bssid: ::prost::alloc::string::String,
+        #[prost(uint32, tag = "2")]
+        pub channel: u32,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSelfTest {
+    #[prost(bool, tag = "1")]
+    pub total_success: bool,
+    #[prost(message, optional, tag = "2")]
+    pub fused: ::core::option::Option<wifi_self_test::TestResult>,
+    #[prost(message, repeated, tag = "3")]
+    pub eth_phys: ::prost::alloc::vec::Vec<wifi_self_test::TestResult>,
+    #[prost(message, repeated, tag = "4")]
+    pub pcis: ::prost::alloc::vec::Vec<wifi_self_test::TestResult>,
+    #[prost(message, optional, tag = "5")]
+    pub bl2_prod: ::core::option::Option<wifi_self_test::TestResult>,
+}
+/// Nested message and enum types in `WifiSelfTest`.
+pub mod wifi_self_test {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct TestResult {
+        #[prost(string, tag = "1")]
+        pub name: ::prost::alloc::string::String,
+        #[prost(bool, tag = "2")]
+        pub success: bool,
+        #[prost(string, tag = "3")]
+        pub failure_reason: ::prost::alloc::string::String,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetConfigRequest {
+    #[prost(message, optional, tag = "1")]
+    pub wifi_config: ::core::option::Option<WifiConfig>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetConfigResponse {
+    #[prost(message, optional, tag = "1")]
+    pub updated_wifi_config: ::core::option::Option<WifiConfig>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetConfigRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetConfigResponse {
+    #[prost(message, optional, tag = "1")]
+    pub wifi_config: ::core::option::Option<WifiConfig>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetMeshDeviceTrustRequest {
+    #[prost(string, tag = "1")]
+    pub device_id: ::prost::alloc::string::String,
+    #[prost(enumeration = "MeshAuth", tag = "2")]
+    pub auth: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetMeshDeviceTrustResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetMeshConfigRequest {
+    #[prost(message, optional, tag = "1")]
+    pub mesh_config: ::core::option::Option<MeshConfig>,
+    #[prost(string, tag = "2")]
+    pub device_id: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetMeshConfigResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetClientsRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetClientsResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub clients: ::prost::alloc::vec::Vec<WifiClient>,
+    #[prost(bool, tag = "2")]
+    pub has_client_index: bool,
+    #[prost(int32, tag = "3")]
+    pub client_index: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetClientHistoryRequest {
+    #[deprecated]
+    #[prost(string, tag = "1")]
+    pub mac_address: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "2")]
+    pub client_id: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetClientHistoryResponse {
+    #[prost(uint64, tag = "1")]
+    pub current: u64,
+    #[prost(float, repeated, tag = "2")]
+    pub tx_throughput_mbps: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "3")]
+    pub rx_throughput_mbps: ::prost::alloc::vec::Vec<f32>,
+    #[prost(
+        enumeration = "wifi_get_client_history_response::WifiLimitedReason",
+        repeated,
+        tag = "4"
+    )]
+    pub throughput_limited: ::prost::alloc::vec::Vec<i32>,
+    #[prost(float, repeated, tag = "5")]
+    pub rx_rate_mbps: ::prost::alloc::vec::Vec<f32>,
+    #[prost(bytes = "vec", tag = "6")]
+    pub rssi: ::prost::alloc::vec::Vec<u8>,
+}
+/// Nested message and enum types in `WifiGetClientHistoryResponse`.
+pub mod wifi_get_client_history_response {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum WifiLimitedReason {
+        LimitUnknown = 0,
+        LimitNone = 1,
+        LimitUnclassified = 2,
+        LimitDroppedPackets = 3,
+    }
+    impl WifiLimitedReason {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                WifiLimitedReason::LimitUnknown => "LIMIT_UNKNOWN",
+                WifiLimitedReason::LimitNone => "LIMIT_NONE",
+                WifiLimitedReason::LimitUnclassified => "LIMIT_UNCLASSIFIED",
+                WifiLimitedReason::LimitDroppedPackets => "LIMIT_DROPPED_PACKETS",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "LIMIT_UNKNOWN" => Some(Self::LimitUnknown),
+                "LIMIT_NONE" => Some(Self::LimitNone),
+                "LIMIT_UNCLASSIFIED" => Some(Self::LimitUnclassified),
+                "LIMIT_DROPPED_PACKETS" => Some(Self::LimitDroppedPackets),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetAviationConformedRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetHistoryResponse {
+    #[prost(uint64, tag = "1")]
+    pub current: u64,
+    #[prost(float, repeated, tag = "1001")]
+    pub ping_drop_rate: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "1002")]
+    pub ping_latency_ms: ::prost::alloc::vec::Vec<f32>,
+    #[prost(uint64, tag = "2")]
+    pub current_index_15s: u64,
+    #[prost(float, repeated, tag = "1003")]
+    pub pop_ipv4_ping_drop_rate_last_15s: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "1004")]
+    pub pop_ipv6_ping_drop_rate_last_15s: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "1005")]
+    pub google_ipv4_ping_drop_rate_last_15s: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "1006")]
+    pub google_ipv6_ping_drop_rate_last_15s: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "1007")]
+    pub cloudflare_ipv4_ping_drop_rate_last_15s: ::prost::alloc::vec::Vec<f32>,
+    #[prost(float, repeated, tag = "1008")]
+    pub cloudflare_ipv6_ping_drop_rate_last_15s: ::prost::alloc::vec::Vec<f32>,
+    #[prost(map = "string, message", tag = "1009")]
+    pub dns_resolver_drop_rate: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        wifi_get_history_response::DnsResolverHistory,
+    >,
+}
+/// Nested message and enum types in `WifiGetHistoryResponse`.
+pub mod wifi_get_history_response {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct DnsResolverHistory {
+        #[prost(float, repeated, tag = "2")]
+        pub drop_rate_last_15s: ::prost::alloc::vec::Vec<f32>,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiNewClientConnectedEvent {
+    #[prost(message, optional, tag = "1")]
+    pub client: ::core::option::Option<WifiClient>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiClient {
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    #[prost(string, tag = "31")]
+    pub given_name: ::prost::alloc::string::String,
+    #[prost(string, tag = "22")]
+    pub domain: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub mac_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub ip_address: ::prost::alloc::string::String,
+    #[prost(bool, tag = "49")]
+    pub dhcp_lease_found: bool,
+    #[prost(bool, tag = "46")]
+    pub dhcp_lease_active: bool,
+    #[prost(bool, tag = "47")]
+    pub dhcp_lease_renewed: bool,
+    #[prost(float, tag = "48")]
+    pub seconds_until_dhcp_lease_expires: f32,
+    #[prost(string, repeated, tag = "41")]
+    pub ipv6_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(float, tag = "4")]
+    pub signal_strength: f32,
+    #[prost(uint32, tag = "12")]
+    pub channel_width: u32,
+    #[prost(message, optional, tag = "5")]
+    pub rx_stats: ::core::option::Option<wifi_client::RxStats>,
+    #[prost(bool, tag = "60")]
+    pub rx_stats_valid: bool,
+    #[prost(message, optional, tag = "6")]
+    pub tx_stats: ::core::option::Option<wifi_client::TxStats>,
+    #[prost(bool, tag = "61")]
+    pub tx_stats_valid: bool,
+    #[prost(uint32, tag = "7")]
+    pub associated_time_s: u32,
+    #[prost(uint32, tag = "45")]
+    pub no_data_idle_s: u32,
+    #[prost(string, tag = "8")]
+    pub mode_str: ::prost::alloc::string::String,
+    #[prost(enumeration = "wifi_client::Interface", tag = "9")]
+    pub iface: i32,
+    #[prost(string, tag = "26")]
+    pub iface_name: ::prost::alloc::string::String,
+    #[prost(float, tag = "10")]
+    pub snr: f32,
+    #[prost(int32, tag = "11")]
+    pub psmode: i32,
+    #[prost(string, tag = "13")]
+    pub upstream_mac_address: ::prost::alloc::string::String,
+    #[prost(enumeration = "wifi_client::Role", tag = "14")]
+    pub role: i32,
+    #[prost(string, tag = "15")]
+    pub device_id: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "16")]
+    pub swq_checks: u32,
+    #[prost(uint32, tag = "17")]
+    pub swq_checks_non_empty: u32,
+    #[prost(uint32, tag = "18")]
+    pub mib_steer_state: u32,
+    #[prost(uint32, tag = "19")]
+    pub mib_steer_method: u32,
+    #[prost(uint32, tag = "20")]
+    pub btm_requests: u32,
+    #[prost(uint32, tag = "21")]
+    pub btm_requests_success: u32,
+    #[prost(uint32, tag = "30")]
+    pub steer_state: u32,
+    #[prost(uint32, tag = "27")]
+    pub steer_req_success_last_1h: u32,
+    #[prost(uint32, tag = "28")]
+    pub steer_req_fail_last_1h: u32,
+    #[prost(uint32, tag = "29")]
+    pub steer_req_fail_and_dissoc_last_1h: u32,
+    #[prost(bool, tag = "23")]
+    pub dot11v_support: bool,
+    #[prost(uint32, tag = "32")]
+    pub hops_from_controller: u32,
+    #[prost(float, tag = "33")]
+    pub est_tx_rate_mbps_from_controller: f32,
+    #[prost(float, tag = "34")]
+    pub est_rx_rate_mbps_from_controller: f32,
+    #[prost(string, tag = "37")]
+    pub hardware_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "38")]
+    pub software_version: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "39")]
+    pub api_version: u32,
+    #[prost(message, optional, tag = "40")]
+    pub ping_metrics: ::core::option::Option<wifi_client::PingMetrics>,
+    #[prost(bool, tag = "42")]
+    pub blocked: bool,
+    #[prost(uint32, tag = "43")]
+    pub client_id: u32,
+    #[prost(string, tag = "53")]
+    pub captive_client_id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "44")]
+    pub fqcodel_info: ::core::option::Option<wifi_client::FqcodelInfo>,
+    #[prost(message, optional, tag = "52")]
+    pub alerts: ::core::option::Option<wifi_client::Alerts>,
+}
+/// Nested message and enum types in `WifiClient`.
+pub mod wifi_client {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct RxStats {
+        #[prost(uint64, tag = "1")]
+        pub bytes: u64,
+        #[prost(uint64, tag = "2")]
+        pub count_errors: u64,
+        #[prost(uint32, tag = "13")]
+        pub phy_mode: u32,
+        #[prost(int32, tag = "3")]
+        pub nss: i32,
+        #[prost(uint32, tag = "8")]
+        pub rate_mbps: u32,
+        #[prost(float, tag = "14")]
+        pub rate_mbps_last_30s: f32,
+        #[prost(float, tag = "15")]
+        pub rate_mbps_last_15s: f32,
+        #[prost(float, tag = "16")]
+        pub rate_mbps_last_1m_avg: f32,
+        #[prost(float, tag = "17")]
+        pub throughput_mbps_last_1m_avg: f32,
+        #[prost(uint32, tag = "5")]
+        pub mcs: u32,
+        #[prost(uint32, tag = "6")]
+        pub bandwidth: u32,
+        #[prost(uint32, tag = "7")]
+        pub guard_ns: u32,
+        #[prost(float, tag = "9")]
+        pub airtime_fraction_last_1s: f32,
+        #[prost(uint32, tag = "10")]
+        pub sampled_packets: u32,
+        #[prost(uint32, tag = "11")]
+        pub sampled_packets_retried: u32,
+        #[prost(uint32, tag = "12")]
+        pub sampled_packets_dropped: u32,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct TxStats {
+        #[prost(uint64, tag = "1")]
+        pub bytes: u64,
+        #[prost(uint64, tag = "2")]
+        pub success_bytes: u64,
+        #[prost(uint32, tag = "10")]
+        pub phy_mode: u32,
+        #[prost(int32, tag = "3")]
+        pub nss: i32,
+        #[prost(uint32, tag = "8")]
+        pub rate_mbps: u32,
+        #[prost(float, tag = "11")]
+        pub rate_mbps_last_30s: f32,
+        #[prost(float, tag = "12")]
+        pub rate_mbps_last_15s: f32,
+        #[prost(uint32, tag = "5")]
+        pub mcs: u32,
+        #[prost(uint32, tag = "6")]
+        pub bandwidth: u32,
+        #[prost(uint32, tag = "7")]
+        pub guard_ns: u32,
+        #[prost(float, tag = "9")]
+        pub airtime_fraction_last_1s: f32,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct PingMetrics {
+        #[prost(bool, tag = "1")]
+        pub in_unhappy_hour_2s: bool,
+        #[prost(bool, tag = "2")]
+        pub in_unhappy_hour_5s: bool,
+        #[prost(float, tag = "3")]
+        pub drop_rate_5m: f32,
+        #[prost(float, tag = "4")]
+        pub latency_5m: f32,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct FqcodelInfo {
+        #[prost(uint64, tag = "1")]
+        pub enqs_hi_prio: u64,
+        #[prost(uint64, tag = "2")]
+        pub enqs_fqcodel: u64,
+        #[prost(uint64, tag = "3")]
+        pub enqs_new: u64,
+        #[prost(uint64, tag = "4")]
+        pub enqs_old: u64,
+        #[prost(uint64, tag = "5")]
+        pub enqs_dropped: u64,
+        #[prost(uint64, tag = "6")]
+        pub deqs_new: u64,
+        #[prost(uint64, tag = "7")]
+        pub deqs_old: u64,
+        #[prost(uint64, tag = "8")]
+        pub deqs_flow_new: u64,
+        #[prost(uint64, tag = "9")]
+        pub deqs_flow_old_deficit: u64,
+        #[prost(uint64, tag = "10")]
+        pub deqs_flow_old_starvation: u64,
+        #[prost(uint64, tag = "11")]
+        pub deqs_dropped: u64,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Alerts {
+        #[prost(bool, tag = "1")]
+        pub throughput_limited: bool,
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Interface {
+        Unknown = 0,
+        Eth = 1,
+        Rf2ghz = 2,
+        Rf5ghz = 3,
+        Rf5ghzHigh = 4,
+    }
+    impl Interface {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Interface::Unknown => "UNKNOWN",
+                Interface::Eth => "ETH",
+                Interface::Rf2ghz => "RF_2GHZ",
+                Interface::Rf5ghz => "RF_5GHZ",
+                Interface::Rf5ghzHigh => "RF_5GHZ_HIGH",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNKNOWN" => Some(Self::Unknown),
+                "ETH" => Some(Self::Eth),
+                "RF_2GHZ" => Some(Self::Rf2ghz),
+                "RF_5GHZ" => Some(Self::Rf5ghz),
+                "RF_5GHZ_HIGH" => Some(Self::Rf5ghzHigh),
+                _ => None,
+            }
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Role {
+        Unknown = 0,
+        Client = 1,
+        Repeater = 2,
+        Controller = 3,
+    }
+    impl Role {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Role::Unknown => "ROLE_UNKNOWN",
+                Role::Client => "CLIENT",
+                Role::Repeater => "REPEATER",
+                Role::Controller => "CONTROLLER",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "ROLE_UNKNOWN" => Some(Self::Unknown),
+                "CLIENT" => Some(Self::Client),
+                "REPEATER" => Some(Self::Repeater),
+                "CONTROLLER" => Some(Self::Controller),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetupRequest {
+    #[prost(bool, tag = "1")]
+    pub skip: bool,
+    #[prost(string, tag = "2")]
+    pub network_name: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub network_password: ::prost::alloc::string::String,
+    #[prost(bool, tag = "4")]
+    pub bypass: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetupResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiBandStatus {
+    #[prost(float, tag = "1")]
+    pub chan_busy_time_fraction: f32,
+    #[prost(float, tag = "2")]
+    pub tx_air_time_fraction: f32,
+    #[prost(float, tag = "3")]
+    pub rx_air_time_fraction: f32,
+    #[prost(float, tag = "4")]
+    pub obss_air_time_fraction: f32,
+    #[prost(float, tag = "5")]
+    pub edcca_air_time_fraction: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiAlerts {
+    #[prost(bool, tag = "1")]
+    pub thermal_throttle: bool,
+    #[prost(bool, tag = "2")]
+    pub install_pending: bool,
+    #[prost(bool, tag = "3")]
+    pub freshly_fused: bool,
+    #[prost(bool, tag = "4")]
+    pub lan_eth_slow_link_10: bool,
+    #[prost(bool, tag = "5")]
+    pub lan_eth_slow_link_100: bool,
+    #[prost(bool, tag = "21")]
+    pub high_cable_ping_drop_rate: bool,
+    #[prost(bool, tag = "10")]
+    pub wan_eth_poor_connection: bool,
+    #[prost(bool, tag = "11")]
+    pub mesh_topology_changing_often: bool,
+    #[prost(bool, tag = "12")]
+    pub mesh_unreliable_backhaul: bool,
+    #[prost(bool, tag = "13")]
+    pub radius_missing_process: bool,
+    #[prost(bool, tag = "14")]
+    pub eth_switch_error: bool,
+    #[prost(bool, tag = "15")]
+    pub poe_on_dish_unreachable: bool,
+    #[prost(bool, tag = "16")]
+    pub poe_fuse_blown: bool,
+    #[prost(bool, tag = "17")]
+    pub poe_router_overcurrent: bool,
+    #[prost(bool, tag = "18")]
+    pub poe_off_current_nominal: bool,
+    #[prost(bool, tag = "19")]
+    pub poe_vin_overvoltage: bool,
+    #[prost(bool, tag = "20")]
+    pub poe_vin_undervoltage: bool,
+    #[prost(bool, tag = "22")]
+    pub sandbox_disabled: bool,
+    #[prost(bool, tag = "23")]
+    pub only_overflight_blocked: bool,
+    #[prost(bool, tag = "24")]
+    pub offline_networks_disabled: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetStatusResponse {
+    #[prost(message, optional, tag = "3")]
+    pub device_info: ::core::option::Option<DeviceInfo>,
+    #[prost(message, optional, tag = "4")]
+    pub device_state: ::core::option::Option<DeviceState>,
+    #[deprecated]
+    #[prost(bool, tag = "1")]
+    pub captive_portal_enabled: bool,
+    #[prost(string, tag = "1003")]
+    pub ipv4_wan_address: ::prost::alloc::string::String,
+    #[prost(string, repeated, tag = "1017")]
+    pub ipv6_wan_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    #[prost(float, tag = "1004")]
+    pub ping_drop_rate: f32,
+    #[prost(float, tag = "1021")]
+    pub ping_drop_rate_5m: f32,
+    #[prost(float, tag = "1005")]
+    pub ping_latency_ms: f32,
+    #[prost(float, tag = "1012")]
+    pub dish_ping_drop_rate: f32,
+    #[prost(float, tag = "1018")]
+    pub dish_ping_drop_rate_5m: f32,
+    #[prost(float, tag = "1013")]
+    pub dish_ping_latency_ms: f32,
+    #[prost(float, tag = "1014")]
+    pub pop_ping_drop_rate: f32,
+    #[prost(float, tag = "1020")]
+    pub pop_ping_drop_rate_5m: f32,
+    #[prost(float, tag = "1015")]
+    pub pop_ping_latency_ms: f32,
+    #[prost(float, tag = "1027")]
+    pub pop_ipv6_ping_drop_rate: f32,
+    #[prost(float, tag = "1028")]
+    pub pop_ipv6_ping_drop_rate_5m: f32,
+    #[prost(float, tag = "1029")]
+    pub pop_ipv6_ping_latency_ms: f32,
+    #[deprecated]
+    #[prost(message, optional, tag = "1008")]
+    pub rf_2ghz_status: ::core::option::Option<WifiBandStatus>,
+    #[deprecated]
+    #[prost(message, optional, tag = "1009")]
+    pub rf_5ghz_status: ::core::option::Option<WifiBandStatus>,
+    #[prost(message, optional, tag = "1010")]
+    pub alerts: ::core::option::Option<WifiAlerts>,
+    #[prost(bool, tag = "1011")]
+    pub is_aviation: bool,
+    #[prost(message, optional, tag = "2000")]
+    pub config: ::core::option::Option<WifiConfig>,
+    #[prost(message, repeated, tag = "3000")]
+    pub clients: ::prost::alloc::vec::Vec<WifiClient>,
+    #[prost(bool, tag = "3001")]
+    pub has_client_index: bool,
+    #[prost(int32, tag = "3002")]
+    pub client_index: i32,
+    #[prost(bool, tag = "1016")]
+    pub is_aviation_conformed: bool,
+    #[prost(message, optional, tag = "3003")]
+    pub radius_stats: ::core::option::Option<RadiusStatsMap>,
+    #[prost(message, repeated, tag = "1019")]
+    pub dhcp_servers: ::prost::alloc::vec::Vec<DhcpServer>,
+    #[prost(message, optional, tag = "1022")]
+    pub poe_stats: ::core::option::Option<PoeStats>,
+    #[prost(string, tag = "1023")]
+    pub dish_id: ::prost::alloc::string::String,
+    #[prost(enumeration = "super::satellites::network::UtDisablementCode", tag = "1031")]
+    pub dish_disablement_code: i32,
+    #[prost(int64, tag = "1024")]
+    pub utc_ns: i64,
+    #[prost(message, optional, tag = "1025")]
+    pub software_update_stats: ::core::option::Option<WifiSoftwareUpdateStats>,
+    #[prost(message, optional, tag = "1026")]
+    pub setup_requirement: ::core::option::Option<WifiSetupRequirement>,
+    #[prost(float, tag = "1030")]
+    pub secs_since_last_public_ipv4_change: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiAuthenticateRequest {
+    #[prost(message, optional, tag = "1")]
+    pub challenge: ::core::option::Option<SignedData>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiAuthenticateResponse {
+    #[prost(message, optional, tag = "1")]
+    pub wifi: ::core::option::Option<ChallengeResponse>,
+    #[prost(message, optional, tag = "2")]
+    pub dish: ::core::option::Option<ChallengeResponse>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiAccountBondingEvent {
+    #[prost(string, tag = "1")]
+    pub dish_id: ::prost::alloc::string::String,
+    #[prost(bool, tag = "2")]
+    pub is_repeater: bool,
+    #[prost(string, tag = "3")]
+    pub hardware_version: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiNewPeerEvent {
+    #[prost(string, tag = "1")]
+    pub peer_id: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PingMetrics {
+    #[prost(float, tag = "1")]
+    pub latency_mean_ms: f32,
+    #[prost(float, tag = "2")]
+    pub latency_stddev_ms: f32,
+    #[prost(float, tag = "3")]
+    pub latency_mean_ms_5m: f32,
+    #[prost(float, tag = "4")]
+    pub latency_mean_ms_1h: f32,
+    #[deprecated]
+    #[prost(float, tag = "5")]
+    pub latency_mean_ms_1d: f32,
+    #[prost(float, tag = "6")]
+    pub drop_rate: f32,
+    #[prost(float, tag = "7")]
+    pub drop_rate_5m: f32,
+    #[prost(float, tag = "8")]
+    pub drop_rate_1h: f32,
+    #[prost(float, tag = "9")]
+    pub drop_rate_1d: f32,
+    #[prost(float, tag = "10")]
+    pub seconds_since_last_success: f32,
+    #[prost(float, tag = "11")]
+    pub seconds_since_last_1s_outage: f32,
+    #[prost(float, tag = "15")]
+    pub seconds_since_last_2s_outage: f32,
+    #[prost(float, tag = "12")]
+    pub seconds_since_last_5s_outage: f32,
+    #[prost(float, tag = "18")]
+    pub seconds_since_last_15s_outage: f32,
+    #[prost(float, tag = "19")]
+    pub seconds_since_last_60s_outage: f32,
+    #[prost(float, tag = "20")]
+    pub seconds_since_last_300s_outage: f32,
+    #[prost(float, tag = "13")]
+    pub happy_hours_1s_1d: f32,
+    #[prost(float, tag = "16")]
+    pub happy_hours_2s_1d: f32,
+    #[prost(float, tag = "14")]
+    pub happy_hours_5s_1d: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetPingMetricsRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetPingMetricsResponse {
+    #[prost(message, optional, tag = "1")]
+    pub internet: ::core::option::Option<PingMetrics>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiNetwork {
+    #[prost(enumeration = "wifi_network::Band", tag = "1")]
+    pub band: i32,
+    #[prost(string, tag = "2")]
+    pub ssid: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "3")]
+    pub channel: u32,
+    #[prost(string, tag = "4")]
+    pub encryption_type_str: ::prost::alloc::string::String,
+}
+/// Nested message and enum types in `WifiNetwork`.
+pub mod wifi_network {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Band {
+        WifiUnknown = 0,
+        Wifi24ghz = 1,
+        Wifi5ghz = 2,
+    }
+    impl Band {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Band::WifiUnknown => "WIFI_UNKNOWN",
+                Band::Wifi24ghz => "WIFI_2_4GHZ",
+                Band::Wifi5ghz => "WIFI_5GHZ",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "WIFI_UNKNOWN" => Some(Self::WifiUnknown),
+                "WIFI_2_4GHZ" => Some(Self::Wifi24ghz),
+                "WIFI_5GHZ" => Some(Self::Wifi5ghz),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiPersistentStats {
+    #[prost(message, optional, tag = "1")]
+    pub factory_reset_button: ::core::option::Option<wifi_persistent_stats::Event>,
+    #[prost(message, optional, tag = "2")]
+    pub factory_reset_plug_unplug: ::core::option::Option<wifi_persistent_stats::Event>,
+    #[prost(message, optional, tag = "3")]
+    pub factory_reset_command: ::core::option::Option<wifi_persistent_stats::Event>,
+    #[prost(message, optional, tag = "4")]
+    pub factory_reset_failed_load_wifi_config: ::core::option::Option<
+        wifi_persistent_stats::Event,
+    >,
+    #[prost(message, optional, tag = "5")]
+    pub reboot_from_software_update: ::core::option::Option<
+        wifi_persistent_stats::Event,
+    >,
+}
+/// Nested message and enum types in `WifiPersistentStats`.
+pub mod wifi_persistent_stats {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Event {
+        #[prost(uint32, tag = "1")]
+        pub count: u32,
+        #[prost(int64, tag = "2")]
+        pub last_occurred_timestamp: i64,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetPersistentStatsResponse {
+    #[prost(message, optional, tag = "1")]
+    pub stats: ::core::option::Option<WifiPersistentStats>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RadioStats {
+    #[prost(enumeration = "wifi_config::Band", tag = "1")]
+    pub band: i32,
+    #[prost(message, optional, tag = "2")]
+    pub rx_stats: ::core::option::Option<network_interface::RxStats>,
+    #[prost(message, optional, tag = "3")]
+    pub tx_stats: ::core::option::Option<network_interface::TxStats>,
+    #[prost(message, optional, tag = "4")]
+    pub thermal_status: ::core::option::Option<radio_stats::ThermalStatus>,
+    #[prost(message, optional, tag = "5")]
+    pub antenna_status: ::core::option::Option<radio_stats::AntennaStatus>,
+}
+/// Nested message and enum types in `RadioStats`.
+pub mod radio_stats {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct ThermalStatus {
+        #[prost(uint32, tag = "1")]
+        pub level: u32,
+        #[deprecated]
+        #[prost(uint32, tag = "2")]
+        pub temp: u32,
+        #[prost(double, tag = "3")]
+        pub temp2: f64,
+        #[prost(uint32, tag = "4")]
+        pub power_reduction: u32,
+        #[prost(uint32, tag = "5")]
+        pub duty_cycle: u32,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct AntennaStatus {
+        #[prost(float, tag = "1")]
+        pub rssi1: f32,
+        #[prost(float, tag = "2")]
+        pub rssi2: f32,
+        #[prost(float, tag = "3")]
+        pub rssi3: f32,
+        #[prost(float, tag = "4")]
+        pub rssi4: f32,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StarlinkRoutersHourlyMetricsV2 {
+    #[prost(message, optional, tag = "1")]
+    pub id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "2")]
+    pub timestamp_date: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "3")]
+    pub timestamp_hour: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "10000")]
+    pub timestamp: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(message, optional, tag = "4")]
+    pub sys_hw_gen: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "5")]
+    pub sys_sw: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "6")]
+    pub sys_country: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "7")]
+    pub sys_is_dev: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "8")]
+    pub sys_alloc_fds: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "9")]
+    pub sys_cpu_usage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "10")]
+    pub sys_mem_free_kb: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "11")]
+    pub sys_bootcount: ::core::option::Option<i32>,
+    #[prost(message, optional, tag = "12")]
+    pub sys_partitions_equal: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "13")]
+    pub sys_uptime_seconds: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "14")]
+    pub sys_anti_rollback_version: ::core::option::Option<i32>,
+    #[prost(message, optional, tag = "15")]
+    pub sys_is_witl: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "16")]
+    pub sys_is_aviation_conformed: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "17")]
+    pub sys_ubi_max_ec: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "18")]
+    pub sys_ubi_bad_peb: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "19")]
+    pub sys_board_rev: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "100")]
+    pub radios_2ghz_channel: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "101")]
+    pub radios_2ghz_antenna1_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "102")]
+    pub radios_2ghz_antenna2_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "103")]
+    pub radios_2ghz_antenna3_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "197")]
+    pub radios_2ghz_antenna4_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "157")]
+    pub radios_2ghz_antenna1_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "158")]
+    pub radios_2ghz_antenna2_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "159")]
+    pub radios_2ghz_antenna3_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "160")]
+    pub radios_2ghz_antenna4_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "104")]
+    pub radios_2ghz_iface_count: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "105")]
+    pub radios_2ghz_chan_busy_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "106")]
+    pub radios_2ghz_edcca_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "107")]
+    pub radios_2ghz_overlapping_bss_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "108")]
+    pub radios_2ghz_rx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "109")]
+    pub radios_2ghz_rx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "110")]
+    pub radios_2ghz_rx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "111")]
+    pub radios_2ghz_rx_frame_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "112")]
+    pub radios_2ghz_rx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "113")]
+    pub radios_2ghz_rx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "114")]
+    pub radios_2ghz_tx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "115")]
+    pub radios_2ghz_tx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "116")]
+    pub radios_2ghz_tx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "117")]
+    pub radios_2ghz_tx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "118")]
+    pub radios_2ghz_tx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "119")]
+    pub radios_5ghz_channel: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "120")]
+    pub radios_5ghz_antenna1_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "121")]
+    pub radios_5ghz_antenna2_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "122")]
+    pub radios_5ghz_antenna3_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "198")]
+    pub radios_5ghz_antenna4_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "161")]
+    pub radios_5ghz_antenna1_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "162")]
+    pub radios_5ghz_antenna2_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "163")]
+    pub radios_5ghz_antenna3_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "164")]
+    pub radios_5ghz_antenna4_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "123")]
+    pub radios_5ghz_iface_count: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "124")]
+    pub radios_5ghz_chan_busy_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "125")]
+    pub radios_5ghz_edcca_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "126")]
+    pub radios_5ghz_overlapping_bss_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "127")]
+    pub radios_5ghz_rx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "128")]
+    pub radios_5ghz_rx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "129")]
+    pub radios_5ghz_rx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "130")]
+    pub radios_5ghz_rx_frame_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "131")]
+    pub radios_5ghz_rx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "132")]
+    pub radios_5ghz_rx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "133")]
+    pub radios_5ghz_tx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "134")]
+    pub radios_5ghz_tx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "135")]
+    pub radios_5ghz_tx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "136")]
+    pub radios_5ghz_tx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "137")]
+    pub radios_5ghz_tx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "138")]
+    pub radios_5ghz_high_channel: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "139")]
+    pub radios_5ghz_high_antenna1_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "140")]
+    pub radios_5ghz_high_antenna2_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "141")]
+    pub radios_5ghz_high_antenna3_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "199")]
+    pub radios_5ghz_high_antenna4_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "165")]
+    pub radios_5ghz_high_antenna1_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "166")]
+    pub radios_5ghz_high_antenna2_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "167")]
+    pub radios_5ghz_high_antenna3_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "168")]
+    pub radios_5ghz_high_antenna4_tssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "142")]
+    pub radios_5ghz_high_iface_count: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "143")]
+    pub radios_5ghz_high_chan_busy_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "144")]
+    pub radios_5ghz_high_edcca_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "145")]
+    pub radios_5ghz_high_overlapping_bss_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "146")]
+    pub radios_5ghz_high_rx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "147")]
+    pub radios_5ghz_high_rx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "148")]
+    pub radios_5ghz_high_rx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "149")]
+    pub radios_5ghz_high_rx_frame_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "150")]
+    pub radios_5ghz_high_rx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "151")]
+    pub radios_5ghz_high_rx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "152")]
+    pub radios_5ghz_high_tx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "153")]
+    pub radios_5ghz_high_tx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "154")]
+    pub radios_5ghz_high_tx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "155")]
+    pub radios_5ghz_high_tx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "156")]
+    pub radios_5ghz_high_tx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "200")]
+    pub radios_2ghz_thermal_temp: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "201")]
+    pub radios_5ghz_thermal_temp: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "206")]
+    pub radios_5ghz_high_thermal_temp: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "202")]
+    pub radios_2ghz_thermal_duty_cycle: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "203")]
+    pub radios_5ghz_thermal_duty_cycle: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "207")]
+    pub radios_5ghz_high_thermal_duty_cycle: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "204")]
+    pub radios_2ghz_thermal_throttled_seconds: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "205")]
+    pub radios_5ghz_thermal_throttled_seconds: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "208")]
+    pub radios_5ghz_high_thermal_throttled_seconds: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "210")]
+    pub board_temp: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "211")]
+    pub poe_mcu_die_temp: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "212")]
+    pub poe_percent_water_detect_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "300")]
+    pub ifaces_lan_eth_rx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "301")]
+    pub ifaces_lan_eth_rx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "302")]
+    pub ifaces_lan_eth_rx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "303")]
+    pub ifaces_lan_eth_rx_frame_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "304")]
+    pub ifaces_lan_eth_tx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "305")]
+    pub ifaces_lan_eth_tx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "306")]
+    pub ifaces_lan_eth_tx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "314")]
+    pub ifaces_lan1_eth_rx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "315")]
+    pub ifaces_lan1_eth_rx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "316")]
+    pub ifaces_lan1_eth_rx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "317")]
+    pub ifaces_lan1_eth_rx_frame_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "318")]
+    pub ifaces_lan1_eth_tx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "319")]
+    pub ifaces_lan1_eth_tx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "320")]
+    pub ifaces_lan1_eth_tx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "307")]
+    pub ifaces_wan_eth_rx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "308")]
+    pub ifaces_wan_eth_rx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "309")]
+    pub ifaces_wan_eth_rx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "310")]
+    pub ifaces_wan_eth_rx_frame_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "311")]
+    pub ifaces_wan_eth_tx_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "312")]
+    pub ifaces_wan_eth_tx_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "313")]
+    pub ifaces_wan_eth_tx_errors: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "400")]
+    pub clients: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "401")]
+    pub clients_2ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "402")]
+    pub clients_5ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "413")]
+    pub clients_5ghz_high: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "403")]
+    pub clients_eth: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "429")]
+    pub clients_5ghz_rx_bandwidth_20mhz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "430")]
+    pub clients_5ghz_rx_bandwidth_40mhz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "431")]
+    pub clients_5ghz_rx_bandwidth_80mhz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "404")]
+    pub clients_repeater: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "405")]
+    pub clients_repeater_2ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "406")]
+    pub clients_repeater_5ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "416")]
+    pub clients_repeater_5ghz_high: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "407")]
+    pub clients_repeater_eth: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "408")]
+    pub mesh_hops: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "409")]
+    pub mesh_one_hop_rssi_avg_2ghz: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "410")]
+    pub mesh_one_hop_rssi_avg_5ghz: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "414")]
+    pub mesh_one_hop_rssi_avg_5ghz_high: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "411")]
+    pub mesh_two_hop_rssi_avg_2ghz: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "412")]
+    pub mesh_two_hop_rssi_avg_5ghz: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "415")]
+    pub mesh_two_hop_rssi_avg_5ghz_high: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "418")]
+    pub repeater_tx_rate_mbps_min: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "419")]
+    pub repeater_rx_rate_mbps_min: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "420")]
+    pub repeater_tx_rate_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "421")]
+    pub repeater_rx_rate_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "422")]
+    pub repeater_seconds_since_2s_outage_min: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "424")]
+    pub repeater_seconds_since_5s_outage_min: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "423")]
+    pub repeater_seconds_since_2s_outage_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "425")]
+    pub repeater_seconds_since_5s_outage_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "426")]
+    pub repeater_latency_ms_1h_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "427")]
+    pub repeater_latency_ms_1h_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "428")]
+    pub mesh_topology_change_count_1d: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "600")]
+    pub ping_seconds_since_last_1s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "601")]
+    pub ping_seconds_since_last_2s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "602")]
+    pub ping_seconds_since_last_5s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "603")]
+    pub ping_seconds_since_last_60s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "604")]
+    pub ping_seconds_since_last_300s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "605")]
+    pub ping_drop_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "606")]
+    pub ping_drop_rate_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "607")]
+    pub ping_latency: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "618")]
+    pub ping_latency_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "610")]
+    pub ping_dish_seconds_since_last_1s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "611")]
+    pub ping_dish_seconds_since_last_2s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "612")]
+    pub ping_dish_seconds_since_last_5s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "613")]
+    pub ping_dish_seconds_since_last_60s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "614")]
+    pub ping_dish_seconds_since_last_300s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "615")]
+    pub ping_dish_drop_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "616")]
+    pub ping_dish_drop_rate_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "617")]
+    pub ping_dish_latency: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "619")]
+    pub ping_dish_latency_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "621")]
+    pub ping_pop_ipv6_drop_rate_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "623")]
+    pub ping_pop_ipv6_latency_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "700")]
+    pub client_speedtest_router_download_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "701")]
+    pub client_speedtest_router_upload_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "702")]
+    pub client_speedtest_router_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "703")]
+    pub client_speedtest_wifi_download_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "704")]
+    pub client_speedtest_wifi_upload_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "705")]
+    pub client_speedtest_client_download_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "706")]
+    pub client_speedtest_client_upload_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "707")]
+    pub client_speedtest_client_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "708")]
+    pub client_speedtest_client_iface: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "709")]
+    pub client_speedtest_client_oui: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
+    #[prost(message, optional, tag = "710")]
+    pub client_speedtest_client_tx_rate: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "711")]
+    pub client_speedtest_client_rx_rate: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "712")]
+    pub client_speedtest_client_platform_type: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "800")]
+    pub speedtest_tcp_8_download_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "801")]
+    pub speedtest_tcp_8_download_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "802")]
+    pub speedtest_tcp_8_upload_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "803")]
+    pub speedtest_tcp_8_upload_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "804")]
+    pub speedtest_tcp_64_download_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "805")]
+    pub speedtest_tcp_64_download_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "806")]
+    pub speedtest_tcp_64_upload_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "807")]
+    pub speedtest_tcp_64_upload_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "808")]
+    pub speedtest_tcp_1_download_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "809")]
+    pub speedtest_tcp_1_download_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "810")]
+    pub speedtest_tcp_1_upload_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "811")]
+    pub speedtest_tcp_1_upload_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "900")]
+    pub dish_cell_id: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1000")]
+    pub config_setup_complete: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1001")]
+    pub config_bands_split: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1002")]
+    pub config_is_repeater: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1003")]
+    pub config_open_network: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1004")]
+    pub config_is_aviation: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1005")]
+    pub config_secure_dns: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1006")]
+    pub config_legacy: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1007")]
+    pub config_ap_mode: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1008")]
+    pub config_dfs_enabled: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1009")]
+    pub config_network_name_is_default: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1010")]
+    pub config_remote_ssh_enabled: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1011")]
+    pub config_is_repeater_wired: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1012")]
+    pub config_is_repeater_wireless: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1013")]
+    pub config_block_schedules_set: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1014")]
+    pub config_custom_nameservers: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1015")]
+    pub config_disable_mesh_onboarding: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1016")]
+    pub config_pin_country_code: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1017")]
+    pub config_disable_update_reboot: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1031")]
+    pub config_https_content_hosting_enabled: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1018")]
+    pub config_disable_2ghz: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1019")]
+    pub config_disable_5ghz: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1029")]
+    pub config_disable_5ghz_high: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1020")]
+    pub config_channel_2ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1021")]
+    pub config_channel_5ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1022")]
+    pub config_channel_5ghz_high: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1023")]
+    pub config_networks: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1024")]
+    pub config_networks_guest: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1025")]
+    pub config_networks_hidden: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1026")]
+    pub config_networks_client_isolation: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1027")]
+    pub config_networks_bands_split: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1101")]
+    pub wan_traffic_control_cake_bytes: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "1102")]
+    pub wan_traffic_control_cake_packets: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "1103")]
+    pub wan_traffic_control_cake_drops: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "1104")]
+    pub wan_traffic_control_cake_ack_drops: ::core::option::Option<i64>,
+    #[prost(message, optional, tag = "1100")]
+    pub conntrack_entries: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1105")]
+    pub dhcp_secs_eq_0: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1106")]
+    pub dhcp_secs_gt_0: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1107")]
+    pub dhcp_secs_gt_10: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1108")]
+    pub dhcp_secs_gt_30: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1109")]
+    pub dhcp_secs_gt_60: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1200")]
+    pub dns_forwards: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1201")]
+    pub dns_forwards_success: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1202")]
+    pub dns_forwards_server_failure: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1203")]
+    pub dns_forwards_no_server_response: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1204")]
+    pub dns_forwards_success_on_default_backup: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1205")]
+    pub dns_forwards_dropped: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1206")]
+    pub dns_forwards_with_backup: ::core::option::Option<u32>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StarlinkRouterAlerts {
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub source: ::prost::alloc::string::String,
+    #[prost(bool, tag = "3")]
+    pub active: bool,
+    #[prost(message, optional, tag = "4")]
+    pub start: ::core::option::Option<super::telemetron::public::common::TimestampInfo>,
+    #[prost(message, optional, tag = "5")]
+    pub end: ::core::option::Option<super::telemetron::public::common::TimestampInfo>,
+    #[prost(string, tag = "6")]
+    pub hardware: ::prost::alloc::string::String,
+    #[prost(string, tag = "7")]
+    pub software: ::prost::alloc::string::String,
+    #[prost(string, tag = "8")]
+    pub details: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StarlinkRouterClientSpeedtests {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub data_record: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(string, tag = "3")]
+    pub country: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "30")]
+    pub speedtest_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "8")]
+    pub client_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "9")]
+    pub router_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "10")]
+    pub client_iface: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "11")]
+    pub client_oui: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "12")]
+    pub client_tx_rate: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "13")]
+    pub client_rx_rate: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "27")]
+    pub client_platform_type: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "34")]
+    pub client_app_version: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "35")]
+    pub client_app_build: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "31")]
+    pub client_rx_phy_mode: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "32")]
+    pub client_rx_spatial_streams: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "33")]
+    pub client_rx_mcs: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "4")]
+    pub client_download_start_time: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(message, optional, tag = "5")]
+    pub client_upload_start_time: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(message, optional, tag = "6")]
+    pub client_download_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "7")]
+    pub client_upload_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "28")]
+    pub client_target: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "16")]
+    pub client_tcp_streams: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "17")]
+    pub router_download_start_time: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(message, optional, tag = "18")]
+    pub router_upload_start_time: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(message, optional, tag = "19")]
+    pub router_download_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "20")]
+    pub router_upload_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "29")]
+    pub router_target: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "22")]
+    pub router_tcp_streams: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "23")]
+    pub wifi_download_start_time: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(message, optional, tag = "24")]
+    pub wifi_upload_start_time: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(message, optional, tag = "25")]
+    pub wifi_download_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "26")]
+    pub wifi_upload_mbps_avg: ::core::option::Option<f32>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StarlinkRouterClients {
+    #[prost(string, tag = "1")]
+    pub router_id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub timestamp: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(uint32, tag = "3")]
+    pub client_id: u32,
+    #[prost(string, tag = "4")]
+    pub client_telem_index: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "119")]
+    pub router_hw: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "120")]
+    pub router_sw: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "137")]
+    pub router_uptime_s: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "121")]
+    pub client_router_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "122")]
+    pub client_hw: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "123")]
+    pub client_sw: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "101")]
+    pub oui: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "102")]
+    pub upstream_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "103")]
+    pub is_repeater: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "104")]
+    pub connected_s: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "105")]
+    pub interface: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "106")]
+    pub radio_channel: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "107")]
+    pub rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "108")]
+    pub rx_mcs: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "109")]
+    pub tx_mcs: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "110")]
+    pub rx_rate: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "111")]
+    pub tx_rate: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "112")]
+    pub rx_bandwidth: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "113")]
+    pub rx_spatial_streams: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "114")]
+    pub rx_phy_mode: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "118")]
+    pub mesh_hops: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "124")]
+    pub speedtest_upload_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "125")]
+    pub speedtest_download_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "127")]
+    pub site_survey_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "128")]
+    pub site_survey_est_rx_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "129")]
+    pub est_controller_throughput_mbps: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "115")]
+    pub ping_drop_rate_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "116")]
+    pub ping_latency_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "117")]
+    pub steer_state: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "126")]
+    pub blocked: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "150")]
+    pub throughput_limited_last_fired: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(message, optional, tag = "130")]
+    pub has_dhcp_v4_lease: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "131")]
+    pub ipv4_address: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "132")]
+    pub has_hostname: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "133")]
+    pub dhcp_v4_lease_is_active: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "134")]
+    pub dhcp_v4_lease_was_renewed: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "135")]
+    pub seconds_until_dhcp_v4_lease_expires: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "138")]
+    pub dissociations_under_10s: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "139")]
+    pub dissociations_under_30s: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "140")]
+    pub dissociations_under_60s: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "141")]
+    pub dissociations_under_120s: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "142")]
+    pub seconds_to_conn_tcp_ipv4: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "143")]
+    pub seconds_to_conn_tcp_ipv6: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "144")]
+    pub seconds_to_conn_udp_ipv4: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "145")]
+    pub seconds_to_conn_udp_ipv6: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "146")]
+    pub flows_tcp_ipv4: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "147")]
+    pub flows_tcp_ipv6: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "148")]
+    pub flows_udp_ipv4: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "149")]
+    pub flows_udp_ipv6: ::core::option::Option<u32>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StarlinkRouterClientTesterRun {
+    #[prost(string, tag = "1")]
+    pub client_tester_router_id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub timestamp: ::core::option::Option<
+        super::telemetron::public::common::TimestampInfo,
+    >,
+    #[prost(message, optional, tag = "3")]
+    pub client_iface_name: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "4")]
+    pub target_ssid: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "5")]
+    pub target_has_password: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "6")]
+    pub target_auth: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "7")]
+    pub target_encryption: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "8")]
+    pub target_bssid: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "25")]
+    pub target_irtt_server: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "9")]
+    pub iteration: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "10")]
+    pub error_code: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "11")]
+    pub seconds_to_associate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "12")]
+    pub seconds_to_lease: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "13")]
+    pub seconds_to_resolve_router: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "14")]
+    pub seconds_to_resolve_internet: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "15")]
+    pub seconds_to_ping_dish: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "16")]
+    pub v4_irtt_test_duration_s: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "17")]
+    pub v4_irtt_rtt_latency_min_ms: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "18")]
+    pub v4_irtt_rtt_latency_mean_ms: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "19")]
+    pub v4_irtt_rtt_latency_median_ms: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "20")]
+    pub v4_irtt_rtt_latency_max_ms: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "21")]
+    pub v4_irtt_rtt_latency_std_dev_ms: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "22")]
+    pub v4_irtt_pkts_sent: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "23")]
+    pub v4_irtt_pkts_recv: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "24")]
+    pub v4_irtt_loss_percent: ::core::option::Option<f32>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSetClientGivenNameRequest {
+    #[deprecated]
+    #[prost(message, optional, tag = "1")]
+    pub client_name: ::core::option::Option<ClientName>,
+    #[prost(message, optional, tag = "2")]
+    pub client_config: ::core::option::Option<ClientConfig>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSelfTestRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiSelfTestResponse {
+    #[prost(message, optional, tag = "1")]
+    pub self_test: ::core::option::Option<WifiSelfTest>,
+    #[prost(string, tag = "2")]
+    pub json: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiRunSelfTestRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiRfTestRequest {
+    #[prost(uint32, tag = "1")]
+    pub num_measurements: u32,
+    #[prost(uint32, tag = "2")]
+    pub channel_2ghz: u32,
+    #[prost(uint32, tag = "3")]
+    pub channel_5ghz: u32,
+    #[prost(uint32, tag = "4")]
+    pub channel_5ghz_high: u32,
+    #[prost(uint32, tag = "5")]
+    pub mcs_2ghz: u32,
+    #[prost(uint32, tag = "6")]
+    pub mcs_5ghz: u32,
+    #[prost(uint32, tag = "7")]
+    pub mcs_5ghz_high: u32,
+    #[prost(uint32, tag = "8")]
+    pub phy_mode_2ghz: u32,
+    #[prost(uint32, tag = "9")]
+    pub phy_mode_5ghz: u32,
+    #[prost(uint32, tag = "10")]
+    pub phy_mode_5ghz_high: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiRfTestResponse {
+    #[prost(string, tag = "1")]
+    pub report: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetFirewallRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetFirewallResponse {
+    #[prost(string, tag = "1")]
+    pub iptables: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub iptables_6: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiTogglePoeNegotiationRequest {
+    #[prost(bool, tag = "1")]
+    pub enable: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiCalibrationModeRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StarlinkRouterHourlyMetricsV2 {
+    #[prost(message, optional, tag = "1")]
+    pub id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "2")]
+    pub timestamp_date: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "3")]
+    pub timestamp_hour: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "4")]
+    pub sys_hw_gen: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "5")]
+    pub sys_sw: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "6")]
+    pub sys_country: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "7")]
+    pub sys_is_dev: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "8")]
+    pub sys_alloc_fds: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "9")]
+    pub sys_cpu_usage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "10")]
+    pub sys_mem_free_kb: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "11")]
+    pub sys_bootcount: ::core::option::Option<i32>,
+    #[prost(message, optional, tag = "12")]
+    pub sys_partitions_equal: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "13")]
+    pub sys_uptime_seconds: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "14")]
+    pub sys_anti_rollback_version: ::core::option::Option<i32>,
+    #[prost(message, optional, tag = "100")]
+    pub radios_2ghz_channel: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "101")]
+    pub radios_2ghz_antenna1_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "102")]
+    pub radios_2ghz_antenna2_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "103")]
+    pub radios_2ghz_antenna3_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "104")]
+    pub radios_2ghz_iface_count: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "105")]
+    pub radios_2ghz_chan_busy_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "106")]
+    pub radios_2ghz_edcca_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "107")]
+    pub radios_2ghz_overlapping_bss_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "108")]
+    pub radios_2ghz_rx_bytes: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "109")]
+    pub radios_2ghz_rx_packets: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "110")]
+    pub radios_2ghz_rx_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "111")]
+    pub radios_2ghz_rx_frame_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "112")]
+    pub radios_2ghz_rx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "113")]
+    pub radios_2ghz_rx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "114")]
+    pub radios_2ghz_tx_bytes: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "115")]
+    pub radios_2ghz_tx_packets: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "116")]
+    pub radios_2ghz_tx_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "117")]
+    pub radios_2ghz_tx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "118")]
+    pub radios_2ghz_tx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "119")]
+    pub radios_5ghz_channel: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "120")]
+    pub radios_5ghz_antenna1_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "121")]
+    pub radios_5ghz_antenna2_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "122")]
+    pub radios_5ghz_antenna3_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "123")]
+    pub radios_5ghz_iface_count: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "124")]
+    pub radios_5ghz_chan_busy_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "125")]
+    pub radios_5ghz_edcca_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "126")]
+    pub radios_5ghz_overlapping_bss_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "127")]
+    pub radios_5ghz_rx_bytes: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "128")]
+    pub radios_5ghz_rx_packets: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "129")]
+    pub radios_5ghz_rx_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "130")]
+    pub radios_5ghz_rx_frame_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "131")]
+    pub radios_5ghz_rx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "132")]
+    pub radios_5ghz_rx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "133")]
+    pub radios_5ghz_tx_bytes: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "134")]
+    pub radios_5ghz_tx_packets: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "135")]
+    pub radios_5ghz_tx_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "136")]
+    pub radios_5ghz_tx_packet_error_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "137")]
+    pub radios_5ghz_tx_airtime_fraction: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "200")]
+    pub radios_2ghz_thermal_temp: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "201")]
+    pub radios_5ghz_thermal_temp: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "202")]
+    pub radios_2ghz_thermal_duty_cycle: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "203")]
+    pub radios_5ghz_thermal_duty_cycle: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "204")]
+    pub radios_2ghz_thermal_throttled_seconds: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "205")]
+    pub radios_5ghz_thermal_throttled_seconds: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "300")]
+    pub ifaces_lan_eth_rx_bytes: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "301")]
+    pub ifaces_lan_eth_rx_packets: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "302")]
+    pub ifaces_lan_eth_rx_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "303")]
+    pub ifaces_lan_eth_rx_frame_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "304")]
+    pub ifaces_lan_eth_tx_bytes: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "305")]
+    pub ifaces_lan_eth_tx_packets: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "306")]
+    pub ifaces_lan_eth_tx_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "307")]
+    pub ifaces_wan_eth_rx_bytes: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "308")]
+    pub ifaces_wan_eth_rx_packets: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "309")]
+    pub ifaces_wan_eth_rx_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "310")]
+    pub ifaces_wan_eth_rx_frame_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "311")]
+    pub ifaces_wan_eth_tx_bytes: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "312")]
+    pub ifaces_wan_eth_tx_packets: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "313")]
+    pub ifaces_wan_eth_tx_errors: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "400")]
+    pub clients: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "401")]
+    pub clients_2ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "402")]
+    pub clients_5ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "403")]
+    pub clients_eth: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "404")]
+    pub clients_repeater: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "405")]
+    pub clients_repeater_2ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "406")]
+    pub clients_repeater_5ghz: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "407")]
+    pub clients_repeater_eth: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "408")]
+    pub mesh_hops: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "409")]
+    pub mesh_one_hop_rssi_avg_2ghz: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "410")]
+    pub mesh_one_hop_rssi_avg_5ghz: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "411")]
+    pub mesh_two_hop_rssi_avg_2ghz: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "412")]
+    pub mesh_two_hop_rssi_avg_5ghz: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "600")]
+    pub ping_seconds_since_last_1s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "601")]
+    pub ping_seconds_since_last_2s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "602")]
+    pub ping_seconds_since_last_5s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "603")]
+    pub ping_seconds_since_last_60s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "604")]
+    pub ping_seconds_since_last_300s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "605")]
+    pub ping_drop_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "606")]
+    pub ping_drop_rate_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "607")]
+    pub ping_latency: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "610")]
+    pub ping_dish_seconds_since_last_1s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "611")]
+    pub ping_dish_seconds_since_last_2s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "612")]
+    pub ping_dish_seconds_since_last_5s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "613")]
+    pub ping_dish_seconds_since_last_60s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "614")]
+    pub ping_dish_seconds_since_last_300s_outage: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "615")]
+    pub ping_dish_drop_rate: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "616")]
+    pub ping_dish_drop_rate_last_1h: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "617")]
+    pub ping_dish_latency: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "700")]
+    pub client_speedtest_router_download_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "701")]
+    pub client_speedtest_router_upload_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "702")]
+    pub client_speedtest_router_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "703")]
+    pub client_speedtest_wifi_download_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "704")]
+    pub client_speedtest_wifi_upload_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "705")]
+    pub client_speedtest_client_download_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "706")]
+    pub client_speedtest_client_upload_mbps: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "707")]
+    pub client_speedtest_client_rssi: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "708")]
+    pub client_speedtest_client_iface: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "709")]
+    pub client_speedtest_client_oui: ::core::option::Option<
+        ::prost::alloc::string::String,
+    >,
+    #[prost(message, optional, tag = "710")]
+    pub client_speedtest_client_tx_rate: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "711")]
+    pub client_speedtest_client_rx_rate: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "712")]
+    pub client_speedtest_client_platform_type: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "800")]
+    pub speedtest_tcp_8_download_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "801")]
+    pub speedtest_tcp_8_download_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "802")]
+    pub speedtest_tcp_8_upload_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "803")]
+    pub speedtest_tcp_8_upload_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "804")]
+    pub speedtest_tcp_64_download_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "805")]
+    pub speedtest_tcp_64_download_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "806")]
+    pub speedtest_tcp_64_upload_mbps_avg: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "807")]
+    pub speedtest_tcp_64_upload_mbps_max: ::core::option::Option<f32>,
+    #[prost(message, optional, tag = "900")]
+    pub dish_cell_id: ::core::option::Option<u32>,
+    #[prost(message, optional, tag = "1000")]
+    pub config_setup_complete: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1001")]
+    pub config_bands_split: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1002")]
+    pub config_is_repeater: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1003")]
+    pub config_open_network: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1004")]
+    pub config_is_aviation: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1005")]
+    pub config_secure_dns: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1006")]
+    pub config_legacy: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1007")]
+    pub config_ap_mode: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1008")]
+    pub config_dfs_enabled: ::core::option::Option<bool>,
+    #[prost(message, optional, tag = "1009")]
+    pub config_network_name_is_default: ::core::option::Option<bool>,
+    #[deprecated]
+    #[prost(message, optional, tag = "1010")]
+    pub config_remote_ssh_enabled: ::core::option::Option<bool>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGuestInfoRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGuestInfoResponse {
+    #[prost(bool, tag = "1")]
+    pub is_guest: bool,
+    #[prost(bool, tag = "2")]
+    pub is_online: bool,
+    #[prost(string, tag = "3")]
+    pub router_hardware_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub dish_hardware_version: ::prost::alloc::string::String,
+    #[prost(bool, tag = "5")]
+    pub is_router_aviation_conformed: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiFactoryTestCommandRequest {
+    #[prost(oneof = "wifi_factory_test_command_request::Command", tags = "1, 2, 3")]
+    pub command: ::core::option::Option<wifi_factory_test_command_request::Command>,
+}
+/// Nested message and enum types in `WifiFactoryTestCommandRequest`.
+pub mod wifi_factory_test_command_request {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Command {
+        #[prost(message, tag = "1")]
+        IwprivCommand(super::IwprivCommand),
+        #[prost(message, tag = "2")]
+        IpLinkSetCommand(super::IpLinkSetCommand),
+        #[prost(message, tag = "3")]
+        IpAddrSetCommand(super::IpAddrSetCommand),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiFactoryTestCommandResponse {
+    #[prost(string, tag = "1")]
+    pub response: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IwprivCommand {
+    #[prost(string, tag = "1")]
+    pub iface: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub arg: ::prost::alloc::string::String,
+    #[prost(enumeration = "iwpriv_command::Ioctl", tag = "3")]
+    pub ioctl: i32,
+}
+/// Nested message and enum types in `IwprivCommand`.
+pub mod iwpriv_command {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Ioctl {
+        Set = 0,
+        E2p = 1,
+        Mac = 3,
+        SxAllow5ghzHigh = 4,
+    }
+    impl Ioctl {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Ioctl::Set => "IOCTL_SET",
+                Ioctl::E2p => "IOCTL_E2P",
+                Ioctl::Mac => "IOCTL_MAC",
+                Ioctl::SxAllow5ghzHigh => "IOCTL_SX_ALLOW_5GHZ_HIGH",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "IOCTL_SET" => Some(Self::Set),
+                "IOCTL_E2P" => Some(Self::E2p),
+                "IOCTL_MAC" => Some(Self::Mac),
+                "IOCTL_SX_ALLOW_5GHZ_HIGH" => Some(Self::SxAllow5ghzHigh),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IpLinkSetCommand {
+    #[prost(string, tag = "1")]
+    pub iface: ::prost::alloc::string::String,
+    #[prost(bool, tag = "2")]
+    pub up: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IpAddrSetCommand {
+    #[prost(string, tag = "1")]
+    pub iface: ::prost::alloc::string::String,
+    #[prost(bool, tag = "2")]
+    pub add: bool,
+    #[prost(string, tag = "3")]
+    pub cidr: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiStartLocalTelemProxyRequest {
+    #[prost(int32, tag = "1")]
+    pub port: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiBackhaulStatsRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiBackhaulStatsResponse {
+    #[prost(bool, tag = "1")]
+    pub success: bool,
+    #[prost(string, tag = "2")]
+    pub bssid: ::prost::alloc::string::String,
+    #[prost(enumeration = "IfaceType", tag = "3")]
+    pub iface: i32,
+    #[prost(uint32, tag = "4")]
+    pub preference: u32,
+    #[prost(message, repeated, tag = "5")]
+    pub site_survey_scan: ::prost::alloc::vec::Vec<WifiSiteSurveyResult>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiToggleUmbilicalModeRequest {
+    #[prost(bool, tag = "1")]
+    pub enable: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiUpdateResponse {
+    #[prost(message, optional, tag = "1")]
+    pub stats: ::core::option::Option<WifiSoftwareUpdateStats>,
+}
+/// Generated client implementations.
+pub mod mesh_client {
+    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
+    #[derive(Debug, Clone)]
+    pub struct MeshClient<T> {
+        inner: tonic::client::Grpc<T>,
+    }
+    impl MeshClient<tonic::transport::Channel> {
+        /// Attempt to create a new client by connecting to a given endpoint.
+        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        where
+            D: TryInto<tonic::transport::Endpoint>,
+            D::Error: Into<StdError>,
+        {
+            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            Ok(Self::new(conn))
+        }
+    }
+    impl<T> MeshClient<T>
+    where
+        T: tonic::client::GrpcService<tonic::body::BoxBody>,
+        T::Error: Into<StdError>,
+        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+    {
+        pub fn new(inner: T) -> Self {
+            let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> MeshClient<InterceptedService<T, F>>
+        where
+            F: tonic::service::Interceptor,
+            T::ResponseBody: Default,
+            T: tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
+        {
+            MeshClient::new(InterceptedService::new(inner, interceptor))
+        }
+        /// Compress requests with the given encoding.
+        ///
+        /// This requires the server to support it otherwise it might respond with an
+        /// error.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
+            self
+        }
+        /// Enable decompressing responses.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
+            self
+        }
+        /// Limits the maximum size of a decoded message.
+        ///
+        /// Default: `4MB`
+        #[must_use]
+        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_decoding_message_size(limit);
+            self
+        }
+        /// Limits the maximum size of an encoded message.
+        ///
+        /// Default: `usize::MAX`
+        #[must_use]
+        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_encoding_message_size(limit);
+            self
+        }
+        pub async fn mesh_stream(
+            &mut self,
+            request: impl tonic::IntoStreamingRequest<Message = super::ToController>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::FromController>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/SpaceX.API.Device.Mesh/MeshStream",
+            );
+            let mut req = request.into_streaming_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("SpaceX.API.Device.Mesh", "MeshStream"));
+            self.inner.streaming(req, path, codec).await
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ToDevice {
+    #[prost(oneof = "to_device::Message", tags = "1, 2")]
+    pub message: ::core::option::Option<to_device::Message>,
+}
+/// Nested message and enum types in `ToDevice`.
+pub mod to_device {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Message {
+        #[prost(message, tag = "1")]
+        Request(super::Request),
+        #[prost(message, tag = "2")]
+        HealthCheck(super::HealthCheck),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FromDevice {
+    #[prost(oneof = "from_device::Message", tags = "1, 2, 3")]
+    pub message: ::core::option::Option<from_device::Message>,
+}
+/// Nested message and enum types in `FromDevice`.
+pub mod from_device {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Message {
+        #[prost(message, tag = "1")]
+        Response(super::Response),
+        #[prost(message, tag = "2")]
+        Event(super::Event),
+        #[prost(message, tag = "3")]
+        HealthCheck(super::HealthCheck),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SensitiveCommand {
+    #[prost(message, optional, tag = "1")]
+    pub timestamp: ::core::option::Option<::prost_types::Timestamp>,
+    #[prost(string, tag = "2")]
+    pub target_id: ::prost::alloc::string::String,
+    #[prost(oneof = "sensitive_command::Request", tags = "3")]
+    pub request: ::core::option::Option<sensitive_command::Request>,
+}
+/// Nested message and enum types in `SensitiveCommand`.
+pub mod sensitive_command {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Request {
+        #[prost(message, tag = "3")]
+        GetLocation(super::GetLocationRequest),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct HealthCheck {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Request {
+    #[prost(uint64, tag = "1")]
+    pub id: u64,
+    #[prost(uint64, tag = "14")]
+    pub epoch_id: u64,
+    #[prost(string, tag = "13")]
+    pub target_id: ::prost::alloc::string::String,
+    #[prost(
+        oneof = "request::Request",
+        tags = "15, 1006, 1078, 1005, 1034, 1011, 1008, 1007, 1012, 1015, 1009, 1016, 1004, 1001, 1013, 1010, 1003, 1014, 1017, 1019, 1020, 1021, 1022, 1023, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 2002, 2003, 2008, 2007, 2009, 2010, 2011, 2013, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 3002, 3007, 3001, 3009, 3003, 3012, 3013, 3015, 3017, 3016, 3018, 3028, 3019, 3020, 3021, 3024, 3025, 3026, 3027, 3029, 3030, 3031, 4001, 4003, 4004, 5000, 5001, 6000"
+    )]
+    pub request: ::core::option::Option<request::Request>,
+}
+/// Nested message and enum types in `Request`.
+pub mod request {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Request {
+        #[prost(message, tag = "15")]
+        SignedRequest(super::SignedData),
+        #[prost(message, tag = "1006")]
+        GetNextId(super::GetNextIdRequest),
+        #[prost(message, tag = "1078")]
+        SensitiveRequest(super::SignedData),
+        #[prost(message, tag = "1005")]
+        Authenticate(super::AuthenticateRequest),
+        #[prost(message, tag = "1034")]
+        EnableDebugTelem(super::EnableDebugTelemRequest),
+        #[prost(message, tag = "1011")]
+        FactoryReset(super::FactoryResetRequest),
+        #[prost(message, tag = "1008")]
+        GetDeviceInfo(super::GetDeviceInfoRequest),
+        #[prost(message, tag = "1007")]
+        GetHistory(super::GetHistoryRequest),
+        #[prost(message, tag = "1012")]
+        GetLog(super::GetLogRequest),
+        #[prost(message, tag = "1015")]
+        GetNetworkInterfaces(super::GetNetworkInterfacesRequest),
+        #[prost(message, tag = "1009")]
+        GetPing(super::GetPingRequest),
+        #[prost(message, tag = "1016")]
+        PingHost(super::PingHostRequest),
+        #[prost(message, tag = "1004")]
+        GetStatus(super::GetStatusRequest),
+        #[prost(message, tag = "1001")]
+        Reboot(super::RebootRequest),
+        #[prost(message, tag = "1013")]
+        SetSku(super::SetSkuRequest),
+        #[prost(message, tag = "1010")]
+        SetTrustedKeys(super::SetTrustedKeysRequest),
+        #[prost(message, tag = "1003")]
+        SpeedTest(super::SpeedTestRequest),
+        #[prost(message, tag = "1014")]
+        Update(super::UpdateRequest),
+        #[prost(message, tag = "1017")]
+        GetLocation(super::GetLocationRequest),
+        #[prost(message, tag = "1019")]
+        GetHeapDump(super::GetHeapDumpRequest),
+        #[prost(message, tag = "1020")]
+        RestartControl(super::RestartControlRequest),
+        #[prost(message, tag = "1021")]
+        Fuse(super::FuseRequest),
+        #[prost(message, tag = "1022")]
+        GetPersistentStats(super::GetPersistentStatsRequest),
+        #[prost(message, tag = "1023")]
+        GetConnections(super::GetConnectionsRequest),
+        #[prost(message, tag = "1027")]
+        StartSpeedtest(super::StartSpeedtestRequest),
+        #[prost(message, tag = "1028")]
+        GetSpeedtestStatus(super::GetSpeedtestStatusRequest),
+        #[prost(message, tag = "1029")]
+        ReportClientSpeedtest(super::ReportClientSpeedtestRequest),
+        #[prost(message, tag = "1030")]
+        InitiateRemoteSsh(super::InitiateRemoteSshRequest),
+        #[prost(message, tag = "1031")]
+        SelfTest(super::SelfTestRequest),
+        #[prost(message, tag = "1032")]
+        SetTestMode(super::SetTestModeRequest),
+        #[prost(message, tag = "1033")]
+        SoftwareUpdate(super::SoftwareUpdateRequest),
+        #[prost(message, tag = "1035")]
+        IqCapture(super::IqCaptureRequest),
+        #[prost(message, tag = "1036")]
+        GetRadioStats(super::GetRadioStatsRequest),
+        #[prost(message, tag = "1037")]
+        Time(super::GetTimeRequest),
+        #[prost(message, tag = "1038")]
+        RunIperfServer(super::RunIperfServerRequest),
+        #[prost(message, tag = "1039")]
+        TcpConnectivityTest(super::TcpConnectivityTestRequest),
+        #[prost(message, tag = "1040")]
+        UdpConnectivityTest(super::UdpConnectivityTestRequest),
+        #[prost(message, tag = "1041")]
+        GetGoroutineStackTraces(super::GetGoroutineStackTracesRequest),
+        #[prost(message, tag = "2002")]
+        DishStow(super::DishStowRequest),
+        #[prost(message, tag = "2003")]
+        DishGetContext(super::DishGetContextRequest),
+        #[prost(message, tag = "2008")]
+        DishGetObstructionMap(super::DishGetObstructionMapRequest),
+        #[prost(message, tag = "2007")]
+        DishSetEmc(super::DishSetEmcRequest),
+        #[prost(message, tag = "2009")]
+        DishGetEmc(super::DishGetEmcRequest),
+        #[prost(message, tag = "2010")]
+        DishSetConfig(super::DishSetConfigRequest),
+        #[prost(message, tag = "2011")]
+        DishGetConfig(super::DishGetConfigRequest),
+        #[prost(message, tag = "2013")]
+        DishPowerSave(super::DishPowerSaveRequest),
+        #[prost(message, tag = "2014")]
+        DishInhibitGps(super::DishInhibitGpsRequest),
+        #[prost(message, tag = "2015")]
+        DishGetData(super::DishGetDataRequest),
+        #[prost(message, tag = "2017")]
+        DishClearObstructionMap(super::DishClearObstructionMapRequest),
+        #[prost(message, tag = "2018")]
+        DishSetMaxPowerTestMode(super::DishSetMaxPowerTestModeRequest),
+        #[prost(message, tag = "2019")]
+        DishActivateRssiScan(super::DishActivateRssiScanRequest),
+        #[prost(message, tag = "2020")]
+        DishGetRssiScanResult(super::DishGetRssiScanResultRequest),
+        #[prost(message, tag = "2021")]
+        DishFactoryReset(super::DishFactoryResetRequest),
+        #[prost(message, tag = "2022")]
+        ResetButton(super::ResetButtonRequest),
+        #[prost(message, tag = "2023")]
+        SetPerVehicleConfig(super::SoftwareUpdateRequest),
+        #[prost(message, tag = "3002")]
+        WifiGetClients(super::WifiGetClientsRequest),
+        #[prost(message, tag = "3007")]
+        WifiGetPingMetrics(super::WifiGetPingMetricsRequest),
+        #[prost(message, tag = "3001")]
+        WifiSetConfig(super::WifiSetConfigRequest),
+        #[prost(message, tag = "3009")]
+        WifiGetConfig(super::WifiGetConfigRequest),
+        #[prost(message, tag = "3003")]
+        WifiSetup(super::WifiSetupRequest),
+        #[prost(message, tag = "3012")]
+        WifiSetMeshDeviceTrust(super::WifiSetMeshDeviceTrustRequest),
+        #[prost(message, tag = "3013")]
+        WifiSetMeshConfig(super::WifiSetMeshConfigRequest),
+        #[prost(message, tag = "3015")]
+        WifiGetClientHistory(super::WifiGetClientHistoryRequest),
+        #[prost(message, tag = "3017")]
+        WifiSetClientGivenName(super::WifiSetClientGivenNameRequest),
+        #[prost(message, tag = "3016")]
+        WifiSetAviationConformed(super::WifiSetAviationConformedRequest),
+        #[prost(message, tag = "3018")]
+        WifiSelfTest(super::WifiSelfTestRequest),
+        #[prost(message, tag = "3028")]
+        WifiRunSelfTest(super::WifiRunSelfTestRequest),
+        #[prost(message, tag = "3019")]
+        WifiCalibrationMode(super::WifiCalibrationModeRequest),
+        #[prost(message, tag = "3020")]
+        WifiGuestInfo(super::WifiGuestInfoRequest),
+        #[prost(message, tag = "3021")]
+        WifiRfTest(super::WifiRfTestRequest),
+        #[prost(message, tag = "3024")]
+        WifiGetFirewall(super::WifiGetFirewallRequest),
+        #[prost(message, tag = "3025")]
+        WifiTogglePoeNegotiation(super::WifiTogglePoeNegotiationRequest),
+        #[prost(message, tag = "3026")]
+        WifiFactoryTestCommand(super::WifiFactoryTestCommandRequest),
+        #[prost(message, tag = "3027")]
+        WifiStartLocalTelemProxy(super::WifiStartLocalTelemProxyRequest),
+        #[prost(message, tag = "3029")]
+        WifiBackhaulStats(super::WifiBackhaulStatsRequest),
+        #[prost(message, tag = "3030")]
+        WifiToggleUmbilicalMode(super::WifiToggleUmbilicalModeRequest),
+        #[prost(message, tag = "3031")]
+        WifiClientSandbox(super::WifiClientSandboxRequest),
+        #[prost(message, tag = "4001")]
+        TransceiverIfLoopbackTest(super::TransceiverIfLoopbackTestRequest),
+        #[prost(message, tag = "4003")]
+        TransceiverGetStatus(super::TransceiverGetStatusRequest),
+        #[prost(message, tag = "4004")]
+        TransceiverGetTelemetry(super::TransceiverGetTelemetryRequest),
+        #[prost(message, tag = "5000")]
+        StartUnlock(super::services::unlock::StartUnlockRequest),
+        #[prost(message, tag = "5001")]
+        FinishUnlock(super::services::unlock::FinishUnlockRequest),
+        #[prost(message, tag = "6000")]
+        GetDiagnostics(super::GetDiagnosticsRequest),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Response {
+    #[prost(uint64, tag = "1")]
+    pub id: u64,
+    #[prost(message, optional, tag = "2")]
+    pub status: ::core::option::Option<super::status::Status>,
+    #[prost(uint64, tag = "3")]
+    pub api_version: u64,
+    #[prost(
+        oneof = "response::Response",
+        tags = "1006, 1034, 1011, 1004, 1012, 1015, 1009, 1016, 1001, 1003, 1013, 1010, 1014, 1017, 1019, 1020, 1021, 1023, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1035, 1037, 1038, 1041, 2005, 2003, 2006, 2004, 2008, 2002, 2007, 2009, 2010, 2011, 2013, 2015, 2018, 2019, 2020, 2021, 2022, 2023, 3005, 3002, 3006, 3007, 3004, 3001, 3009, 3003, 3022, 3012, 3013, 3015, 3016, 3020, 3021, 3024, 3025, 3026, 3027, 3028, 4001, 4003, 4004, 5000, 5001, 6000, 6001"
+    )]
+    pub response: ::core::option::Option<response::Response>,
+}
+/// Nested message and enum types in `Response`.
+pub mod response {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        #[prost(message, tag = "1006")]
+        GetNextId(super::GetNextIdResponse),
+        #[prost(message, tag = "1034")]
+        EnableDebugTelem(super::EnableDebugTelemResponse),
+        #[prost(message, tag = "1011")]
+        FactoryReset(super::FactoryResetResponse),
+        #[prost(message, tag = "1004")]
+        GetDeviceInfo(super::GetDeviceInfoResponse),
+        #[prost(message, tag = "1012")]
+        GetLog(super::GetLogResponse),
+        #[prost(message, tag = "1015")]
+        GetNetworkInterfaces(super::GetNetworkInterfacesResponse),
+        #[prost(message, tag = "1009")]
+        GetPing(super::GetPingResponse),
+        #[prost(message, tag = "1016")]
+        PingHost(super::PingHostResponse),
+        #[prost(message, tag = "1001")]
+        Reboot(super::RebootResponse),
+        #[prost(message, tag = "1003")]
+        SpeedTest(super::SpeedTestResponse),
+        #[prost(message, tag = "1013")]
+        SetSku(super::SetSkuResponse),
+        #[prost(message, tag = "1010")]
+        SetTrustedKeys(super::SetTrustedKeysResponse),
+        #[prost(message, tag = "1014")]
+        Update(super::UpdateResponse),
+        #[prost(message, tag = "1017")]
+        GetLocation(super::GetLocationResponse),
+        #[prost(message, tag = "1019")]
+        GetHeapDump(super::GetHeapDumpResponse),
+        #[prost(message, tag = "1020")]
+        RestartControl(super::RestartControlResponse),
+        #[prost(message, tag = "1021")]
+        Fuse(super::FuseResponse),
+        #[prost(message, tag = "1023")]
+        GetConnections(super::GetConnectionsResponse),
+        #[prost(message, tag = "1027")]
+        StartSpeedtest(super::StartSpeedtestResponse),
+        #[prost(message, tag = "1028")]
+        GetSpeedtestStatus(super::GetSpeedtestStatusResponse),
+        #[prost(message, tag = "1029")]
+        ReportClientSpeedtest(super::ReportClientSpeedtestResponse),
+        #[prost(message, tag = "1030")]
+        InitiateRemoteSsh(super::InitiateRemoteSshResponse),
+        #[prost(message, tag = "1031")]
+        SelfTest(super::SelfTestResponse),
+        #[prost(message, tag = "1032")]
+        SetTestMode(super::SetTestModeResponse),
+        #[prost(message, tag = "1033")]
+        SoftwareUpdate(super::SoftwareUpdateResponse),
+        #[prost(message, tag = "1035")]
+        GetRadioStats(super::GetRadioStatsResponse),
+        #[prost(message, tag = "1037")]
+        Time(super::GetTimeResponse),
+        #[prost(message, tag = "1038")]
+        RunIperfServer(super::RunIperfServerResponse),
+        #[prost(message, tag = "1041")]
+        GetGoroutineStackTraces(super::GetGoroutineStackTracesResponse),
+        #[prost(message, tag = "2005")]
+        DishAuthenticate(super::DishAuthenticateResponse),
+        #[prost(message, tag = "2003")]
+        DishGetContext(super::DishGetContextResponse),
+        #[prost(message, tag = "2006")]
+        DishGetHistory(super::DishGetHistoryResponse),
+        #[prost(message, tag = "2004")]
+        DishGetStatus(super::DishGetStatusResponse),
+        #[prost(message, tag = "2008")]
+        DishGetObstructionMap(super::DishGetObstructionMapResponse),
+        #[prost(message, tag = "2002")]
+        DishStow(super::DishStowResponse),
+        #[prost(message, tag = "2007")]
+        DishSetEmc(super::DishSetEmcResponse),
+        #[prost(message, tag = "2009")]
+        DishGetEmc(super::DishGetEmcResponse),
+        #[prost(message, tag = "2010")]
+        DishSetConfig(super::DishSetConfigResponse),
+        #[prost(message, tag = "2011")]
+        DishGetConfig(super::DishGetConfigResponse),
+        #[prost(message, tag = "2013")]
+        DishInhibitGps(super::DishInhibitGpsResponse),
+        #[prost(message, tag = "2015")]
+        DishClearObstructionMap(super::DishClearObstructionMapResponse),
+        #[prost(message, tag = "2018")]
+        DishSetMaxPowerTestMode(super::DishSetMaxPowerTestModeResponse),
+        #[prost(message, tag = "2019")]
+        DishActivateRssiScan(super::DishActivateRssiScanResponse),
+        #[prost(message, tag = "2020")]
+        DishGetRssiScanResult(super::DishGetRssiScanResultResponse),
+        #[prost(message, tag = "2021")]
+        DishFactoryReset(super::DishFactoryResetResponse),
+        #[prost(message, tag = "2022")]
+        ResetButton(super::ResetButtonResponse),
+        #[prost(message, tag = "2023")]
+        SetPerVehicleConfig(super::SetPerVehicleConfigResponse),
+        #[prost(message, tag = "3005")]
+        WifiAuthenticate(super::WifiAuthenticateResponse),
+        #[prost(message, tag = "3002")]
+        WifiGetClients(super::WifiGetClientsResponse),
+        #[prost(message, tag = "3006")]
+        WifiGetHistory(super::WifiGetHistoryResponse),
+        #[prost(message, tag = "3007")]
+        WifiGetPingMetrics(super::WifiGetPingMetricsResponse),
+        #[prost(message, tag = "3004")]
+        WifiGetStatus(super::WifiGetStatusResponse),
+        #[prost(message, tag = "3001")]
+        WifiSetConfig(super::WifiSetConfigResponse),
+        #[prost(message, tag = "3009")]
+        WifiGetConfig(super::WifiGetConfigResponse),
+        #[prost(message, tag = "3003")]
+        WifiSetup(super::WifiSetupResponse),
+        #[prost(message, tag = "3022")]
+        WifiGetPersistentStats(super::WifiGetPersistentStatsResponse),
+        #[prost(message, tag = "3012")]
+        WifiSetMeshDeviceTrust(super::WifiSetMeshDeviceTrustResponse),
+        #[prost(message, tag = "3013")]
+        WifiSetMeshConfig(super::WifiSetMeshConfigResponse),
+        #[prost(message, tag = "3015")]
+        WifiGetClientHistory(super::WifiGetClientHistoryResponse),
+        #[prost(message, tag = "3016")]
+        WifiSelfTest(super::WifiSelfTestResponse),
+        #[prost(message, tag = "3020")]
+        WifiGuestInfo(super::WifiGuestInfoResponse),
+        #[prost(message, tag = "3021")]
+        WifiRfTest(super::WifiRfTestResponse),
+        #[prost(message, tag = "3024")]
+        WifiGetFirewall(super::WifiGetFirewallResponse),
+        #[prost(message, tag = "3025")]
+        WifiFactoryTestCommand(super::WifiFactoryTestCommandResponse),
+        #[prost(message, tag = "3026")]
+        WifiBackhaulStats(super::WifiBackhaulStatsResponse),
+        #[prost(message, tag = "3027")]
+        WifiClientSandbox(super::WifiClientSandboxResponse),
+        #[prost(message, tag = "3028")]
+        WifiUpdate(super::WifiUpdateResponse),
+        #[prost(message, tag = "4001")]
+        TransceiverIfLoopbackTest(super::TransceiverIfLoopbackTestResponse),
+        #[prost(message, tag = "4003")]
+        TransceiverGetStatus(super::TransceiverGetStatusResponse),
+        #[prost(message, tag = "4004")]
+        TransceiverGetTelemetry(super::TransceiverGetTelemetryResponse),
+        #[prost(message, tag = "5000")]
+        StartUnlock(super::services::unlock::StartUnlockResponse),
+        #[prost(message, tag = "5001")]
+        FinishUnlock(super::services::unlock::FinishUnlockResponse),
+        #[prost(message, tag = "6000")]
+        WifiGetDiagnostics(super::WifiGetDiagnosticsResponse),
+        #[prost(message, tag = "6001")]
+        DishGetDiagnostics(super::DishGetDiagnosticsResponse),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Event {
+    #[prost(oneof = "event::Event", tags = "3001, 3002, 3003, 3004, 3005")]
+    pub event: ::core::option::Option<event::Event>,
+}
+/// Nested message and enum types in `Event`.
+pub mod event {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Event {
+        #[prost(message, tag = "3001")]
+        WifiNewClientConnected(super::WifiNewClientConnectedEvent),
+        #[prost(message, tag = "3002")]
+        WifiAccountBonding(super::WifiAccountBondingEvent),
+        #[prost(message, tag = "3003")]
+        WifiNewPeer(super::WifiNewPeerEvent),
+        #[prost(message, tag = "3004")]
+        WifiCloudStatus(super::WifiCloudStatusEvent),
+        #[prost(message, tag = "3005")]
+        WifiClientSandbox(super::WifiClientSandboxRequest),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiCloudStatusEvent {
+    #[prost(uint32, tag = "4")]
+    pub api_version: u32,
+    #[prost(bool, tag = "1")]
+    pub direct_link_to_dish: bool,
+    #[prost(string, tag = "2")]
+    pub hardware_version: ::prost::alloc::string::String,
+    #[prost(bool, tag = "3")]
+    pub is_bypassed: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiClientSandboxRequest {
+    #[prost(message, repeated, tag = "1")]
+    pub client_sandbox_status: ::prost::alloc::vec::Vec<WifiClientSandboxStatus>,
+    #[prost(enumeration = "WifiClientSandboxAlert", repeated, tag = "2")]
+    pub alerts: ::prost::alloc::vec::Vec<i32>,
+    #[prost(uint64, tag = "3")]
+    pub unix_timestamp_ns: u64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiClientSandboxResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiClientSandboxStatus {
+    #[prost(string, tag = "1")]
+    pub client: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "2")]
+    pub sandbox: u32,
+    #[prost(bool, tag = "3")]
+    pub sandboxed: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EnableDebugTelemRequest {
+    #[prost(uint32, tag = "1")]
+    pub duration_m: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EnableDebugTelemResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FactoryResetRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FactoryResetResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetTimeRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetTimeResponse {
+    #[prost(int64, tag = "1")]
+    pub unix_nano: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FuseRequest {
+    #[prost(bool, tag = "1")]
+    pub prevent_reboot: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FuseResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetHistoryRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLogRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLogResponse {
+    #[prost(message, optional, tag = "4")]
+    pub current: ::core::option::Option<get_log_response::Logs>,
+    #[prost(message, optional, tag = "5")]
+    pub saved: ::core::option::Option<get_log_response::Logs>,
+    #[deprecated]
+    #[prost(string, tag = "1")]
+    pub syslog: ::prost::alloc::string::String,
+    #[deprecated]
+    #[prost(string, tag = "2")]
+    pub offline_log: ::prost::alloc::string::String,
+    #[deprecated]
+    #[prost(string, tag = "3")]
+    pub persistent_log: ::prost::alloc::string::String,
+}
+/// Nested message and enum types in `GetLogResponse`.
+pub mod get_log_response {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Logs {
+        #[prost(string, tag = "1")]
+        pub syslog: ::prost::alloc::string::String,
+        #[prost(string, tag = "2")]
+        pub dmesg: ::prost::alloc::string::String,
+        #[prost(string, tag = "3")]
+        pub kernel_panic: ::prost::alloc::string::String,
+        #[deprecated]
+        #[prost(string, tag = "4")]
+        pub mtk_eth_procs: ::prost::alloc::string::String,
+        #[prost(string, tag = "5")]
+        pub debug_netsys_0sec: ::prost::alloc::string::String,
+        #[prost(string, tag = "6")]
+        pub debug_netsys_2sec: ::prost::alloc::string::String,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPingRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPingResponse {
+    #[prost(map = "string, message", tag = "1")]
+    pub results: ::std::collections::HashMap<::prost::alloc::string::String, PingResult>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PingHostRequest {
+    #[prost(string, tag = "3")]
+    pub address: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "4")]
+    pub size: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PingHostResponse {
+    #[prost(message, optional, tag = "1")]
+    pub result: ::core::option::Option<PingResult>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetStatusRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RebootRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RebootResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpeedTestStats {
+    #[deprecated]
+    #[prost(float, tag = "3")]
+    pub latency_ms: f32,
+    #[deprecated]
+    #[prost(uint64, tag = "4")]
+    pub start_time: u64,
+    #[prost(int64, tag = "5")]
+    pub upload_start_time: i64,
+    #[prost(int64, tag = "6")]
+    pub download_start_time: i64,
+    #[prost(float, tag = "1")]
+    pub upload_mbps: f32,
+    #[prost(float, tag = "2")]
+    pub download_mbps: f32,
+    #[prost(enumeration = "speed_test_stats::Target", tag = "7")]
+    pub target: i32,
+    #[prost(uint32, tag = "8")]
+    pub tcp_streams: u32,
+}
+/// Nested message and enum types in `SpeedTestStats`.
+pub mod speed_test_stats {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Target {
+        Unknown = 0,
+        Fastcom = 1,
+        Cloudflare = 2,
+    }
+    impl Target {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Target::Unknown => "UNKNOWN",
+                Target::Fastcom => "FASTCOM",
+                Target::Cloudflare => "CLOUDFLARE",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNKNOWN" => Some(Self::Unknown),
+                "FASTCOM" => Some(Self::Fastcom),
+                "CLOUDFLARE" => Some(Self::Cloudflare),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ClientPlatform {
+    #[prost(enumeration = "client_platform::Platform", tag = "1")]
+    pub platform: i32,
+    #[prost(float, tag = "2")]
+    pub major_version: f32,
+    #[prost(float, tag = "3")]
+    pub minor_version: f32,
+}
+/// Nested message and enum types in `ClientPlatform`.
+pub mod client_platform {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum Platform {
+        Unknown = 0,
+        Ios = 1,
+        Android = 2,
+        Web = 3,
+    }
+    impl Platform {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                Platform::Unknown => "UNKNOWN",
+                Platform::Ios => "IOS",
+                Platform::Android => "ANDROID",
+                Platform::Web => "WEB",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNKNOWN" => Some(Self::Unknown),
+                "IOS" => Some(Self::Ios),
+                "ANDROID" => Some(Self::Android),
+                "WEB" => Some(Self::Web),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpeedTestRequest {
+    #[prost(uint32, tag = "4")]
+    pub id: u32,
+    #[prost(message, optional, tag = "1")]
+    pub client_speedtest: ::core::option::Option<SpeedTestStats>,
+    #[prost(float, tag = "2")]
+    pub client_rssi: f32,
+    #[prost(message, optional, tag = "3")]
+    pub client_platform: ::core::option::Option<ClientPlatform>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpeedTestResponse {
+    #[deprecated]
+    #[prost(float, tag = "1")]
+    pub download_bps: f32,
+    #[deprecated]
+    #[prost(float, tag = "2")]
+    pub upload_bps: f32,
+    #[deprecated]
+    #[prost(float, tag = "3")]
+    pub latency_s: f32,
+    #[deprecated]
+    #[prost(float, tag = "4")]
+    pub download_mbps: f32,
+    #[deprecated]
+    #[prost(float, tag = "5")]
+    pub upload_mbps: f32,
+    #[deprecated]
+    #[prost(float, tag = "6")]
+    pub latency_ms: f32,
+    #[prost(message, optional, tag = "15")]
+    pub router_speedtest: ::core::option::Option<SpeedTestStats>,
+    #[prost(float, tag = "7")]
+    pub download_mbps_1_tcp_conn: f32,
+    #[prost(float, tag = "8")]
+    pub upload_mbps_1_tcp_conn: f32,
+    #[prost(float, tag = "9")]
+    pub download_mbps_4_tcp_conn: f32,
+    #[prost(float, tag = "10")]
+    pub upload_mbps_4_tcp_conn: f32,
+    #[prost(float, tag = "11")]
+    pub download_mbps_16_tcp_conn: f32,
+    #[prost(float, tag = "12")]
+    pub upload_mbps_16_tcp_conn: f32,
+    #[prost(float, tag = "13")]
+    pub download_mbps_64_tcp_conn: f32,
+    #[prost(float, tag = "14")]
+    pub upload_mbps_64_tcp_conn: f32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RunIperfServerRequest {
+    #[prost(uint32, tag = "1")]
+    pub duration_s: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RunIperfServerResponse {
+    #[prost(uint32, tag = "1")]
+    pub port: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetConnectionsRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetConnectionsResponse {
+    #[prost(map = "string, message", tag = "1")]
+    pub services: ::std::collections::HashMap<
+        ::prost::alloc::string::String,
+        get_connections_response::ServiceConnection,
+    >,
+}
+/// Nested message and enum types in `GetConnectionsResponse`.
+pub mod get_connections_response {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct ServiceConnection {
+        #[prost(string, tag = "1")]
+        pub address: ::prost::alloc::string::String,
+        #[prost(int32, tag = "2")]
+        pub seconds_since_success: i32,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDeviceInfoRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDeviceInfoResponse {
+    #[prost(message, optional, tag = "1")]
+    pub device_info: ::core::option::Option<DeviceInfo>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetTrustedKeysRequest {
+    #[prost(message, repeated, tag = "1")]
+    pub keys: ::prost::alloc::vec::Vec<PublicKey>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetTrustedKeysResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetSkuRequest {
+    #[prost(string, tag = "1")]
+    pub sku: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub country_code: ::prost::alloc::string::String,
+    #[prost(bool, tag = "4")]
+    pub apply_country_code: bool,
+    #[prost(bool, tag = "5")]
+    pub pin_country_code: bool,
+    #[prost(bool, tag = "6")]
+    pub custom_power_table: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetSkuResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateRequest {
+    #[prost(bool, optional, tag = "1")]
+    pub schedule_reboot: ::core::option::Option<bool>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UpdateResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RestartControlRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RestartControlResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNetworkInterfacesRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNetworkInterfacesResponse {
+    #[prost(message, repeated, tag = "1006")]
+    pub network_interfaces: ::prost::alloc::vec::Vec<NetworkInterface>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetRadioStatsRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetRadioStatsResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub radio_stats: ::prost::alloc::vec::Vec<RadioStats>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetHeapDumpRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetHeapDumpResponse {
+    #[prost(string, tag = "1")]
+    pub heap_dump: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLocationRequest {
+    #[prost(enumeration = "PositionSource", tag = "1")]
+    pub source: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLocationResponse {
+    #[prost(message, optional, tag = "1")]
+    pub lla: ::core::option::Option<LlaPosition>,
+    #[prost(double, tag = "4")]
+    pub sigma_m: f64,
+    #[prost(enumeration = "PositionSource", tag = "3")]
+    pub source: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishSetEmcRequest {
+    #[prost(double, tag = "1")]
+    pub theta: f64,
+    #[prost(double, tag = "2")]
+    pub phi: f64,
+    #[prost(uint32, tag = "3")]
+    pub rx_chan: u32,
+    #[prost(uint32, tag = "4")]
+    pub tx_chan: u32,
+    #[prost(uint32, tag = "5")]
+    pub modulation: u32,
+    #[prost(double, tag = "7")]
+    pub desired_tilt_angle: f64,
+    #[prost(bool, tag = "8")]
+    pub chan_override: bool,
+    #[prost(bool, tag = "9")]
+    pub theta_enabled: bool,
+    #[prost(bool, tag = "10")]
+    pub phi_enabled: bool,
+    #[prost(bool, tag = "11")]
+    pub idle: bool,
+    #[prost(bool, tag = "12")]
+    pub fast_switching: bool,
+    #[prost(bool, tag = "13")]
+    pub sky_search: bool,
+    #[prost(bool, tag = "14")]
+    pub force_pll_unlock: bool,
+    #[prost(bool, tag = "15")]
+    pub force_eirp_failure: bool,
+    #[prost(bool, tag = "16")]
+    pub snow_active_override: bool,
+    #[prost(bool, tag = "18")]
+    pub manual_tilting: bool,
+    #[prost(bool, tag = "19")]
+    pub tilt_to_stowed: bool,
+    #[prost(bool, tag = "20")]
+    pub reboot: bool,
+    #[prost(bool, tag = "21")]
+    pub continuous_motor_test: bool,
+    #[prost(double, tag = "22")]
+    pub distance_override_meters: f64,
+    #[prost(uint32, tag = "24")]
+    pub country_code_override: u32,
+    #[prost(int32, tag = "25")]
+    pub tx_duty_cycle_override: i32,
+    #[prost(int32, tag = "26")]
+    pub rx_duty_cycle_override: i32,
+    #[prost(double, tag = "27")]
+    pub eirp_legal_limit_dbw_override: f64,
+    #[prost(double, tag = "28")]
+    pub eirp_adjustment_db: f64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishSetEmcResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishSetMaxPowerTestModeRequest {
+    #[prost(bool, tag = "1")]
+    pub enabled: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishSetMaxPowerTestModeResponse {
+    #[prost(bool, tag = "1")]
+    pub enabled: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetEmcRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetEmcResponse {
+    #[prost(string, tag = "2")]
+    pub uuid: ::prost::alloc::string::String,
+    #[prost(uint64, tag = "3")]
+    pub timestamp: u64,
+    #[prost(uint32, tag = "11")]
+    pub cplane_updates: u32,
+    #[prost(double, tag = "16")]
+    pub gps_latitude: f64,
+    #[prost(double, tag = "17")]
+    pub gps_longitude: f64,
+    #[prost(double, tag = "18")]
+    pub gps_pdop: f64,
+    #[prost(uint32, tag = "19")]
+    pub rf_mode: u32,
+    #[prost(double, tag = "20")]
+    pub phi: f64,
+    #[prost(double, tag = "21")]
+    pub theta: f64,
+    #[prost(uint32, tag = "22")]
+    pub rx_channel: u32,
+    #[prost(uint32, tag = "23")]
+    pub tx_channel: u32,
+    #[prost(float, tag = "24")]
+    pub t_dbf_max: f32,
+    #[prost(double, tag = "25")]
+    pub t_center: f64,
+    #[prost(bool, tag = "30")]
+    pub auto_power_snow_melt_enabled: bool,
+    #[prost(double, tag = "32")]
+    pub voltage: f64,
+    #[prost(uint32, tag = "33")]
+    pub rx_beam_state: u32,
+    #[prost(uint32, tag = "34")]
+    pub tx_beam_state: u32,
+    #[prost(uint32, tag = "35")]
+    pub half_duplex_state: u32,
+    #[prost(bool, tag = "36")]
+    pub manual_tilt_enabled: bool,
+    #[prost(double, tag = "37")]
+    pub tilt_angle: f64,
+    #[prost(uint32, tag = "38")]
+    pub pll_tx_lock_detected: u32,
+    #[prost(bool, tag = "39")]
+    pub eirp_exceeded_threshold: bool,
+    #[prost(bool, tag = "41")]
+    pub idle_override_enabled: bool,
+    #[prost(bool, tag = "42")]
+    pub theta_override_enabled: bool,
+    #[prost(double, tag = "43")]
+    pub theta_override_value: f64,
+    #[prost(bool, tag = "44")]
+    pub phi_override_enabled: bool,
+    #[prost(double, tag = "45")]
+    pub phi_override_value: f64,
+    #[prost(uint32, tag = "46")]
+    pub rx_chan_override_value: u32,
+    #[prost(uint32, tag = "47")]
+    pub tx_chan_override_value: u32,
+    #[prost(bool, tag = "48")]
+    pub sky_search_override_enabled: bool,
+    #[prost(bool, tag = "49")]
+    pub fast_switching_enabled: bool,
+    #[prost(uint32, tag = "50")]
+    pub modulation_override_value: u32,
+    #[prost(bool, tag = "51")]
+    pub force_eirp_failure: bool,
+    #[prost(bool, tag = "52")]
+    pub force_pll_unlock: bool,
+    #[prost(uint32, tag = "53")]
+    pub ut_ine_success: u32,
+    #[prost(bool, tag = "54")]
+    pub rf_ready: bool,
+    #[prost(bool, tag = "55")]
+    pub tilt_to_stowed: bool,
+    #[prost(bool, tag = "56")]
+    pub reboot: bool,
+    #[prost(bool, tag = "57")]
+    pub continuous_motor_test: bool,
+    #[prost(double, tag = "58")]
+    pub distance_override_meters: f64,
+    #[prost(uint32, tag = "62")]
+    pub country_code_override: u32,
+    #[prost(double, tag = "63")]
+    pub max_pointing_distance: f64,
+    #[prost(double, tag = "64")]
+    pub distance_scaling_factor: f64,
+    #[prost(int32, tag = "65")]
+    pub tx_duty_cycle_override: i32,
+    #[prost(int32, tag = "66")]
+    pub rx_duty_cycle_override: i32,
+    #[prost(float, tag = "67")]
+    pub tx_time_ms: f32,
+    #[prost(float, tag = "68")]
+    pub rx_time_ms: f32,
+    #[prost(double, tag = "69")]
+    pub eirp_legal_limit_dbw: f64,
+    #[prost(double, tag = "70")]
+    pub eirp_legal_limit_dbw_override: f64,
+    #[prost(double, tag = "71")]
+    pub eirp_adjustment_db: f64,
+    #[prost(double, tag = "72")]
+    pub eirp_predicted_dbw: f64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPersistentStatsRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StartSpeedtestRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StartSpeedtestResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SpeedtestStatus {
+    #[prost(bool, tag = "1")]
+    pub running: bool,
+    #[prost(uint32, tag = "2")]
+    pub id: u32,
+    #[prost(message, optional, tag = "1000")]
+    pub up: ::core::option::Option<speedtest_status::Direction>,
+    #[prost(message, optional, tag = "1001")]
+    pub down: ::core::option::Option<speedtest_status::Direction>,
+}
+/// Nested message and enum types in `SpeedtestStatus`.
+pub mod speedtest_status {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Direction {
+        #[prost(float, repeated, tag = "1")]
+        pub throughputs_mbps: ::prost::alloc::vec::Vec<f32>,
+        #[prost(enumeration = "super::SpeedtestError", tag = "2")]
+        pub err: i32,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSpeedtestStatusRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSpeedtestStatusResponse {
+    #[prost(message, optional, tag = "1")]
+    pub status: ::core::option::Option<SpeedtestStatus>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReportClientSpeedtestRequest {
+    #[prost(uint32, tag = "1")]
+    pub id: u32,
+    #[prost(message, optional, tag = "2")]
+    pub client_speedtest: ::core::option::Option<SpeedTestStats>,
+    #[prost(message, optional, tag = "5")]
+    pub wifi_speedtest: ::core::option::Option<SpeedTestStats>,
+    #[prost(float, tag = "3")]
+    pub client_rssi: f32,
+    #[prost(message, optional, tag = "4")]
+    pub client_platform: ::core::option::Option<ClientPlatform>,
+    #[prost(string, tag = "6")]
+    pub app_version: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "7")]
+    pub app_build: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReportClientSpeedtestResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SetPerVehicleConfigResponse {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishPowerSaveRequest {
+    #[prost(uint32, tag = "1")]
+    pub power_save_start_minutes: u32,
+    #[prost(uint32, tag = "2")]
+    pub power_save_duration_minutes: u32,
+    #[prost(bool, tag = "3")]
+    pub enable_power_save: bool,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct IqCaptureRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetDiagnosticsRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct WifiGetDiagnosticsResponse {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub hardware_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub software_version: ::prost::alloc::string::String,
+    #[prost(message, repeated, tag = "4")]
+    pub networks: ::prost::alloc::vec::Vec<wifi_get_diagnostics_response::Network>,
+}
+/// Nested message and enum types in `WifiGetDiagnosticsResponse`.
+pub mod wifi_get_diagnostics_response {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Network {
+        #[prost(string, tag = "1")]
+        pub domain: ::prost::alloc::string::String,
+        #[prost(string, tag = "2")]
+        pub ipv4: ::prost::alloc::string::String,
+        #[prost(string, repeated, tag = "3")]
+        pub ipv6: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+        #[prost(uint32, tag = "10")]
+        pub clients_ethernet: u32,
+        #[prost(uint32, tag = "11")]
+        pub clients_2ghz: u32,
+        #[prost(uint32, tag = "12")]
+        pub clients_5ghz: u32,
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DishGetDiagnosticsResponse {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub hardware_version: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub software_version: ::prost::alloc::string::String,
+    #[prost(int32, tag = "4")]
+    pub utc_offset_s: i32,
+    #[prost(enumeration = "dish_get_diagnostics_response::TestResult", tag = "7")]
+    pub hardware_self_test: i32,
+    #[prost(
+        enumeration = "dish_get_diagnostics_response::TestResultCode",
+        repeated,
+        tag = "11"
+    )]
+    pub hardware_self_test_codes: ::prost::alloc::vec::Vec<i32>,
+    #[prost(message, optional, tag = "5")]
+    pub alerts: ::core::option::Option<dish_get_diagnostics_response::Alerts>,
+    #[prost(enumeration = "dish_get_diagnostics_response::DisablementCode", tag = "6")]
+    pub disablement_code: i32,
+    #[prost(message, optional, tag = "8")]
+    pub location: ::core::option::Option<dish_get_diagnostics_response::Location>,
+    #[prost(message, optional, tag = "9")]
+    pub alignment_stats: ::core::option::Option<
+        dish_get_diagnostics_response::AlignmentStats,
+    >,
+    #[prost(bool, tag = "10")]
+    pub stowed: bool,
+    #[prost(
+        enumeration = "super::telemetron::public::integrations::RateLimitReason",
+        tag = "12"
+    )]
+    pub dl_bandwidth_restricted_reason: i32,
+    #[prost(
+        enumeration = "super::telemetron::public::integrations::RateLimitReason",
+        tag = "13"
+    )]
+    pub ul_bandwidth_restricted_reason: i32,
+}
+/// Nested message and enum types in `DishGetDiagnosticsResponse`.
+pub mod dish_get_diagnostics_response {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Alerts {
+        #[prost(bool, tag = "1")]
+        pub dish_is_heating: bool,
+        #[prost(bool, tag = "2")]
+        pub dish_thermal_throttle: bool,
+        #[prost(bool, tag = "3")]
+        pub dish_thermal_shutdown: bool,
+        #[prost(bool, tag = "4")]
+        pub power_supply_thermal_throttle: bool,
+        #[prost(bool, tag = "5")]
+        pub motors_stuck: bool,
+        #[prost(bool, tag = "6")]
+        pub mast_not_near_vertical: bool,
+        #[prost(bool, tag = "7")]
+        pub slow_ethernet_speeds: bool,
+        #[prost(bool, tag = "8")]
+        pub software_install_pending: bool,
+        #[prost(bool, tag = "9")]
+        pub moving_too_fast_for_policy: bool,
+        #[prost(bool, tag = "10")]
+        pub obstructed: bool,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Location {
+        #[prost(bool, tag = "1")]
+        pub enabled: bool,
+        #[prost(double, tag = "2")]
+        pub latitude: f64,
+        #[prost(double, tag = "3")]
+        pub longitude: f64,
+        #[prost(double, tag = "4")]
+        pub altitude_meters: f64,
+        #[prost(bool, tag = "5")]
+        pub uncertainty_meters_valid: bool,
+        #[prost(double, tag = "6")]
+        pub uncertainty_meters: f64,
+        #[prost(double, tag = "7")]
+        pub gps_time_s: f64,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct AlignmentStats {
+        #[prost(float, tag = "1")]
+        pub boresight_azimuth_deg: f32,
+        #[prost(float, tag = "2")]
+        pub boresight_elevation_deg: f32,
+        #[prost(float, tag = "3")]
+        pub desired_boresight_azimuth_deg: f32,
+        #[prost(float, tag = "4")]
+        pub desired_boresight_elevation_deg: f32,
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum TestResult {
+        NoResult = 0,
+        Passed = 1,
+        Failed = 2,
+    }
+    impl TestResult {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TestResult::NoResult => "NO_RESULT",
+                TestResult::Passed => "PASSED",
+                TestResult::Failed => "FAILED",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "NO_RESULT" => Some(Self::NoResult),
+                "PASSED" => Some(Self::Passed),
+                "FAILED" => Some(Self::Failed),
+                _ => None,
+            }
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum TestResultCode {
+        General = 0,
+        BootUp = 1,
+        CpuVoltage = 2,
+        DbfAapCs = 3,
+        DbfNumFems = 4,
+        DbfReadErrors = 5,
+        DbfTDie0 = 6,
+        DbfTDie1 = 7,
+        DbfTDie0Valid = 8,
+        DbfTDie1Valid = 9,
+        EthPrime = 10,
+        Eirp = 11,
+        FemCut = 12,
+        FuseAvs = 13,
+        Gps = 14,
+        Imu = 15,
+        Phy = 16,
+        ScpError = 17,
+        Temperature = 18,
+        Vtsens = 19,
+    }
+    impl TestResultCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                TestResultCode::General => "GENERAL",
+                TestResultCode::BootUp => "BOOT_UP",
+                TestResultCode::CpuVoltage => "CPU_VOLTAGE",
+                TestResultCode::DbfAapCs => "DBF_AAP_CS",
+                TestResultCode::DbfNumFems => "DBF_NUM_FEMS",
+                TestResultCode::DbfReadErrors => "DBF_READ_ERRORS",
+                TestResultCode::DbfTDie0 => "DBF_T_DIE_0",
+                TestResultCode::DbfTDie1 => "DBF_T_DIE_1",
+                TestResultCode::DbfTDie0Valid => "DBF_T_DIE_0_VALID",
+                TestResultCode::DbfTDie1Valid => "DBF_T_DIE_1_VALID",
+                TestResultCode::EthPrime => "ETH_PRIME",
+                TestResultCode::Eirp => "EIRP",
+                TestResultCode::FemCut => "FEM_CUT",
+                TestResultCode::FuseAvs => "FUSE_AVS",
+                TestResultCode::Gps => "GPS",
+                TestResultCode::Imu => "IMU",
+                TestResultCode::Phy => "PHY",
+                TestResultCode::ScpError => "SCP_ERROR",
+                TestResultCode::Temperature => "TEMPERATURE",
+                TestResultCode::Vtsens => "VTSENS",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "GENERAL" => Some(Self::General),
+                "BOOT_UP" => Some(Self::BootUp),
+                "CPU_VOLTAGE" => Some(Self::CpuVoltage),
+                "DBF_AAP_CS" => Some(Self::DbfAapCs),
+                "DBF_NUM_FEMS" => Some(Self::DbfNumFems),
+                "DBF_READ_ERRORS" => Some(Self::DbfReadErrors),
+                "DBF_T_DIE_0" => Some(Self::DbfTDie0),
+                "DBF_T_DIE_1" => Some(Self::DbfTDie1),
+                "DBF_T_DIE_0_VALID" => Some(Self::DbfTDie0Valid),
+                "DBF_T_DIE_1_VALID" => Some(Self::DbfTDie1Valid),
+                "ETH_PRIME" => Some(Self::EthPrime),
+                "EIRP" => Some(Self::Eirp),
+                "FEM_CUT" => Some(Self::FemCut),
+                "FUSE_AVS" => Some(Self::FuseAvs),
+                "GPS" => Some(Self::Gps),
+                "IMU" => Some(Self::Imu),
+                "PHY" => Some(Self::Phy),
+                "SCP_ERROR" => Some(Self::ScpError),
+                "TEMPERATURE" => Some(Self::Temperature),
+                "VTSENS" => Some(Self::Vtsens),
+                _ => None,
+            }
+        }
+    }
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum DisablementCode {
+        Unknown = 0,
+        Okay = 1,
+        NoActiveAccount = 2,
+        TooFarFromServiceAddress = 3,
+        InOcean = 4,
+        BlockedCountry = 6,
+        DataOverageSandboxPolicy = 7,
+        CellIsDisabled = 8,
+        RoamRestricted = 10,
+        UnknownLocation = 11,
+        AccountDisabled = 12,
+        UnsupportedVersion = 13,
+        MovingTooFastForPolicy = 14,
+        UnderAviationFlyoverLimits = 15,
+    }
+    impl DisablementCode {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                DisablementCode::Unknown => "UNKNOWN",
+                DisablementCode::Okay => "OKAY",
+                DisablementCode::NoActiveAccount => "NO_ACTIVE_ACCOUNT",
+                DisablementCode::TooFarFromServiceAddress => {
+                    "TOO_FAR_FROM_SERVICE_ADDRESS"
+                }
+                DisablementCode::InOcean => "IN_OCEAN",
+                DisablementCode::BlockedCountry => "BLOCKED_COUNTRY",
+                DisablementCode::DataOverageSandboxPolicy => {
+                    "DATA_OVERAGE_SANDBOX_POLICY"
+                }
+                DisablementCode::CellIsDisabled => "CELL_IS_DISABLED",
+                DisablementCode::RoamRestricted => "ROAM_RESTRICTED",
+                DisablementCode::UnknownLocation => "UNKNOWN_LOCATION",
+                DisablementCode::AccountDisabled => "ACCOUNT_DISABLED",
+                DisablementCode::UnsupportedVersion => "UNSUPPORTED_VERSION",
+                DisablementCode::MovingTooFastForPolicy => "MOVING_TOO_FAST_FOR_POLICY",
+                DisablementCode::UnderAviationFlyoverLimits => {
+                    "UNDER_AVIATION_FLYOVER_LIMITS"
+                }
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "UNKNOWN" => Some(Self::Unknown),
+                "OKAY" => Some(Self::Okay),
+                "NO_ACTIVE_ACCOUNT" => Some(Self::NoActiveAccount),
+                "TOO_FAR_FROM_SERVICE_ADDRESS" => Some(Self::TooFarFromServiceAddress),
+                "IN_OCEAN" => Some(Self::InOcean),
+                "BLOCKED_COUNTRY" => Some(Self::BlockedCountry),
+                "DATA_OVERAGE_SANDBOX_POLICY" => Some(Self::DataOverageSandboxPolicy),
+                "CELL_IS_DISABLED" => Some(Self::CellIsDisabled),
+                "ROAM_RESTRICTED" => Some(Self::RoamRestricted),
+                "UNKNOWN_LOCATION" => Some(Self::UnknownLocation),
+                "ACCOUNT_DISABLED" => Some(Self::AccountDisabled),
+                "UNSUPPORTED_VERSION" => Some(Self::UnsupportedVersion),
+                "MOVING_TOO_FAST_FOR_POLICY" => Some(Self::MovingTooFastForPolicy),
+                "UNDER_AVIATION_FLYOVER_LIMITS" => Some(Self::UnderAviationFlyoverLimits),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TcpConnectivityTestRequest {
+    #[prost(string, tag = "1")]
+    pub target: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "2")]
+    pub port: u32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct UdpConnectivityTestRequest {
+    #[prost(string, tag = "1")]
+    pub target: ::prost::alloc::string::String,
+    #[prost(uint32, tag = "2")]
+    pub port: u32,
+    #[prost(enumeration = "udp_connectivity_test_request::UdpProbeDataType", tag = "3")]
+    pub probe_data: i32,
+}
+/// Nested message and enum types in `UdpConnectivityTestRequest`.
+pub mod udp_connectivity_test_request {
+    #[derive(
+        Clone,
+        Copy,
+        Debug,
+        PartialEq,
+        Eq,
+        Hash,
+        PartialOrd,
+        Ord,
+        ::prost::Enumeration
+    )]
+    #[repr(i32)]
+    pub enum UdpProbeDataType {
+        Empty = 0,
+        DnsStatusRequest = 1,
+        DtlsClientHello = 2,
+        DnsVersionBindReq = 3,
+        RpcCheck = 4,
+        DnsSd = 5,
+        SnmpV1Public = 6,
+        SnmpV3GetRequest = 7,
+        NtpMessage = 8,
+        Xdmcp = 9,
+        Kerberos = 10,
+        SipOptions = 11,
+        LdapSearchReq = 12,
+        MemcachedStats = 13,
+        Openvpn = 14,
+        CifsNsUc = 15,
+        TftpGet = 16,
+        DhcpInform = 17,
+        Quic = 18,
+        Ripv1 = 19,
+        NfsProcNull = 20,
+        CoapRequest = 21,
+    }
+    impl UdpProbeDataType {
+        /// String value of the enum field names used in the ProtoBuf definition.
+        ///
+        /// The values are not transformed in any way and thus are considered stable
+        /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+        pub fn as_str_name(&self) -> &'static str {
+            match self {
+                UdpProbeDataType::Empty => "EMPTY",
+                UdpProbeDataType::DnsStatusRequest => "DNS_STATUS_REQUEST",
+                UdpProbeDataType::DtlsClientHello => "DTLS_CLIENT_HELLO",
+                UdpProbeDataType::DnsVersionBindReq => "DNS_VERSION_BIND_REQ",
+                UdpProbeDataType::RpcCheck => "RPC_CHECK",
+                UdpProbeDataType::DnsSd => "DNS_SD",
+                UdpProbeDataType::SnmpV1Public => "SNMP_V1_PUBLIC",
+                UdpProbeDataType::SnmpV3GetRequest => "SNMP_V3_GET_REQUEST",
+                UdpProbeDataType::NtpMessage => "NTP_MESSAGE",
+                UdpProbeDataType::Xdmcp => "XDMCP",
+                UdpProbeDataType::Kerberos => "KERBEROS",
+                UdpProbeDataType::SipOptions => "SIP_OPTIONS",
+                UdpProbeDataType::LdapSearchReq => "LDAP_SEARCH_REQ",
+                UdpProbeDataType::MemcachedStats => "MEMCACHED_STATS",
+                UdpProbeDataType::Openvpn => "OPENVPN",
+                UdpProbeDataType::CifsNsUc => "CIFS_NS_UC",
+                UdpProbeDataType::TftpGet => "TFTP_GET",
+                UdpProbeDataType::DhcpInform => "DHCP_INFORM",
+                UdpProbeDataType::Quic => "QUIC",
+                UdpProbeDataType::Ripv1 => "RIPV1",
+                UdpProbeDataType::NfsProcNull => "NFS_PROC_NULL",
+                UdpProbeDataType::CoapRequest => "COAP_REQUEST",
+            }
+        }
+        /// Creates an enum from field names used in the ProtoBuf definition.
+        pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+            match value {
+                "EMPTY" => Some(Self::Empty),
+                "DNS_STATUS_REQUEST" => Some(Self::DnsStatusRequest),
+                "DTLS_CLIENT_HELLO" => Some(Self::DtlsClientHello),
+                "DNS_VERSION_BIND_REQ" => Some(Self::DnsVersionBindReq),
+                "RPC_CHECK" => Some(Self::RpcCheck),
+                "DNS_SD" => Some(Self::DnsSd),
+                "SNMP_V1_PUBLIC" => Some(Self::SnmpV1Public),
+                "SNMP_V3_GET_REQUEST" => Some(Self::SnmpV3GetRequest),
+                "NTP_MESSAGE" => Some(Self::NtpMessage),
+                "XDMCP" => Some(Self::Xdmcp),
+                "KERBEROS" => Some(Self::Kerberos),
+                "SIP_OPTIONS" => Some(Self::SipOptions),
+                "LDAP_SEARCH_REQ" => Some(Self::LdapSearchReq),
+                "MEMCACHED_STATS" => Some(Self::MemcachedStats),
+                "OPENVPN" => Some(Self::Openvpn),
+                "CIFS_NS_UC" => Some(Self::CifsNsUc),
+                "TFTP_GET" => Some(Self::TftpGet),
+                "DHCP_INFORM" => Some(Self::DhcpInform),
+                "QUIC" => Some(Self::Quic),
+                "RIPV1" => Some(Self::Ripv1),
+                "NFS_PROC_NULL" => Some(Self::NfsProcNull),
+                "COAP_REQUEST" => Some(Self::CoapRequest),
+                _ => None,
+            }
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetGoroutineStackTracesRequest {}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetGoroutineStackTracesResponse {
+    #[prost(string, tag = "1")]
+    pub stack_traces: ::prost::alloc::string::String,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum WifiClientSandboxAlert {
+    SandboxAlertUnknown = 0,
+    SandboxAlertPortal = 1,
+    SandboxAlertGroundApi = 2,
+    SandboxAlertStarlinkApi = 3,
+}
+impl WifiClientSandboxAlert {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            WifiClientSandboxAlert::SandboxAlertUnknown => "SANDBOX_ALERT_UNKNOWN",
+            WifiClientSandboxAlert::SandboxAlertPortal => "SANDBOX_ALERT_PORTAL",
+            WifiClientSandboxAlert::SandboxAlertGroundApi => "SANDBOX_ALERT_GROUND_API",
+            WifiClientSandboxAlert::SandboxAlertStarlinkApi => {
+                "SANDBOX_ALERT_STARLINK_API"
+            }
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "SANDBOX_ALERT_UNKNOWN" => Some(Self::SandboxAlertUnknown),
+            "SANDBOX_ALERT_PORTAL" => Some(Self::SandboxAlertPortal),
+            "SANDBOX_ALERT_GROUND_API" => Some(Self::SandboxAlertGroundApi),
+            "SANDBOX_ALERT_STARLINK_API" => Some(Self::SandboxAlertStarlinkApi),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum PositionSource {
+    Auto = 0,
+    None = 1,
+    UtInfo = 2,
+    External = 3,
+    Gps = 4,
+    Starlink = 5,
+    GncGps = 6,
+    GncPnt = 7,
+    GncFused = 8,
+    GncRaw = 9,
+}
+impl PositionSource {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            PositionSource::Auto => "AUTO",
+            PositionSource::None => "NONE",
+            PositionSource::UtInfo => "UT_INFO",
+            PositionSource::External => "EXTERNAL",
+            PositionSource::Gps => "GPS",
+            PositionSource::Starlink => "STARLINK",
+            PositionSource::GncGps => "GNC_GPS",
+            PositionSource::GncPnt => "GNC_PNT",
+            PositionSource::GncFused => "GNC_FUSED",
+            PositionSource::GncRaw => "GNC_RAW",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "AUTO" => Some(Self::Auto),
+            "NONE" => Some(Self::None),
+            "UT_INFO" => Some(Self::UtInfo),
+            "EXTERNAL" => Some(Self::External),
+            "GPS" => Some(Self::Gps),
+            "STARLINK" => Some(Self::Starlink),
+            "GNC_GPS" => Some(Self::GncGps),
+            "GNC_PNT" => Some(Self::GncPnt),
+            "GNC_FUSED" => Some(Self::GncFused),
+            "GNC_RAW" => Some(Self::GncRaw),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum SpeedtestError {
+    None = 0,
+    Unknown = 1,
+    Token = 2,
+    Api = 3,
+    NoResult = 4,
+    Offline = 5,
+}
+impl SpeedtestError {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            SpeedtestError::None => "SPEEDTEST_ERROR_NONE",
+            SpeedtestError::Unknown => "SPEEDTEST_ERROR_UNKNOWN",
+            SpeedtestError::Token => "SPEEDTEST_ERROR_TOKEN",
+            SpeedtestError::Api => "SPEEDTEST_ERROR_API",
+            SpeedtestError::NoResult => "SPEEDTEST_ERROR_NO_RESULT",
+            SpeedtestError::Offline => "SPEEDTEST_ERROR_OFFLINE",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "SPEEDTEST_ERROR_NONE" => Some(Self::None),
+            "SPEEDTEST_ERROR_UNKNOWN" => Some(Self::Unknown),
+            "SPEEDTEST_ERROR_TOKEN" => Some(Self::Token),
+            "SPEEDTEST_ERROR_API" => Some(Self::Api),
+            "SPEEDTEST_ERROR_NO_RESULT" => Some(Self::NoResult),
+            "SPEEDTEST_ERROR_OFFLINE" => Some(Self::Offline),
+            _ => None,
+        }
+    }
+}
+/// Generated client implementations.
+pub mod device_client {
+    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
+    #[derive(Debug, Clone)]
+    pub struct DeviceClient<T> {
+        inner: tonic::client::Grpc<T>,
+    }
+    impl DeviceClient<tonic::transport::Channel> {
+        /// Attempt to create a new client by connecting to a given endpoint.
+        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        where
+            D: TryInto<tonic::transport::Endpoint>,
+            D::Error: Into<StdError>,
+        {
+            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            Ok(Self::new(conn))
+        }
+    }
+    impl<T> DeviceClient<T>
+    where
+        T: tonic::client::GrpcService<tonic::body::BoxBody>,
+        T::Error: Into<StdError>,
+        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+    {
+        pub fn new(inner: T) -> Self {
+            let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> DeviceClient<InterceptedService<T, F>>
+        where
+            F: tonic::service::Interceptor,
+            T::ResponseBody: Default,
+            T: tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
+        {
+            DeviceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        /// Compress requests with the given encoding.
+        ///
+        /// This requires the server to support it otherwise it might respond with an
+        /// error.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
+            self
+        }
+        /// Enable decompressing responses.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
+            self
+        }
+        /// Limits the maximum size of a decoded message.
+        ///
+        /// Default: `4MB`
+        #[must_use]
+        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_decoding_message_size(limit);
+            self
+        }
+        /// Limits the maximum size of an encoded message.
+        ///
+        /// Default: `usize::MAX`
+        #[must_use]
+        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_encoding_message_size(limit);
+            self
+        }
+        pub async fn stream(
+            &mut self,
+            request: impl tonic::IntoStreamingRequest<Message = super::ToDevice>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::FromDevice>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/SpaceX.API.Device.Device/Stream",
+            );
+            let mut req = request.into_streaming_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("SpaceX.API.Device.Device", "Stream"));
+            self.inner.streaming(req, path, codec).await
+        }
+        pub async fn handle(
+            &mut self,
+            request: impl tonic::IntoRequest<super::Request>,
+        ) -> std::result::Result<tonic::Response<super::Response>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/SpaceX.API.Device.Device/Handle",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("SpaceX.API.Device.Device", "Handle"));
+            self.inner.unary(req, path, codec).await
+        }
+    }
+}

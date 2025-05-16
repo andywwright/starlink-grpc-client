@@ -1,6 +1,10 @@
 # Starlink gRPC Client
 
-A **safe**, **async**, and **type-safe** Rust client for querying status information from a **Starlink Gen 3 Dishy** via **gRPC**.
+A **safe**, **async**, and **type-safe** Rust client for querying status information from a **Starlink Gen 3 Dishy** via **gRPC**
+
+
+- API version: **33**
+- Fully tested on hardware version: **rev4_panda_prod1**
 
 ---
 
@@ -16,36 +20,18 @@ A **safe**, **async**, and **type-safe** Rust client for querying status informa
 
 ## 🚀 Getting Started
 
-### 1. **Install Protobuf Compiler**
-
-This library requires `protoc` (Protocol Buffers Compiler) to be installed.
-
-- **macOS**:  
-  ```bash
-  brew install protobuf
-  ```
-- **Linux**:  
-  Install via package manager or [official releases](https://github.com/protocolbuffers/protobuf/releases).
-
-- **Windows**:  
-  Download from [https://github.com/protocolbuffers/protobuf/releases](https://github.com/protocolbuffers/protobuf/releases).
-
-Or set the `PROTOC` environment variable if you have a custom installation.
-
----
-
-### 2. **Add to Your `Cargo.toml`**
+### **Add to Your `Cargo.toml`**
 
 ```toml
 [dependencies]
-starlink-grpc-client = "0.3.2"
+starlink-grpc-client = "0.4.0"
 ```
 
 (or whatever the last version is)
 
 ---
 
-### 3. **Example Usage**
+### **Example Usage**
 
 ```rust
 use starlink_grpc_client::client::DishClient;
@@ -98,6 +84,27 @@ git clone https://github.com/andywwright/starlink-grpc-client.git
 cd starlink-grpc-client
 cargo build
 ```
+
+---
+
+## 🧱 Regenerating gRPC Bindings (Protobuf)
+
+If you change the `.proto` files and need to regenerate the Rust bindings, use the **build-protos** feature:
+
+```bash
+cargo build --features build-protos
+```
+
+- This will regenerate files into `proto_bindings`.
+- You **must commit** these regenerated files if you want the default build to work for consumers.
+
+**When to use this:**
+- When updating `.proto` definitions.
+- When preparing a new crate release with updated API.
+
+**When _not_ needed:**
+- Regular consumers or users **do not need to run this**.
+- Default builds use the already checked-in generated code without `protoc`.
 
 ---
 

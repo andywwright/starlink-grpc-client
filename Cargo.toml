@@ -1,6 +1,6 @@
 [package]
 name = "starlink-grpc-client"
-version = "0.3.2"
+version = "0.4.0"
 authors = ["Andy Wright <andywwright@icloud.com>"]
 edition = "2021"
 description = "A safe, async, type-safe client for querying Starlink Gen 3 Dishy via gRPC."
@@ -10,8 +10,11 @@ documentation = "https://docs.rs/starlink-grpc-client"
 homepage = "https://github.com/andywwright/starlink-grpc-client"
 readme = "README.md"
 
-[build-dependencies]
-tonic-build = "0.9"
+[features]
+# by default, we do NOT regenerate protos (no protoc needed) 
+default = []
+# to force proto regen into proto_bindings, run with `--features build-protos`
+build-protos = []
 
 [dependencies]
 tokio = { version = "1.28", features = ["full"] }
@@ -20,3 +23,8 @@ prost = "0.11"
 prost-types = "0.11"
 thiserror = "1.0"
 futures = "0.3"
+
+[build-dependencies]
+tonic-build = "0.9"
+prost-build = "0.11"
+protoc-bin-vendored = "3"

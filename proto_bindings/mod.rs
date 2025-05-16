@@ -1,0 +1,30 @@
+pub mod space_x {
+    pub mod api {
+        pub mod device {
+            pub mod services {
+                pub mod unlock {
+                    include!("space_x.api.device.services.unlock.rs");
+                }
+            }
+            include!("space_x.api.device.rs");
+        }
+        pub mod satellites {
+            pub mod network {
+                include!("space_x.api.satellites.network.rs");
+            }
+        }
+        pub mod status {
+            include!("space_x.api.status.rs");
+        }
+        pub mod telemetron {
+            pub mod public {
+                pub mod common {
+                    include!("space_x.api.telemetron.public.common.rs");
+                }
+                pub mod integrations {
+                    include!("space_x.api.telemetron.public.integrations.rs");
+                }
+            }
+        }
+    }
+}
