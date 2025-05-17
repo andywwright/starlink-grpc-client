@@ -51,7 +51,7 @@ async fn main() {
 }
 ```
 
-> ✅ See working examples in [examples/usage.rs](examples/usage.rs), [examples/stream.rs](examples/stream.rs) and [examples/stream_verbose.rs](examples/stream_verbose.rs)
+> ✅ See working examples in [usage.rs](examples/usage.rs), [stream.rs](examples/stream.rs) and with simple [charts](https://github.com/andywwright/starlink-web-dashboard)
 
 ---
 
