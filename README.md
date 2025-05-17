@@ -117,8 +117,6 @@ This project follows **[Semantic Versioning 2.0.0](https://semver.org/)**:
 - **MINOR**: Backward-compatible features
 - **PATCH**: Bug fixes
 
-_Current Version: **0.1.0** (Developer Preview)_
-
 ---
 
 ## 📝 License
