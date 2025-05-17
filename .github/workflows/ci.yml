@@ -19,9 +19,6 @@ jobs:
       with:
         toolchain: stable
 
-    - name: Install protoc via apt
-      run: sudo apt-get update && sudo apt-get install -y protobuf-compiler
-
     - name: Build project
       run: cargo build --verbose
 
